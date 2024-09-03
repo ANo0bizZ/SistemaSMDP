@@ -4,17 +4,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Usuario extends CI_Controller
 {
 
+	/*public function __construct() {
+        parent::__construct();
+        $this->load->model('Usuario_model'); 
+        /* $this->load->model('Servicios_model'); 
+		$this->load->model('AgendarCita_model');  // Asegúrate de cargar el modelo aquí 
+    }*/
 	public function listaUsuarios()
 	{
 		$lista = $this->usuario_model->listausuarios();
 		$data['usuarios'] = $lista->result();
 		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
 		$this->load->view('inc/listaUsuarios', $data);
 		$this->load->view('inc/footerAdmin');
 	}
+
 	public function dashboard()
 	{
 		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
 		$this->load->view('inc/dashboard');
 		$this->load->view('inc/footerAdmin');
 	}
@@ -26,6 +35,7 @@ class Usuario extends CI_Controller
 		$this->load->view('formModificar', $data);
 		$this->load->view('inc/footerAdmin');
 	}
+	
 	public function modificarbdUsuario()
 	{
 		$idUsuario = $this->input->post('idUsuario');
@@ -38,6 +48,7 @@ class Usuario extends CI_Controller
 		$this->usuario_model->modificarUsuario($idUsuario, $data);
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
+	
 
 	public function cambiarEstado()
 	{
@@ -62,9 +73,15 @@ class Usuario extends CI_Controller
 		$this->load->view('paginaPrincipal/eventos.php');
 	}
 
+	public function galeria()
+	{
+		$this->load->view('paginaPrincipal/galeria.php');
+	}
+
 	public function administrador()
 	{
 		$this->load->view('inc/headerAdmin.php');
+		$this->load->view('inc/sidebar');
 		$this->load->view('inc/mainAdmin.php');
 		$this->load->view('inc/footerAdmin.php');
 	}
@@ -78,66 +95,7 @@ class Usuario extends CI_Controller
 	{
 		$this->load->view('login');
 	}
-	//AgendarCita
-	/* public function agendar()
-	{
-		$data['pacientes'] = $this->Usuario_model->listaPacientes()->result();
-		$data['servicios'] = $this->Servicios_model->listarservicios()->result();
-
-		$this->load->view('inc/head');
-		$this->load->view('inc/menu');
-		$this->load->view('agendarCita', $data);
-		$this->load->view('inc/footer');
-	} */
-	//AgendarCita
-	/* public function agendarcita()
-	{
-		$data = array(
-			'fechaAtencion' => $this->input->post('fechaAtencion'),
-			'horaAtencion' => $this->input->post('horaAtencion'),
-			'usuario_idusuario' => $this->input->post('usuario_idusuario'),
-			'servicios_idservicios' => $this->input->post('servicios_idservicios')
-		);
-
-		if ($this->Usuario_model->agendar_cita($data)) {
-			$this->session->set_flashdata('success', 'Cita agendada correctamente.');
-		} else {
-			$this->session->set_flashdata('error', 'Error al agendar la cita.');
-		}
-		redirect('usuario/agendar');
-	} */
-	//AgendarCita
-	/* public function modificar()
-	{
-		$idagendarcita = $_POST['idagendarcita'];
-		$data['citas'] = $this->usuario_model->recuperarcita($idagendarcita);
-		$data['pacientes'] = $this->Usuario_model->listaPacientes()->result();
-		$data['servicios'] = $this->Servicios_model->listarservicios()->result();
-		$this->load->view('inc/head');
-		//$this->load->view('inc/menu');
-		$this->load->view('modificarCita', $data);
-		$this->load->view('inc/footer');
-	} */
-	//AgendarCita
-	/* public function modificarbd()
-	{
-		$idagendarcita = $this->input->post('idagendarcita');
-		$data = array(
-			'fechaAtencion' => strtoupper($this->input->post('fechaAtencion')),
-			'horaAtencion' => strtoupper($this->input->post('horaAtencion')),
-			'servicios_idservicios' => strtoupper($this->input->post('servicios_idservicios'))
-		);
-		$this->Usuario_model->modificarcita($idagendarcita, $data);
-		redirect('usuario/listaCitas', 'refresh');
-	} */
-/* 	public function listaCitas()
-	{
-		$data['citas'] = $this->Usuario_model->getCitas();
-		$this->load->view('inc/head');
-		$this->load->view('inc/menu');
-		$this->load->view('listaDeCitas', $data);
-		$this->load->view('inc/footer');
-	} */
+	
 	public function agregar()
 	{
 		//$this->load->view('inc/head');
@@ -192,30 +150,5 @@ class Usuario extends CI_Controller
 		}
 	}
 	
-	/* public function deshabilitarbd()
-	{
-		/* todo esto es del formmodificar */
-		//$idagendarcita = $_POST['idagendarcita']; //del formulario lo que esta dentro de post
-		//$data['estadoCita'] = '0';
-		//$this->usuario_model->modificarEstadoCita($idagendarcita, $data);
-		//redirect('usuario/listaCitas', 'refresh');
-	//} 
-	//AgendarCita
-	/* public function habilitarbd()
-	{
-		/* todo esto es del formmodificar */
-		//$idagendarcita = $_POST['idagendarcita']; //del formulario lo que esta dentro de post
-		//$data['estadoCita'] = '1';
-		//$this->usuario_model->modificarEstadoCita($idagendarcita, $data);
-		//redirect('usuario/deshabilitados', 'refresh');
-	//} */
-	//AgendarCita
-	/* public function citasatendidas()
-	{
-		$data['cita'] = $this->Usuario_model->listaAtendidos();
-		$this->load->view('inc/head');
-		//$this->load->view('inc/menu');
-		$this->load->view('atendidos', $data);
-		//$this->load->view('inc/footer');
-	}*/
+	
 } 

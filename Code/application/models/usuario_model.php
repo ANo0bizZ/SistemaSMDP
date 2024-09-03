@@ -39,36 +39,6 @@ class Usuario_model extends CI_Model {
 		return $this->db->get();
 	}
 	
-	
-
-	/* public function modificarcita($idagendarcita,$data)
-	{
-		$this->db->where('idagendarcita',$idagendarcita);
-		$this->db->update('agendarcita',$data);
-	} */
-	/* public function recuperarcita($idagendarcita)
-	{
-		$this->db->select('agendarcita.*, usuario.nombre AS nombreUsuario, usuario.apellidos AS apellidosUsuario');
-		$this->db->from('agendarcita');
-		$this->db->join('usuario', 'agendarcita.usuario_idusuario = usuario.idusuario');
-		$this->db->where('idagendarcita', $idagendarcita);
-		return $this->db->get();
-	} */
-	/* public function listaAtendidos()
-	{
-		$this->db->select('agendarcita.idagendarcita AS idAgendarCita, agendarcita.fechaAtencion, agendarcita.horaAtencion, agendarcita.estadoCita, usuario.nombre AS nombreUsuario, usuario.apellidos AS apellidosUsuario, servicios.nombreServicio AS nombreServicio');
-		$this->db->from('agendarcita');
-		$this->db->join('usuario', 'agendarcita.usuario_idusuario = usuario.idusuario');
-		$this->db->join('servicios', 'agendarcita.servicios_idservicios = servicios.idservicios');
-		$this->db->where('agendarcita.estadoCita', 0);
-		return $this->db->get();
-	} */
-	/* public function modificarEstadoCita($idagendarcita,$data)
-	{
-		$this->db->where('idagendarcita',$idagendarcita);
-		$this->db->update('agendarcita',$data);
-	} */
-
 	public function modificarUsuario($idUsuario,$data)
 	{
 		$this->db->where('idUsuario',$idUsuario);
