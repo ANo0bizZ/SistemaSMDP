@@ -3,13 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usuario extends CI_Controller
 {
-
-	/*public function __construct() {
-        parent::__construct();
-        $this->load->model('Usuario_model'); 
-        /* $this->load->model('Servicios_model'); 
-		$this->load->model('AgendarCita_model');  // Asegúrate de cargar el modelo aquí 
-    }*/
 	public function listaUsuarios()
 	{
 		$lista = $this->usuario_model->listausuarios();
