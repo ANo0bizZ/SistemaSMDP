@@ -55,7 +55,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="<?php echo site_url('usuario/principal'); ?>" class="nav-link">Inicio</a></li>
                     <li class="nav-item"><a href="servicios.php" class="nav-link">Quienes somos?</a></li>
-                    <li class="nav-item"><a href="galeria.php" class="nav-link">Galeria</a></li>
+                    <li class="nav-item"><a href="<?php echo site_url('usuario/galeria'); ?>" class="nav-link">Galeria</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/eventos'); ?>" class="nav-link">Eventos</a></li>
                     <li class="nav-item"><a href="contactos.php" class="nav-link">Contactos</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/login'); ?>" class="btn btn-primary mr-md-3 py-3 px-2" style="margin-top: 25px;">Acceder<span class="ion-ios-arrow-forward"></span></a></li>
