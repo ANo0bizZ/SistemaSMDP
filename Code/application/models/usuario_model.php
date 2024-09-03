@@ -6,22 +6,9 @@ class Usuario_model extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('usuarios');
-		return $this->db->get();  //Devuelve el resultado
+		return $this->db->get();  
 	}
 
-   /*  public function getCitas()
-    {
-		$this->db->select('agendarcita.idagendarcita AS idAgendarCita, agendarcita.fechaAtencion, agendarcita.horaAtencion, agendarcita.estadoCita, usuario.nombre AS nombreUsuario, usuario.apellidos AS apellidosUsuario, servicios.nombreServicio AS nombreServicio');
-		$this->db->from('agendarcita');
-		$this->db->join('usuario', 'agendarcita.usuario_idusuario = usuario.idusuario');
-		$this->db->join('servicios', 'agendarcita.servicios_idservicios = servicios.idservicios');
-		$this->db->where('agendarcita.estadoCita', 1);
-		$query = $this->db->get();
-		return $query->result();
-    } */
-	/* public function agendar_cita($data) {
-        $this->db->insert('agendarcita', $data);
-    } */
 	public function registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol) {
 		$data = array(
 			'nombres' => $nombres,

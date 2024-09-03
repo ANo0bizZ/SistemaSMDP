@@ -13,7 +13,7 @@
   });
 
 
-	var fullHeight = function() {
+/* 	var fullHeight = function() {
 
 		$('.js-fullheight').css('height', $(window).height());
 		$(window).resize(function(){
@@ -21,7 +21,7 @@
 		});
 
 	};
-	fullHeight();
+	fullHeight(); */
 
 	// loader
 	var loader = function() {

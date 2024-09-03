@@ -48,7 +48,7 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <nav class=" navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="<?php echo site_url('usuario/principal'); ?>"><img src="<?php echo base_url(); ?>extrasPrincipal/images/SMDP1.ico" alt="">Refugio "San Martin de Porres"</a>
             <div class="collapse navbar-collapse" id="ftco-nav">
