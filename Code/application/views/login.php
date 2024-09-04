@@ -48,8 +48,8 @@
                 <?php if (isset($error)) {
                     echo '<p style="color:red;">' . $error . '</p>';
                 } ?>
-                <a href="#">¿Olvidó su Contraseña?</a>
-                <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                <a href="#">¿Olvidó su Contraseña? </a>
+                <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión </button>
             </form>
 
         </div>

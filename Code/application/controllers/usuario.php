@@ -46,7 +46,7 @@ class Usuario extends CI_Controller
 	public function cambiarEstado()
 	{
 		$idUsuario = $this->input->post('idUsuario');
-		$estado = $this->input->post('estado'); // Debería ser 0 para desactivar al usuario
+		$estado = $this->input->post('estado'); 
 		$data = array(
 			'estado' => $estado
 		);
@@ -54,6 +54,13 @@ class Usuario extends CI_Controller
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
 
+	public function crearUsuario()
+	{
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
+		$this->load->view('inc/formCrearUsuario');
+		$this->load->view('inc/footerAdmin');
+	}
 	public function principal()
 	{
 		$this->load->view('paginaPrincipal/headerPrincipal');
@@ -92,7 +99,7 @@ class Usuario extends CI_Controller
 	public function agregar()
 	{
 		//$this->load->view('inc/head');
-		$this->load->view('inc/menu');
+		//$this->load->view('inc/menu');
 		$this->load->view('formulario');
 		//$this->load->view('inc/footer');
 		//$this->load->view('inc/pie');	
@@ -111,6 +118,20 @@ class Usuario extends CI_Controller
 		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol);
 
 		redirect('usuario/principal');
+	}
+	public function registrarUsuarioA() {
+		$nombres = $this->input->post('nombres');
+		$primerApellido = $this->input->post('primerApellido');
+		$segundoApellido = $this->input->post('segundoApellido');
+		$fechaNacimiento = $this->input->post('fechaNacimiento');
+		$usuario = $this->input->post('usuario');
+		$contra = md5($this->input->post('contra'));
+		$rol = $this->input->post('rol');
+
+		$this->load->model('usuario_model');
+		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol);
+
+		redirect('usuario/administrador');
 	}
 	
 
