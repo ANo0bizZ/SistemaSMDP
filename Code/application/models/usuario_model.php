@@ -35,7 +35,7 @@ class Usuario_model extends CI_Model {
 		$this->db->select('idUsuario, nombres, primerApellido, segundoApellido, usuario, rol');
 		$this->db->from('usuarios');
 		$this->db->where('usuario', $usuario);
-		$this->db->where('contra', md5($contra));  // Usa md5 para comparar la contraseña
+		$this->db->where('contra', md5($contra));
 		return $this->db->get();
 	}
 	

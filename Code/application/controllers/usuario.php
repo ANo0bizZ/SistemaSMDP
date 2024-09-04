@@ -141,7 +141,6 @@ class Usuario extends CI_Controller
 	
 		$this->load->model('usuario_model');
 		$result = $this->usuario_model->validar_usuario($usuario, $contra);
-	
 		if ($result->num_rows() > 0) {
 			$row = $result->row();
 			$session_data = array(
@@ -160,7 +159,55 @@ class Usuario extends CI_Controller
 			}
 		} else {
 			$data['error'] = 'El usuario o contraseña ingresados no son correctos.';
-			$this->load->view('login', $data);  // Redirige a la vista de login con mensaje de error
+			$this->load->view('login', $data);
+		}
+	}
+	
+	public function validarUsuario() {
+		$usuario = $_POST['usuario'];
+		$contra = sha1($_POST['contra']); // Hasheamos la contraseña
+	
+		// Consultamos el modelo para validar el usuario
+		$consulta = $this->usuario_model->validar($usuario, $contra);
+		if ($consulta->num_rows() > 0) {
+			// Usuario válido, creamos la sesión
+			foreach ($consulta->result() as $row) {
+				$this->session->set_userdata('idusuario', $row->idusuario);
+				$this->session->set_userdata('usuario', $row->usuario);
+				$this->session->set_userdata('nombre', $row->nombre);
+				$this->session->set_userdata('primerApellido', $row->primerApellido);
+				$this->session->set_userdata('segundoApellido', $row->segundoApellido);
+				$this->session->set_userdata('rol', $row->rol);
+	
+				// Redirigimos según el rol del usuario
+				if ($row->rol === 'administrador') {
+					redirect('usuario/administrador', 'refresh');
+				} elseif ($row->rol === 'voluntario') {
+					redirect('usuario/voluntario', 'refresh');
+				} else {
+					redirect('usuario/adoptante', 'refresh');
+				}
+			}
+		} else {
+			// Acceso incorrecto, volvemos al login con mensaje de error
+			$data['error'] = 'El usuario o contraseña ingresados no son correctos.';
+			$this->load->view('login', $data);
+		}
+	}
+	
+	public function panel() {
+		if ($this->session->userdata('usuario')) {
+			$rol = $this->session->userdata('rol');
+			if ($rol === 'administrador') {
+				redirect('usuario/administrador', 'refresh');
+			} elseif ($rol === 'voluntario') {
+				redirect('usuario/voluntario', 'refresh');
+			} else {
+				redirect('usuario/adoptante', 'refresh');
+			}
+		} else {
+			// Si no hay sesión iniciada, redirigir al login
+			redirect('usuario/login', 'refresh');
 		}
 	}
 	

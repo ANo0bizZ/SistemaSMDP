@@ -20,4 +20,17 @@ class Mascota_model extends CI_Model {
 		$this->db->where('idMascotas',$idMascotas);
 		$this->db->update('umascotas',$data);
 	}
+	public function registrarMascota($nombre, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol) {
+		$data = array(
+			'nombre' => $nombre,
+			'primerApellido' => $primerApellido,
+			'segundoApellido' => $segundoApellido,
+			'fechaNacimiento' => $fechaNacimiento,
+			'usuario' => $usuario,
+			'contra' => $contra,
+			'rol' => $rol
+		);
+		$this->db->insert('usuarios', $data);
+	}
+	
 }

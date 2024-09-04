@@ -25,6 +25,13 @@ class Mascota extends CI_Controller
 		$this->load->view('formModMascota', $data);
 		$this->load->view('inc/footerAdmin');
 	}
+	public function insertarMascota()
+	{
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
+		$this->load->view('inc/formInsertarMascota');
+		$this->load->view('inc/footerAdmin');
+	}
     public function modificarbdMascota()
 	{
 		$idMascotas = $this->input->post('idMascotas');
@@ -36,4 +43,5 @@ class Mascota extends CI_Controller
 		$this->mascota_model->modificarMascota($idMascotas, $data);
 		redirect('mascota/listaMascotas', 'refresh');
 	}
+
 }
