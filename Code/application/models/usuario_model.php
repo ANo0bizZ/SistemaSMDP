@@ -21,8 +21,10 @@ class Usuario_model extends CI_Model {
 		);
 		$this->db->insert('usuarios', $data);
 	}
-	
 
+	public function agregarusuario($data){
+		$this->db->insert('usuarios', $data);
+	}
     public function validarusuario($usuario, $contra) {
         $this->db->select('idUsuario, usuario, nombres, primerApellido, segundoApellido, rol');
         $this->db->from('usuario');
