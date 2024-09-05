@@ -111,10 +111,9 @@
             </ul>
           </li>
           <li class="nav-item d-flex align-items-center">
-            <a href="<?php echo base_url(); ?>tempAdmin/pages/sign-in.php" class="nav-link text-body font-weight-bold px-0">
-              <i class="fa fa-user me-sm-1"></i>
-
-              <span class="d-sm-inline d-none">Sign In</span>
+            <a href="<?php echo site_url('usuario/logout'); ?>" class="btn btn-success text-body font-weight-bold px-3">
+            <i class="material-icons opacity-10">exit_to_app</i>
+              <span class="d-sm-inline d-none">Cerrar Sesión</span>
             </a>
           </li>
         </ul>
