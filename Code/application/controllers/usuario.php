@@ -95,16 +95,7 @@ class Usuario extends CI_Controller
 	{
 		$this->load->view('login');
 	}
-	
-	public function agregar()
-	{
-		//$this->load->view('inc/head');
-		//$this->load->view('inc/menu');
-		$this->load->view('formulario');
-		//$this->load->view('inc/footer');
-		//$this->load->view('inc/pie');	
-	}
-	
+
 	public function registrarUsuario() {
 		$nombres = $this->input->post('nombres');
 		$primerApellido = $this->input->post('primerApellido');
@@ -134,62 +125,22 @@ class Usuario extends CI_Controller
 		redirect('usuario/administrador');
 	}
 	
-
-	public function validarLogin() {
-		$usuario = $this->input->post('usuario');
-		$contra = $this->input->post('contra');
-	
-		$this->load->model('usuario_model');
-		$result = $this->usuario_model->validar_usuario($usuario, $contra);
-		if ($result->num_rows() > 0) {
-			$row = $result->row();
-			$session_data = array(
-				'var_idUsuario' => $row->idUsuario,
-				'var_nombres' => $row->nombres,
-				'var_primerApellido' => $row->primerApellido,
-				'var_segundoApellido' => $row->segundoApellido,
-				'var_rol' => $row->rol
-			);
-			$this->session->set_userdata($session_data);
-	
-			if ($row->rol === '0') {
-				redirect('usuario/administrador');
-			} else {
-				redirect('usuario/visitantes');
-			}
-		} else {
-			$data['error'] = 'El usuario o contraseña ingresados no son correctos.';
-			$this->load->view('login', $data);
-		}
-	}
-	
-	public function validarUsuario() {
+	 public function validarLogin() {
 		$usuario = $_POST['usuario'];
-		$contra = sha1($_POST['contra']); // Hasheamos la contraseña
+		$contra = $_POST['contra']; 
 	
-		// Consultamos el modelo para validar el usuario
-		$consulta = $this->usuario_model->validar($usuario, $contra);
+		$consulta = $this->usuario_model->validar_usuario($usuario, $contra);
 		if ($consulta->num_rows() > 0) {
-			// Usuario válido, creamos la sesión
 			foreach ($consulta->result() as $row) {
-				$this->session->set_userdata('idusuario', $row->idusuario);
-				$this->session->set_userdata('usuario', $row->usuario);
-				$this->session->set_userdata('nombre', $row->nombre);
+				$this->session->set_userdata('idUsuario', $row->idUsuario);
+				$this->session->set_userdata('nombres', $row->nombres);
 				$this->session->set_userdata('primerApellido', $row->primerApellido);
 				$this->session->set_userdata('segundoApellido', $row->segundoApellido);
+				$this->session->set_userdata('usuario', $row->usuario);
 				$this->session->set_userdata('rol', $row->rol);
-	
-				// Redirigimos según el rol del usuario
-				if ($row->rol === 'administrador') {
-					redirect('usuario/administrador', 'refresh');
-				} elseif ($row->rol === 'voluntario') {
-					redirect('usuario/voluntario', 'refresh');
-				} else {
-					redirect('usuario/adoptante', 'refresh');
-				}
+				redirect('usuario/panel','refresh');
 			}
 		} else {
-			// Acceso incorrecto, volvemos al login con mensaje de error
 			$data['error'] = 'El usuario o contraseña ingresados no son correctos.';
 			$this->load->view('login', $data);
 		}
@@ -198,18 +149,18 @@ class Usuario extends CI_Controller
 	public function panel() {
 		if ($this->session->userdata('usuario')) {
 			$rol = $this->session->userdata('rol');
-			if ($rol === 'administrador') {
+			if ($rol === '0') {
 				redirect('usuario/administrador', 'refresh');
-			} elseif ($rol === 'voluntario') {
-				redirect('usuario/voluntario', 'refresh');
-			} else {
-				redirect('usuario/adoptante', 'refresh');
+			}else {
+				redirect('usuario/visitantes', 'refresh');
 			}
 		} else {
-			// Si no hay sesión iniciada, redirigir al login
 			redirect('usuario/login', 'refresh');
 		}
 	}
-	
+	public function logout(){
+		$this->session->sess_destroy();
+		redirect('usuario/principal', 'refresh');
+	}
 	
 } 

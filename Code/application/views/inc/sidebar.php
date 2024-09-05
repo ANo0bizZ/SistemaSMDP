@@ -84,12 +84,12 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo base_url(); ?>tempAdmin/pages/sign-up.php">
+          <a class="nav-link text-white" href="<?php echo site_url('usuario/logout'); ?>">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">assignment</i>
+              <i class="material-icons opacity-10">exit_to_app</i>
             </div>
 
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Sign Up</span>
+            <span class="nav-link-text ms-1" style="font-size: 20px;">Cerrar Sesión</span>
           </a>
         </li>
       </ul>

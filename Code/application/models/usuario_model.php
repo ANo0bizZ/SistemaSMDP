@@ -32,7 +32,7 @@ class Usuario_model extends CI_Model {
     }
 
 	public function validar_usuario($usuario, $contra) {
-		$this->db->select('idUsuario, nombres, primerApellido, segundoApellido, usuario, rol');
+		$this->db->select('*');
 		$this->db->from('usuarios');
 		$this->db->where('usuario', $usuario);
 		$this->db->where('contra', md5($contra));
