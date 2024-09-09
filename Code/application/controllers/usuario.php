@@ -97,7 +97,7 @@ class Usuario extends CI_Controller
 
 	public function registrarUsuario()
 	{
-		/* $data['nombres'] = strtoupper($_POST['nombres']);
+		$data['nombres'] = strtoupper($_POST['nombres']);
 		$data['primerApellido'] = strtoupper($_POST['primerApellido']);
 		$data['segundoApellido'] = strtoupper($_POST['segundoApellido']);
 		$data['fechaNacimiento'] = strtoupper($_POST['fechaNacimiento']);
@@ -110,7 +110,8 @@ class Usuario extends CI_Controller
 		$this->email->from('arkxcpa14@gmail.com', 'Centro de Adopciones "San Martin de Porres"');
 		$this->email->to($data['usuario']);
 		$this->email->subject('Bienvenido a Centro de Adopciones "San Martin');
-		$resetLink = site_url("usuario/login");
+		$resetLink = "http://localhost/SistemaSMDP/Code/index.php/usuario/login";
+
 
 		echo $resetLink; 
 		$this->email->message("Estimado/a {$data['nombres']} {$data['primerApellido']} {$data['segundoApellido']},\n\n" .
@@ -125,20 +126,7 @@ class Usuario extends CI_Controller
 		} else {
 			$this->session->set_flashdata('error', 'Error al enviar correo.');
 		}
-		$this->usuario_model->agregarusuario($data); */
-
-		$nombres = $this->input->post('nombres');
-		$primerApellido = $this->input->post('primerApellido');
-		$segundoApellido = $this->input->post('segundoApellido');
-		$fechaNacimiento = $this->input->post('fechaNacimiento');
-		$usuario = $this->input->post('usuario');
-		$contra = md5($this->input->post('contra'));
-		$rol = $this->input->post('rol');
-
-		$this->load->model('usuario_model');
-		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol);
-
-		redirect('usuario/principal');
+		$this->usuario_model->agregarusuario($data); 
 	}
 	public function registrarUsuarioA()
 	{
