@@ -36,7 +36,7 @@
             <span class="nav-link-text ms-1" style="font-size: 20px;">Crear Usuario</span>
           </a>
         </li>
-        
+
         <li class="nav-item">
           <a class="nav-link text-white" href="<?php echo site_url('usuario/listaUsuarios'); ?>">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -48,22 +48,22 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('mascota/listaMascotas'); ?>">
+          <a class="nav-link text-white" href="<?php echo site_url('mascota/agregarMascota'); ?>">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
+              <i class="fas fa-dog"></i>
+              <i class="fas fa-plus-circle"></i>
             </div>
-
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Lista de Mascotas</span>
+            <span class="nav-link-text ms-1" style="font-size: 20px;">Agregar mascotas</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo base_url(); ?>tempAdmin/pages/notifications.php">
+          <a class="nav-link text-white" href="<?php echo site_url('mascota/listaMascotas'); ?>">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">notifications</i>
+              <i class="material-icons opacity-10">pets</i>
             </div>
 
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Notifications</span>
+            <span class="nav-link-text ms-1" style="font-size: 20px;">Lista de Mascotas</span>
           </a>
         </li>
 

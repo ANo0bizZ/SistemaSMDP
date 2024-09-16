@@ -2,7 +2,7 @@
 include 'headerPrincipal.php';
 ?>
 <!-- END nav -->
-<section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text align-items-end">
@@ -18,8 +18,8 @@ include 'headerPrincipal.php';
   <div class="container">
     <div class="row">
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/lulu.jpg);">
-          <a href="images/lulu.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/lulu.jpg');">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/lulu.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">
@@ -34,8 +34,8 @@ include 'headerPrincipal.php';
         </div>
       </div>
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/rocky.jpg);">
-          <a href="images/rocky.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(<?php echo base_url() ?>extrasPrincipal/images/rocky.jpg);">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/rocky.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">
@@ -50,8 +50,8 @@ include 'headerPrincipal.php';
         </div>
       </div>
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/max.jpg);">
-          <a href="images/max.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(<?php echo base_url() ?>extrasPrincipal/images/max.jpg);">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/max.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">
@@ -67,8 +67,8 @@ include 'headerPrincipal.php';
       </div>
 
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/luna.webp);">
-          <a href="images/luna.webp" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(<?php echo base_url() ?>extrasPrincipal/images/luna.webp);">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/luna.webp" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">
@@ -83,8 +83,8 @@ include 'headerPrincipal.php';
         </div>
       </div>
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/duke.webp);">
-          <a href="images/duke.webp" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(<?php echo base_url() ?>extrasPrincipal/images/duke.webp);">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/duke.webp" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">
@@ -99,8 +99,8 @@ include 'headerPrincipal.php';
         </div>
       </div>
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/Whiskas.jpg);">
-          <a href="images/Whiskas.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(<?php echo base_url() ?>extrasPrincipal/images/Whiskas.jpg);">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/Whiskas.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">
@@ -116,8 +116,8 @@ include 'headerPrincipal.php';
       </div>
 
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/reina.jpg);">
-          <a href="images/reina.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(<?php echo base_url() ?>extrasPrincipal/images/reina.jpg);">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/reina.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">
@@ -132,8 +132,8 @@ include 'headerPrincipal.php';
         </div>
       </div>
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/Toby.jpg);">
-          <a href="images/Toby.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(<?php echo base_url() ?>extrasPrincipal/images/Toby.jpg);">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/Toby.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">
@@ -148,8 +148,8 @@ include 'headerPrincipal.php';
         </div>
       </div>
       <div class="col-md-4 ftco-animate">
-        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(images/Simba.jpg);">
-          <a href="images/Simba.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
+        <div class="work mb-4 img d-flex align-items-end" style="background-image: url(<?php echo base_url() ?>extrasPrincipal/images/Simba.jpg);">
+          <a href="<?php echo base_url() ?>extrasPrincipal/images/Simba.jpg" class="icon image-popup d-flex justify-content-center align-items-center">
             <span class="fa fa-expand"></span>
           </a>
           <div class="desc w-100 px-4">

@@ -25,7 +25,7 @@ class Usuario extends CI_Controller
 		$idUsuario = $this->input->post('idUsuario');
 		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
 		$this->load->view('inc/headerAdmin');
-		$this->load->view('formModificar', $data);
+		$this->load->view('inc/formModificar', $data);
 		$this->load->view('inc/footerAdmin');
 	}
 
@@ -86,7 +86,7 @@ class Usuario extends CI_Controller
 	}
 	public function visitantes()
 	{
-		$this->load->view('paginaPrincipal/headerPrincipal');
+		$this->load->view('paginaPrincipal/headerVisitantes');
 		$this->load->view('paginaPrincipal/index.php');
 		$this->load->view('paginaPrincipal/footerPrincipal');
 	}
@@ -97,36 +97,41 @@ class Usuario extends CI_Controller
 
 	public function registrarUsuario()
 	{
-		$data['nombres'] = strtoupper($_POST['nombres']);
-		$data['primerApellido'] = strtoupper($_POST['primerApellido']);
-		$data['segundoApellido'] = strtoupper($_POST['segundoApellido']);
-		$data['fechaNacimiento'] = strtoupper($_POST['fechaNacimiento']);
-		$data['usuario'] = $_POST['usuario'];
-		$data['rol'] = $_POST['rol'];
-		$password = $_POST['contra'];
-		$data['estado'] = 1;
+		$nombres = $this->input->post('nombres');
+		$primerApellido = $this->input->post('primerApellido');
+		$segundoApellido = $this->input->post('segundoApellido');
+		$fechaNacimiento = $this->input->post('fechaNacimiento');
+		$ci = $this->input->post('ci');
+		$usuario = $this->input->post('usuario');
+		$contra = $this->input->post('contra');
+		$rol = $this->input->post('rol');
 
 		$this->load->library('email');
 		$this->email->from('arkxcpa14@gmail.com', 'Centro de Adopciones "San Martin de Porres"');
-		$this->email->to($data['usuario']);
+		$this->email->to($usuario);
 		$this->email->subject('Bienvenido a Centro de Adopciones "San Martin');
 		$resetLink = "http://localhost/SistemaSMDP/Code/index.php/usuario/login";
-
-
-		echo $resetLink; 
-		$this->email->message("Estimado/a {$data['nombres']} {$data['primerApellido']} {$data['segundoApellido']},\n\n" .
-			"Su cuenta ha sido creada con éxito. A continuación, le proporcionaremos sus detalles de acceso:\n\n" .
-			"Usuario: {$data['usuario']}\n" .
-			"Contraseña: $password\n\n" .
-			"Haz clic en el siguiente enlace para acceder a tu cuenta: <a href='" . $resetLink . "'>Acceder</a>\n\n" .
-			"Gracias por ser parte del Cambio. Adopta Hoy, Ama Para Siempre.");
+		$this->email->message("
+    <div style='text-align: center;'>
+        <p>Estimado/a {$nombres} {$primerApellido} {$segundoApellido},</p>
+        <p>Su cuenta ha sido creada con éxito. A continuación, le proporcionaremos sus detalles de acceso:</p>
+        <p>Usuario: {$usuario}</p>
+        <p>Contraseña: {$contra}</p>
+        <br>
+        <p>Haz clic en el siguiente botón para acceder a tu cuenta:</p>
+        <br>
+        <a href='" . $resetLink . "' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #28a745; text-decoration: none; border-radius: 5px;'>Acceder</a>
+        <br><br>
+        <p>Gracias por ser parte del Cambio. Adopta Hoy, Ama Para Siempre.</p>
+    </div>
+");
 
 		if ($this->email->send()) {
 			$this->session->set_flashdata('success', 'Usuario registrado y correo enviado correctamente.');
 		} else {
 			$this->session->set_flashdata('error', 'Error al enviar correo.');
 		}
-		$this->usuario_model->agregarusuario($data); 
+		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $ci, $usuario, $contra, $rol, null);
 	}
 	public function registrarUsuarioA()
 	{
@@ -134,15 +139,19 @@ class Usuario extends CI_Controller
 		$primerApellido = $this->input->post('primerApellido');
 		$segundoApellido = $this->input->post('segundoApellido');
 		$fechaNacimiento = $this->input->post('fechaNacimiento');
+		$ci = $this->input->post('ci');
 		$usuario = $this->input->post('usuario');
 		$contra = md5($this->input->post('contra'));
 		$rol = $this->input->post('rol');
 
 		$this->load->model('usuario_model');
-		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol);
+
+		$idCreador = $this->session->userdata('idUsuario');
+		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $ci, $usuario, $contra, $rol, $idCreador);
 
 		redirect('usuario/administrador');
 	}
+
 
 	public function validarLogin()
 	{
