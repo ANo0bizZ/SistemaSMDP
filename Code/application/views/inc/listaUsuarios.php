@@ -1,5 +1,4 @@
 
-    <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
@@ -97,7 +96,7 @@
                   <tbody>
                     <?php $contador = 1; ?>
                     <?php foreach ($usuarios as $usuario) : ?>
-                      <?php if ($usuario->estado == 1) : // Solo mostrar si estado es 1 
+                      <?php if ($usuario->estado == 1) :
                       ?>
                         <tr>
                           <td align="center"><?php echo $contador; ?></td>
@@ -125,11 +124,11 @@
                           <td align="center">
                             <?php echo form_open("usuario/modUsuario"); ?>
                             <input type="hidden" name="idUsuario" value="<?php echo $usuario->idUsuario; ?>">
-                            <button type="submit" class="btn btn-warning fas fa-edit">Editar</button>
+                            <button type="submit" class="btn btn-warning fas fa-edit"> Editar</button>
                             <?php echo form_close(); ?>
                           </td>
                           <td align="center">
-                            <button type="button" class="btn btn-danger fa-trash" data-toggle="modal" data-target="#confirmDeleteModal" data-id="<?php echo $usuario->idUsuario; ?>">Eliminar</button>
+                            <button type="button" class="btn btn-danger fas fa-trash" data-toggle="modal" data-target="#confirmDeleteModal" data-id="<?php echo $usuario->idUsuario; ?>"> Eliminar</button>
                           </td>
                         </tr>
                         <?php $contador++; ?>
@@ -161,7 +160,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Cambio de Estado</h5>
+              <h5 class="modal-title" id="confirmDeleteModalLabel">Eliminación de Usuario</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -172,7 +171,7 @@
             <div class="modal-footer">
               <?php echo form_open("usuario/cambiarEstado"); ?>
               <input type="hidden" name="idUsuario" id="deleteUserId" value="">
-              <input type="hidden" name="estado" value="0"> <!-- Cambiar el estado a 0 -->
+              <input type="hidden" name="estado" value="0">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-danger">Confirmar</button>
               <?php echo form_close(); ?>
@@ -181,7 +180,6 @@
         </div>
       </div>
 
-      <!-- /.content-wrapper -->
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
