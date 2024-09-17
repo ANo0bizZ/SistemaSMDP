@@ -123,8 +123,7 @@ class Usuario extends CI_Controller
         <a href='" . $resetLink . "' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #28a745; text-decoration: none; border-radius: 5px;'>Acceder</a>
         <br><br>
         <p>Gracias por ser parte del Cambio. Adopta Hoy, Ama Para Siempre.</p>
-    </div>
-");
+    </div>");
 
 		if ($this->email->send()) {
 			$this->session->set_flashdata('success', 'Usuario registrado y correo enviado correctamente.');

@@ -1,0 +1,195 @@
+CREATE TABLE IF NOT EXISTS `actividades` (
+  `idActividades` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `titulo` VARCHAR(255) NOT NULL,
+  `descripcion` TEXT NULL DEFAULT NULL,
+  `fecha` DATE NOT NULL,
+  `hora` TIME NOT NULL,
+  `estado` TINYINT(3) NOT NULL,
+  `idUsuarioCreador` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`idActividades`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `especies`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `especies` (
+  `idEspecies` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(10) NOT NULL,
+  `descripcion` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`idEspecies`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `razas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `razas` (
+  `idRazas` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idEspecies` SMALLINT(6) UNSIGNED NOT NULL,
+  `nombre` VARCHAR(30) NOT NULL,
+  `tamanio` ENUM('Grande', 'Mediano', 'Pequeño') NOT NULL,
+  `descripcion` VARCHAR(255) NULL DEFAULT NULL,
+  `estado` TINYINT(2) NOT NULL,
+  `fechaCreacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `ultimaActualizacion` DATE NULL DEFAULT NULL,
+  `idCreador` TINYINT(6) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`idRazas`, `idEspecies`),
+  INDEX `fk_razas_especies_idx` (`idEspecies` ASC) VISIBLE,
+  CONSTRAINT `fk_razas_especies`
+    FOREIGN KEY (`idEspecies`)
+    REFERENCES `especies` (`idEspecies`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 13
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `mascotas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mascotas` (
+  `idMascotas` SMALLINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idRazas` SMALLINT(6) UNSIGNED NOT NULL,
+  `idEspecies` SMALLINT(6) UNSIGNED NOT NULL,
+  `nombre` VARCHAR(30) NULL DEFAULT NULL,
+  `fechaNacMascota` DATE NULL DEFAULT NULL,
+  `fechaIngreso` DATE NOT NULL,
+  `sexo` ENUM('Macho', 'Hembra') NOT NULL,
+  `color` VARCHAR(45) NOT NULL,
+  `estado` TINYINT(4) NOT NULL DEFAULT 0 COMMENT '0 -> Disponible\\n1 -> En Proceso\\n2 -> Adoptado',
+  `fechaCreacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `ultimaActualizacion` TIMESTAMP NULL DEFAULT NULL,
+  `idCreador` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`idMascotas`),
+  INDEX `fk_mascotas_razas1_idx` (`idRazas` ASC, `idEspecies` ASC) VISIBLE,
+  CONSTRAINT `fk_mascotas_razas1`
+    FOREIGN KEY (`idRazas` , `idEspecies`)
+    REFERENCES `razas` (`idRazas` , `idEspecies`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `usuarios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `idUsuario` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nombres` VARCHAR(30) NOT NULL,
+  `primerApellido` VARCHAR(30) NOT NULL,
+  `segundoApellido` VARCHAR(30) NULL DEFAULT NULL,
+  `fechaNacimiento` DATE NOT NULL,
+  `ci` INT(12) NOT NULL,
+  `usuario` VARCHAR(45) NOT NULL,
+  `contra` VARCHAR(32) NOT NULL,
+  `rol` TINYINT(4) NOT NULL COMMENT '0 -> Administrador\\n1 -> Adoptante\\n2 -> Voluntario',
+  `estado` TINYINT(4) NOT NULL DEFAULT 1 COMMENT '0 -> Inactivo\\n1 -> Activo\\n2 -> Esperando Aprobación',
+  `fechaCreacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `ultimaActualizacion` TIMESTAMP NULL DEFAULT NULL,
+  `idCreador` SMALLINT(6) NOT NULL,
+  PRIMARY KEY (`idUsuario`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `solicitudadopcion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `solicitudadopcion` (
+  `idSolicitud` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idUsuario` SMALLINT(6) UNSIGNED NOT NULL,
+  `fechaSolicitud` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `ci` INT(12) NOT NULL,
+  `direccion` VARCHAR(255) NOT NULL,
+  `descripcion` TEXT NOT NULL,
+  `estado` TINYINT(3) NOT NULL DEFAULT 0,
+  `fechaActualizacion` TIMESTAMP NULL DEFAULT NULL,
+  `idUsuarioCreador` SMALLINT(6) NOT NULL,
+  `adopciones_idAdopciones` INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`idSolicitud`, `idUsuario`),
+  INDEX `fk_solicitudAdopcion_usuarios1_idx` (`idUsuario` ASC) VISIBLE,
+  CONSTRAINT `fk_solicitudAdopcion_usuarios1`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `usuarios` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `detalleadopcion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `detalleadopcion` (
+  `idMascotas` SMALLINT(10) UNSIGNED NOT NULL,
+  `idSolicitud` SMALLINT(6) UNSIGNED NOT NULL,
+  `descripcion` TEXT NOT NULL,
+  PRIMARY KEY (`idMascotas`, `idSolicitud`),
+  INDEX `fk_mascotas_has_solicitudAdopcion_solicitudAdopcion1_idx` (`idSolicitud` ASC) VISIBLE,
+  INDEX `fk_mascotas_has_solicitudAdopcion_mascotas1_idx` (`idMascotas` ASC) VISIBLE,
+  CONSTRAINT `fk_mascotas_has_solicitudAdopcion_mascotas1`
+    FOREIGN KEY (`idMascotas`)
+    REFERENCES `mascotas` (`idMascotas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mascotas_has_solicitudAdopcion_solicitudAdopcion1`
+    FOREIGN KEY (`idSolicitud`)
+    REFERENCES `solicitudadopcion` (`idSolicitud`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `fotos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fotos` (
+  `idFotos` SMALLINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idMascotas` SMALLINT(10) UNSIGNED NOT NULL,
+  `ruta` VARCHAR(255) NOT NULL,
+  `descripcion` VARCHAR(255) NULL DEFAULT NULL,
+  `fechaCreacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  `estado` TINYINT(3) NOT NULL,
+  PRIMARY KEY (`idFotos`),
+  INDEX `fk_fotos_mascotas1_idx` (`idMascotas` ASC) VISIBLE,
+  CONSTRAINT `fk_fotos_mascotas1`
+    FOREIGN KEY (`idMascotas`)
+    REFERENCES `mascotas` (`idMascotas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `participaciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `participaciones` (
+  `idParticipaciones` SMALLINT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `idActividades` SMALLINT(6) UNSIGNED NOT NULL,
+  `idUsuario` SMALLINT(6) UNSIGNED NOT NULL,
+  `cantidad` TINYINT(3) NOT NULL DEFAULT 0,
+  `descripcion` TEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`idParticipaciones`),
+  INDEX `fk_participaciones_actividades1_idx` (`idActividades` ASC) VISIBLE,
+  INDEX `fk_participaciones_usuarios1_idx` (`idUsuario` ASC) VISIBLE,
+  CONSTRAINT `fk_participaciones_actividades1`
+    FOREIGN KEY (`idActividades`)
+    REFERENCES `actividades` (`idActividades`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_participaciones_usuarios1`
+    FOREIGN KEY (`idUsuario`)
+    REFERENCES `usuarios` (`idUsuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
