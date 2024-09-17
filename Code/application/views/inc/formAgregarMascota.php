@@ -55,10 +55,10 @@
                     style="width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 10px;"
                     data-toggle="modal" data-target="#modalNuevaRaza">Agregar nueva raza</button>
             </div>
-            <input type="text" name="nombreMascota" placeholder="Nombre de la Mascota" required
+            <input type="text" name="nombre" placeholder="Nombre de la Mascota" required
                 style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
-            <label for="" style="margin-bottom: 5px;">Fecha de Nacimiento de la Mascota</label>
-            <input type="number" name="fechaIngreso" id="fechaIngreso" min="2000" max="<?php echo date('Y'); ?>" required
+            <label for="" style="margin-bottom: 5px;">Año Nacimiento de la Mascota</label>
+            <input type="number" name="fechaNacMascota" id="fechaIngreso" min="2000" max="<?php echo date('Y'); ?>" required
                 style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
             <label for="" style="margin-bottom: 5px;">Fecha de Ingreso al Refugio</label>
             <input type="date" name="fechaIngreso" required
@@ -145,10 +145,25 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none;">
+                <h5 class="modal-title" id="successModalLabel">¡Registro Exitoso!</h5>
+            </div>
+            <div class="modal-body">
+                La mascota se ha registrado correctamente.
+            </div>
+            <div class="modal-footer" style="border-top: none;">
+                <button type="button" class="btn btn-success" id="btnAceptar">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     document.getElementById('guardarNuevaRaza').addEventListener('click', function(event) {
-        event.preventDefault(); 
+        event.preventDefault();
         var form = document.getElementById('formNuevaRaza');
         if (!form.checkValidity()) {
             return;
@@ -162,9 +177,9 @@
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
                 if (response.success) {
-                    form.reset(); 
-                    $('#modalNuevaRaza').modal('hide'); 
-                    $('#successModalRaza').modal('show'); 
+                    form.reset();
+                    $('#modalNuevaRaza').modal('hide');
+                    $('#successModalRaza').modal('show');
                     $('#razas').append('<option value="' + response.idRaza + '">' + response.nombre + '</option>');
                 } else {
                     alert('Error al registrar la raza: ' + response.message);
@@ -177,55 +192,73 @@
         xhr.onerror = function() {
             alert('Error al intentar enviar el formulario.');
         };
-        
+
         var formData = new FormData(form);
         xhr.send(new URLSearchParams(formData).toString());
     });
 
     document.getElementById('btnAceptarRaza').addEventListener('click', function() {
         $('#successModalRaza').modal('hide');
-        $('#modalNuevaRaza').modal('hide'); 
+        $('#modalNuevaRaza').modal('hide');
     });
 
-    // Envío del formulario de registro de mascotas
+    //---------------------------*----------------------------
     document.getElementById('formRegistroMascota').addEventListener('submit', function(event) {
-    event.preventDefault();
-    var form = this;
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', form.action, true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        event.preventDefault();
+        var form = this;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', form.action, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                form.reset();
+                $('#successModal').modal('show');
+            }
+        };
+        xhr.send(new URLSearchParams(new FormData(form)).toString());
+    });
+    document.getElementById('btnAceptar').addEventListener('click', function() {
+        $('#successModal').modal('hide');
+    });
+    /*
+        // Envío del formulario de registro de mascotas
+        document.getElementById('formRegistroMascota').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var form = this;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', form.action, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            console.log("Formulario enviado exitosamente. Respuesta:", xhr.responseText);
-            $('#successModal').modal('show');
-        } else {
-            console.error("Error en la solicitud. Código de estado:", xhr.status);
-            console.error("Respuesta del servidor:", xhr.responseText);
-        }
-    };
-    xhr.onerror = function() {
-        console.error("Error al intentar enviar el formulario.");
-    };
-    
-    // Guardar los datos en sessionStorage para persistirlos en caso de error
-    var inputs = form.querySelectorAll('input, select, textarea');
-    inputs.forEach(function(input) {
-        sessionStorage.setItem(input.name, input.value);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                console.log("Formulario enviado exitosamente. Respuesta:", xhr.responseText);
+                $('#successModal').modal('show');
+            } else {
+                console.error("Error en la solicitud. Código de estado:", xhr.status);
+                console.error("Respuesta del servidor:", xhr.responseText);
+            }
+        };
+        xhr.onerror = function() {
+            console.error("Error al intentar enviar el formulario.");
+        };
+        
+        // Guardar los datos en sessionStorage para persistirlos en caso de error
+        var inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(function(input) {
+            sessionStorage.setItem(input.name, input.value);
+        });
+
+        xhr.send(new URLSearchParams(new FormData(form)).toString());
     });
 
-    xhr.send(new URLSearchParams(new FormData(form)).toString());
-});
-
-// Recargar los datos del sessionStorage al abrir el formulario
-window.onload = function() {
-    var inputs = document.querySelectorAll('#formRegistroMascota input, #formRegistroMascota select, #formRegistroMascota textarea');
-    inputs.forEach(function(input) {
-        var value = sessionStorage.getItem(input.name);
-        if (value) {
-            input.value = value;
-        }
-    });
-};
-
+    // Recargar los datos del sessionStorage al abrir el formulario
+    window.onload = function() {
+        var inputs = document.querySelectorAll('#formRegistroMascota input, #formRegistroMascota select, #formRegistroMascota textarea');
+        inputs.forEach(function(input) {
+            var value = sessionStorage.getItem(input.name);
+            if (value) {
+                input.value = value;
+            }
+        });
+    }); */
 </script>

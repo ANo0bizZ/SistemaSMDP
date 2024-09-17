@@ -14,18 +14,46 @@ class Mascota_model extends CI_Model
         return $query->result();
     }
 
-    public function registrar_raza($nombre, $especies_idEspecies, $tamanio, $descripcion, $estado){
+    public function registrar_raza($nombre, $idEspecies, $tamanio, $descripcion, $estado){
         $data = array(
 			'nombre' => $nombre,
-			'especies_idEspecies'=> $especies_idEspecies,
+			'idEspecies'=> $idEspecies,
             'tamanio' => $tamanio,
             'descripcion' => $descripcion,
             'estado' => $estado
 		);
 		$this->db->insert('razas', $data);
         return $this->db->insert_id();
+    } 
+    public function registrar_mascota($idEspecies, $idRazas, $nombre, $fechaNacMascota, $fechaIngreso, $sexo, $color, $descripcion, $idCreador)
+    {
+        $data = array(
+            'idEspecies' => $idEspecies,
+            'idRazas' => $idRazas,
+            'nombre' => $nombre,
+            'fechaNacMascota' => $fechaNacMascota,
+            'fechaIngreso' => $fechaIngreso,
+            'sexo' => $sexo,
+            'color' => $color,
+            'descripcion' => $descripcion,
+            'estado' => 1,
+            'idCreador' => $idCreador
+        );
+        $this->db->insert('mascotas', $data);
+        return $this->db->insert_id();
     }
 
+    public function guardar_foto_mascota($idMascota, $fotoPath, $idUsuarioCreador)
+    {
+        $data = array(
+            'idMascota' => $idMascota,
+            'rutaFoto' => $fotoPath,
+            'estado' => 1,
+            'fechaCreacion' => date('Y-m-d H:i:s'),
+            'idUsuarioCreador' => $idUsuarioCreador
+        );
+        $this->db->insert('fotos', $data);
+    }
     public function recuperarMascota($idMascotas)
     {
         $this->db->select('*');
@@ -45,34 +73,5 @@ class Mascota_model extends CI_Model
         $this->db->update('umascotas', $data);
     }
 
-    public function registrar_mascota($especie, $raza, $nombreMascota, $fechaNacimiento, $fechaIngreso, $sexo, $color, $descripcion, $idUsuarioCreador)
-    {
-        $data = array(
-            'idEspecie' => $especie,
-            'raza' => $raza,
-            'nombreMascota' => $nombreMascota,
-            'fechaNacimiento' => $fechaNacimiento,
-            'fechaIngreso' => $fechaIngreso,
-            'sexo' => $sexo,
-            'color' => $color,
-            'descripcion' => $descripcion,
-            'estado' => 1,
-            'fechaCreacion' => date('Y-m-d H:i:s'),
-            'idUsuarioCreador' => $idUsuarioCreador
-        );
-        $this->db->insert('mascotas', $data);
-        return $this->db->insert_id();
-    }
-
-    public function guardar_foto_mascota($idMascota, $fotoPath, $idUsuarioCreador)
-    {
-        $data = array(
-            'idMascota' => $idMascota,
-            'rutaFoto' => $fotoPath,
-            'estado' => 1,
-            'fechaCreacion' => date('Y-m-d H:i:s'),
-            'idUsuarioCreador' => $idUsuarioCreador
-        );
-        $this->db->insert('fotos', $data);
-    }
+    
 }

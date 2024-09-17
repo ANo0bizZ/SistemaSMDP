@@ -1,5 +1,5 @@
 <br><br>
-<h1>Modificar Usuario</h1>
+<h1>Modificar Mascota</h1>
 <br>
 
 <?php foreach($mascotas->result() as $row): ?>
