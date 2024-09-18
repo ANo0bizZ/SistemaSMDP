@@ -1,6 +1,5 @@
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
             data-scroll="true">
             <div class="container-fluid py-1 px-3">
@@ -51,11 +50,8 @@
                 </div>
             </div>
         </nav>
-        <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div id="confimacionInsert"></div>
-
-            <!-- Mensaje de error -->
             <?php if ($this->session->flashdata('error')) : ?>
             <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
                 aria-hidden="true">
@@ -125,18 +121,18 @@
                                             <td align="center"><?php
                                               if ($mascota->estado == 0) {
                                                 echo "DISPONIBLE";
-                                              } elseif ($mascota->rol == 1) {
+                                              } elseif ($mascota->estado == 1) {
                                                 echo "EN PROCESO";
-                                              } elseif ($mascota->rol == 2) {
+                                              } elseif ($mascota->estado == 2) {
                                                 echo "ADOPTADO";
                                               } else {
                                                 echo "ROL NO CONOCIDO";
                                               }
                                               ?></td>
                                             <td align="center"><?php
-                                              $fechaNacMascota = new DateTime($mascota->fechaNacMascota);
-                                              $hoy = new DateTime(date("Y-m-d"));
-                                              $edad = $hoy->diff($fechaNacMascota)->y;
+                                              $anioNacMascota = intval($mascota->fechaNacMascota);
+                                              $anioActual = intval(date("Y"));
+                                              $edad = $anioActual - $anioNacMascota;
                                               echo $edad;
                                               ?></td>
                                             <td align="center">
@@ -148,7 +144,7 @@
                                                 <?php echo form_close(); ?>
                                             </td>
                                             <td align="center">
-                                                <button type="button" class="btn btn-danger fa-trash"
+                                                <button type="button" class="btn btn-danger fas fa-trash"
                                                     data-toggle="modal" data-target="#confirmDeleteModal"
                                                     data-id="<?php echo $mascota->idMascotas; ?>">Eliminar</button>
                                             </td>

@@ -36,23 +36,21 @@ class Mascota_model extends CI_Model
             'sexo' => $sexo,
             'color' => $color,
             'descripcion' => $descripcion,
-            'estado' => 1,
+            'estado' => 0,
             'idCreador' => $idCreador
         );
         $this->db->insert('mascotas', $data);
         return $this->db->insert_id();
     }
-
-    public function guardar_foto_mascota($idMascota, $fotoPath, $idUsuarioCreador)
+    public function registrar_foto($idMascotas, $urlFoto)
     {
         $data = array(
-            'idMascota' => $idMascota,
-            'rutaFoto' => $fotoPath,
-            'estado' => 1,
-            'fechaCreacion' => date('Y-m-d H:i:s'),
-            'idUsuarioCreador' => $idUsuarioCreador
+            'idMascotas' => $idMascotas,
+            'urlFoto' => $urlFoto,
+            'estado' => 0
         );
         $this->db->insert('fotos', $data);
+        return $this->db->insert_id();
     }
     public function recuperarMascota($idMascotas)
     {
@@ -70,7 +68,7 @@ class Mascota_model extends CI_Model
     public function modificarMascota($idMascotas, $data)
     {
         $this->db->where('idMascotas', $idMascotas);
-        $this->db->update('umascotas', $data);
+        $this->db->update('mascotas', $data);
     }
 
     
