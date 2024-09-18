@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-7 pl-md-5 py-md-5">
                 <div class="heading-section pt-md-5">
-                    <h2 class="mb-4">Why Choose Us?</h2>
+                    <h2 class="mb-4">Un poco más de nosotros</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-6 services-2 w-100 d-flex">
