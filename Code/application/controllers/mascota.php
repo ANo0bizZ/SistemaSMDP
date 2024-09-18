@@ -29,59 +29,63 @@ class Mascota extends CI_Controller
 		} else {
 			echo json_encode(['success' => false, 'message' => 'No se pudo registrar la raza.']);
 		}
-	} 
+	}
 
 	public function registrarMascota()
-	{
-		$idEspecies = $this->input->post('especies');
-		$idRazas = $this->input->post('razas');
-		$nombre = $this->input->post('nombre');
-		$fechaNacMascota = $this->input->post('fechaNacMascota');
-		$fechaIngreso = $this->input->post('fechaIngreso');
-		$sexo = $this->input->post('sexo');
-		$color = $this->input->post('color');
-		$descripcion = $this->input->post('descripcion');
-		$idCreador = 1;
-		$this->load->model('mascota_model');
-		$this->mascota_model->registrar_mascota($idEspecies, $idRazas, $nombre, $fechaNacMascota, $fechaIngreso, $sexo, $color, $descripcion, $idCreador);
-		redirect('mascota/agregarMascota');
-/*
-		$config['upload_path'] = './uploads/fotos_mascotas/';
-		$config['allowed_types'] = 'gif|jpg|png|jpeg';
-		$config['max_size'] = 2048;
-		$config['encrypt_name'] = TRUE;
+    {
+        $idEspecies = $this->input->post('especies');
+        $idRazas = $this->input->post('razas');
+        $nombre = $this->input->post('nombre');
+        $fechaNacMascota = $this->input->post('fechaNacMascota');
+        $fechaIngreso = $this->input->post('fechaIngreso');
+        $sexo = $this->input->post('sexo');
+        $color = $this->input->post('color');
+        $descripcion = $this->input->post('descripcion');
+        $idCreador = 1;
 
-		$this->upload->initialize($config);
-		if (!$this->upload->do_upload('foto')) {
-			$error = array('error' => $this->upload->display_errors());
-			$this->load->view('error_page', $error);
-		} else {
-			$fotoData = $this->upload->data();
-			$fotoPath = $fotoData['file_name'];
-			$idMascota = $this->mascota_model->registrar_mascota($especie, $raza, $nombreMascota, $fechaNacimiento, $fechaIngreso, $sexo, $color, $descripcion, $idUsuarioCreador);
-			$this->mascota_model->guardar_foto_mascota($idMascota, $fotoPath, $idUsuarioCreador);
-			redirect('mascota/registrarMascota');
-		}
-	} */
-	/* public function registrarMascota()
-	{
-		$data = array(
-			'nombre' => $this->input->post('nombreMascota'),
-			'especie' => $this->input->post('especies'),
-			'raza' => $this->input->post('razas'),
-			'fechaNacMascota' => $this->input->post('fechaNacimiento'),
-			'fechaIngreso' => $this->input->post('fechaIngreso'),
-			'sexo' => $this->input->post('sexo'),
-			'color' => $this->input->post('color'),
-			'descripcion' => $this->input->post('descripcion')
-		);
+        $this->load->model('mascota_model');
+        $idMascota = $this->mascota_model->registrar_mascota($idEspecies, $idRazas, $nombre, $fechaNacMascota, $fechaIngreso, $sexo, $color, $descripcion, $idCreador);
 
-		if ($this->mascota_model->registrarMascota($data)) {
-			echo json_encode(['success' => true]);
-		} else {
-			echo json_encode(['success' => false, 'message' => 'Error al registrar la mascota']);
-		}*/
-	} 
+        $fotos_registradas = 0;
+
+        if ($idMascota) {
+            $this->load->library('upload');
+            $files = $_FILES['foto'];
+            $file_count = count($files['name']);
+
+            for ($i = 0; $i < $file_count; $i++) {
+                if (!empty($files['name'][$i])) {
+                    $_FILES['userfile']['name'] = $files['name'][$i];
+                    $_FILES['userfile']['type'] = $files['type'][$i];
+                    $_FILES['userfile']['tmp_name'] = $files['tmp_name'][$i];
+                    $_FILES['userfile']['error'] = $files['error'][$i];
+                    $_FILES['userfile']['size'] = $files['size'][$i];
+
+                    $config['upload_path'] = './uploads/';
+                    $config['allowed_types'] = 'gif|jpg|jpeg|png';
+                    $config['max_size'] = 2048; 
+                    $config['file_name'] = 'mascota_' . $idMascota . '_' . time() . '_' . $i;
+
+                    $this->upload->initialize($config);
+
+                    if ($this->upload->do_upload('userfile')) {
+                        $upload_data = $this->upload->data();
+                        $urlFoto = 'uploads/' . $upload_data['file_name'];
+                        $this->mascota_model->registrar_foto($idMascota, $urlFoto);
+                        $fotos_registradas++;
+                    } else {
+                        $error = $this->upload->display_errors();
+                        log_message('error', 'Error al subir foto: ' . $error);
+                    }
+                }
+            }
+        }
+
+        echo json_encode([
+            'success' => true, 
+            'message' => 'Mascota registrada con éxito. Fotos registradas: ' . $fotos_registradas
+        ]);
+    }
 
 	public function listaMascotas()
 	{

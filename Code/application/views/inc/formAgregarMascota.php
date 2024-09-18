@@ -10,11 +10,34 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group input-group-outline">
-                    <label class="form-label">Type here...</label>
-                    <input type="text" class="form-control">
-                </div>
             </div>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item px-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0">
+                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-bell cursor-pointer"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="<?php echo site_url('usuario/logout'); ?>" class="btn btn-success text-body font-weight-bold px-3">
+                        <i class="material-icons opacity-10">exit_to_app</i>
+                        <span class="d-sm-inline d-none">Cerrar Sesión</span>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -78,8 +101,7 @@
             </div>
             <div style="display: flex; gap: 10px; margin-bottom: 15px; align-items: center;">
                 <label for="foto" style="flex-basis: 50%;">Subir Fotografía de la Mascota:</label>
-                <input type="file" name="foto[]" id="foto" accept="image/*" multiple
-                    style="flex-basis: 50%; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
+                <input type="file" name="foto[]" id="foto" accept="image/*" multiple style="flex-basis: 50%; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
             </div>
             <textarea name="descripcion" placeholder="Descripción de la Mascota"
                 style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;"></textarea>
@@ -89,6 +111,8 @@
         </form>
     </div>
 </div>
+
+<!-- ---------------------MODALES------------------------------ -->
 
 <div class="modal fade" id="modalNuevaRaza" tabindex="-1" role="dialog" aria-labelledby="modalNuevaRazaLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -127,6 +151,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="successModalRaza" tabindex="-1" role="dialog" aria-labelledby="successModalRazaLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -202,63 +227,32 @@
         $('#modalNuevaRaza').modal('hide');
     });
 
-    //---------------------------*----------------------------
     document.getElementById('formRegistroMascota').addEventListener('submit', function(event) {
         event.preventDefault();
         var form = this;
+        var formData = new FormData(form);
+
         var xhr = new XMLHttpRequest();
         xhr.open('POST', form.action, true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
             if (xhr.status === 200) {
-                form.reset();
-                $('#successModal').modal('show');
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    form.reset();
+                    $('#successModal').modal('show');
+                } else {
+                    alert('Error al registrar la mascota: ' + response.message);
+                }
+            } else {
+                alert('Error en la solicitud al servidor.');
             }
         };
-        xhr.send(new URLSearchParams(new FormData(form)).toString());
+        xhr.onerror = function() {
+            alert('Error al intentar enviar el formulario.');
+        };
+        xhr.send(formData);
     });
     document.getElementById('btnAceptar').addEventListener('click', function() {
         $('#successModal').modal('hide');
     });
-    /*
-        // Envío del formulario de registro de mascotas
-        document.getElementById('formRegistroMascota').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var form = this;
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', form.action, true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                console.log("Formulario enviado exitosamente. Respuesta:", xhr.responseText);
-                $('#successModal').modal('show');
-            } else {
-                console.error("Error en la solicitud. Código de estado:", xhr.status);
-                console.error("Respuesta del servidor:", xhr.responseText);
-            }
-        };
-        xhr.onerror = function() {
-            console.error("Error al intentar enviar el formulario.");
-        };
-        
-        // Guardar los datos en sessionStorage para persistirlos en caso de error
-        var inputs = form.querySelectorAll('input, select, textarea');
-        inputs.forEach(function(input) {
-            sessionStorage.setItem(input.name, input.value);
-        });
-
-        xhr.send(new URLSearchParams(new FormData(form)).toString());
-    });
-
-    // Recargar los datos del sessionStorage al abrir el formulario
-    window.onload = function() {
-        var inputs = document.querySelectorAll('#formRegistroMascota input, #formRegistroMascota select, #formRegistroMascota textarea');
-        inputs.forEach(function(input) {
-            var value = sessionStorage.getItem(input.name);
-            if (value) {
-                input.value = value;
-            }
-        });
-    }); */
 </script>
