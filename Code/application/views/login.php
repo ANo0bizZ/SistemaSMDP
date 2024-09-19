@@ -21,7 +21,7 @@
         <input type="text" name="nombres" placeholder="Nombre(s)" required>
         <div style="display: flex; gap: 10px;">
             <input type="text" name="primerApellido" placeholder="Primer Apellido" style="flex: 1;" required>
-            <input type="text" name="segundoApellido" placeholder="Segundo Apellido" style="flex: 1;" required>
+            <input type="text" name="segundoApellido" placeholder="Segundo Apellido" style="flex: 1;">
         </div>
         <input type="date" name="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
         <input type="number" name="ci" id="ci" placeholder="Cedula de Identidad" required>
