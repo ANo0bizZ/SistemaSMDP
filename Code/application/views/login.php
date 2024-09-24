@@ -24,7 +24,6 @@
             <input type="text" name="segundoApellido" placeholder="Segundo Apellido" style="flex: 1;">
         </div>
         <input type="date" name="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
-        <input type="number" name="ci" id="ci" placeholder="Cedula de Identidad" required>
         <input type="email" name="usuario" placeholder="Email" required>
         <input type="password" name="contra" placeholder="Password" required>
         <label for="rol">¿Como deseas ayudarnos?</label>
@@ -38,12 +37,12 @@
 
         <div class="form-container sign-in">
             <form action="<?php echo site_url('usuario/validarLogin'); ?>" method="post">
-                <h1>Iniciar Sesión</h1>
-                <div class="social-icons">
+                <h1 align="center">Iniciar Sesión</h1><br>
+                <!-- <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                </div>
-                <span>o utilice su cuenta</span>
+                </div> -->
+                <span>Inicie sesión si ya tiene una cuenta</span>
                 <input type="email" name="usuario" id="usuario" class="form-control" placeholder="Email">
                 <input type="password" name="contra" id="contra" class="form-control" placeholder="Contraseña">
                 <?php if (isset($error)) {

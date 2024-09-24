@@ -14,17 +14,18 @@ class Mascota_model extends CI_Model
         return $query->result();
     }
 
-    public function registrar_raza($nombre, $idEspecies, $tamanio, $descripcion, $estado){
+    public function registrar_raza($nombre, $idEspecies, $tamanio, $descripcion, $estado)
+    {
         $data = array(
-			'nombre' => $nombre,
-			'idEspecies'=> $idEspecies,
+            'nombre' => $nombre,
+            'idEspecies' => $idEspecies,
             'tamanio' => $tamanio,
             'descripcion' => $descripcion,
             'estado' => $estado
-		);
-		$this->db->insert('razas', $data);
+        );
+        $this->db->insert('razas', $data);
         return $this->db->insert_id();
-    } 
+    }
     public function registrar_mascota($idEspecies, $idRazas, $nombre, $fechaNacMascota, $fechaIngreso, $sexo, $color, $descripcion, $idCreador)
     {
         $data = array(
@@ -54,10 +55,21 @@ class Mascota_model extends CI_Model
     }
     public function recuperarMascota($idMascotas)
     {
-        $this->db->select('*');
+        $this->db->select('mascotas.*, especies.nombre AS nombreEspecie, razas.nombre AS nombreRaza');
         $this->db->from('mascotas');
-        $this->db->where('idMascotas', $idMascotas);
-        return $this->db->get();
+        $this->db->join('razas', 'mascotas.idRazas = razas.idRazas');
+        $this->db->join('especies', 'razas.idEspecies = especies.idEspecies');
+        $this->db->where('mascotas.idMascotas', $idMascotas);
+        return $this->db->get()->row();
+    }
+
+    public function obtenerMascotas()
+    {
+        $this->db->select('mascotas.*, especies.nombre AS nombreEspecie, razas.nombre AS nombreRaza');
+        $this->db->from('mascotas');
+        $this->db->join('razas', 'mascotas.idRazas = razas.idRazas');
+        $this->db->join('especies', 'razas.idEspecies = especies.idEspecies');
+        return $this->db->get()->result();
     }
     public function listamascotas()
     {
@@ -70,6 +82,23 @@ class Mascota_model extends CI_Model
         $this->db->where('idMascotas', $idMascotas);
         $this->db->update('mascotas', $data);
     }
+    public function obtenerMascotasDisponibles($inicio, $por_pagina)
+    {
+        $this->db->select('mascotas.idMascotas, mascotas.nombre, razas.nombre as raza, IFNULL(GROUP_CONCAT(fotos.urlFoto), "") as fotos');
+        $this->db->from('mascotas');
+        $this->db->join('razas', 'mascotas.idRazas = razas.idRazas', 'left');
+        $this->db->join('fotos', 'mascotas.idMascotas = fotos.idMascotas', 'left');
+        $this->db->where('mascotas.estado', 0);
+        $this->db->where('fotos.estado', 0);
+        $this->db->group_by('mascotas.idMascotas');
+        $this->db->limit($por_pagina, $inicio);
+        return $this->db->get()->result();
+    }
 
-    
+    public function contarMascotasDisponibles()
+    {
+        $this->db->from('mascotas');
+        $this->db->where('estado', 0);
+        return $this->db->count_all_results();
+    } 
 }

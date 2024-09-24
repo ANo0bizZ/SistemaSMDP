@@ -3,10 +3,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usuario extends CI_Controller
 {
+	public function crearUsuario()
+	{
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
+		$this->load->view('inc/formCrearUsuario');
+		$this->load->view('inc/footerAdmin');
+	}
 	public function principal()
 	{
 		$this->load->view('paginaPrincipal/headerPrincipal');
 		$this->load->view('paginaPrincipal/index');
+		$this->load->view('paginaPrincipal/footerPrincipal');
+	}
+	public function visitantes()
+	{
+		$this->load->view('paginaPrincipal/headerVisitantes');
+		$this->load->view('paginaPrincipal/index.php');
 		$this->load->view('paginaPrincipal/footerPrincipal');
 	}
 	public function blog()
@@ -14,16 +27,46 @@ class Usuario extends CI_Controller
 		$this->load->view('paginaPrincipal/eventos.php');
 	}
 
-	public function galeria()
+	public function galeria($pagina = 1)
 	{
-		$this->load->view('paginaPrincipal/headerVisitantes');
-		$this->load->view('paginaPrincipal/galeria.php');
-	}
-	public function visitantes()
-	{
-		$this->load->view('paginaPrincipal/headerVisitantes');
-		$this->load->view('paginaPrincipal/index.php');
+		$por_pagina = 9;
+		$inicio = ($pagina - 1) * $por_pagina;
+
+		$data['mascotas'] = $this->mascota_model->obtenerMascotasDisponibles($inicio, $por_pagina);
+		$total_mascotas = $this->mascota_model->contarMascotasDisponibles();
+
+		$data['total_paginas'] = ceil($total_mascotas / $por_pagina);
+		$data['pagina_actual'] = $pagina;
+
+		$this->load->view('paginaPrincipal/headerPrincipal');
+		$this->load->view('paginaPrincipal/galeria', $data);
 		$this->load->view('paginaPrincipal/footerPrincipal');
+	} 
+	public function galeriaVisita($pagina = 1)
+	{
+		$por_pagina = 9;
+		$inicio = ($pagina - 1) * $por_pagina;
+
+		$data['mascotas'] = $this->mascota_model->obtenerMascotasDisponibles($inicio, $por_pagina);
+		$total_mascotas = $this->mascota_model->contarMascotasDisponibles();
+
+		$data['total_paginas'] = ceil($total_mascotas / $por_pagina);
+		$data['pagina_actual'] = $pagina;
+
+		$this->load->view('paginaPrincipal/headerVisitantes');
+		$this->load->view('paginaPrincipal/galeriaVisitantes', $data);
+		$this->load->view('paginaPrincipal/footerPrincipal');
+	} 
+	public function solicitudAdopcion(){
+		//$this->load->view('paginaPrincipal/headerVisitantes');
+		$this->load->view('paginaPrincipal/adopcion/headerAdopcion');
+		$this->load->view('paginaPrincipal/adopcion/formAdopcion');
+		$this->load->view('paginaPrincipal/adopcion/footerAdopcion');
+	}
+	public function eventos()
+	{
+		$this->load->view('paginaPrincipal/headerVisitantes');
+		$this->load->view('paginaPrincipal/eventos.php');
 	}
 	public function listaUsuarios()
 	{
@@ -41,6 +84,10 @@ class Usuario extends CI_Controller
 		$this->load->view('inc/sidebar');
 		$this->load->view('inc/dashboard');
 		$this->load->view('inc/footerAdmin');
+	}
+	public function login()
+	{
+		$this->load->view('login');
 	}
 	public function modUsuario()
 	{
@@ -76,15 +123,6 @@ class Usuario extends CI_Controller
 		$this->usuario_model->actualizarEstado($idUsuario, $data);
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
-	
-	public function crearUsuario()
-	{
-		$this->load->view('inc/headerAdmin');
-		$this->load->view('inc/sidebar');
-		$this->load->view('inc/formCrearUsuario');
-		$this->load->view('inc/footerAdmin');
-	}
-
 	public function administrador()
 	{
 		$this->load->view('inc/headerAdmin.php');
@@ -92,21 +130,16 @@ class Usuario extends CI_Controller
 		$this->load->view('inc/mainAdmin.php');
 		$this->load->view('inc/footerAdmin.php');
 	}
-	public function login()
-	{
-		$this->load->view('login');
-	}
-
 	public function registrarUsuario()
 	{
 		$nombres = $this->input->post('nombres');
 		$primerApellido = $this->input->post('primerApellido');
 		$segundoApellido = $this->input->post('segundoApellido');
 		$fechaNacimiento = $this->input->post('fechaNacimiento');
-		$ci = $this->input->post('ci');
 		$usuario = $this->input->post('usuario');
 		$contra = $this->input->post('contra');
 		$rol = $this->input->post('rol');
+		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol, null);
 
 		$this->load->library('email');
 		$this->email->from('arkxcpa14@gmail.com', 'Centro de Adopciones "San Martin de Porres"');
@@ -146,14 +179,11 @@ class Usuario extends CI_Controller
 		$rol = $this->input->post('rol');
 
 		$this->load->model('usuario_model');
-
 		$idCreador = $this->session->userdata('idUsuario');
 		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $ci, $usuario, $contra, $rol, $idCreador);
 
 		redirect('usuario/administrador');
 	}
-
-
 	public function validarLogin()
 	{
 		$usuario = $_POST['usuario'];

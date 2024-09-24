@@ -50,12 +50,12 @@
     </div>
     <nav class=" navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="<?php echo site_url('usuario/principal'); ?>"><img src="<?php echo base_url(); ?>extrasPrincipal/images/SMDP1.ico" alt="">Refugio "San Martin de Porres"</a>
+            <a class="navbar-brand" href="<?php echo site_url('usuario/visitantes'); ?>"><img src="<?php echo base_url(); ?>extrasPrincipal/images/SMDP1.ico" alt="">Refugio "San Martin de Porres"</a>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="<?php echo site_url('usuario/principal'); ?>" class="nav-link">Inicio</a></li>
+                    <li class="nav-item"><a href="<?php echo site_url('usuario/visitantes'); ?>" class="nav-link">Inicio</a></li>
                     <li class="nav-item"><a href="servicios.php" class="nav-link">Quienes somos?</a></li>
-                    <li class="nav-item"><a href="<?php echo site_url('usuario/galeria'); ?>" class="nav-link">Galeria</a></li>
+                    <li class="nav-item"><a href="<?php echo site_url('usuario/galeriaVisita'); ?>" class="nav-link">Galeria</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/eventos'); ?>" class="nav-link">Eventos</a></li>
                     <li class="nav-item"><a href="contactos.php" class="nav-link">Contactos</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/logout'); ?>" class="btn btn-primary mr-md-3 py-3 px-2" style="margin-top: 25px;">Cerrar Sesión<span class="ion-ios-arrow-forward"></span></a></li>
