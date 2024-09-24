@@ -10,14 +10,13 @@ class Usuario_model extends CI_Model
 		return $this->db->get();
 	}
 
-	public function registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $ci, $usuario, $contra, $rol, $idCreador )
+	public function registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol, $idCreador)
 	{
 		$data = array(
 			'nombres' => $nombres,
 			'primerApellido' => $primerApellido,
 			'segundoApellido' => $segundoApellido,
 			'fechaNacimiento' => $fechaNacimiento,
-			'ci' => $ci,
 			'usuario' => $usuario,
 			'contra' => md5($contra),
 			'rol' => $rol,
@@ -27,15 +26,14 @@ class Usuario_model extends CI_Model
 		$idUsuario = $this->db->insert_id();
 
 		if ($idCreador === null) {
-			$idCreador = $idUsuario; 
-		}else{
-			$idCreador = 1;
+			$idCreador = $idUsuario;
 		}
 
 		$this->db->where('idUsuario', $idUsuario);
 		$this->db->update('usuarios', array('idCreador' => $idCreador));
-	}
 
+		return $idUsuario;
+	}
 	public function validarusuario($usuario, $contra)
 	{
 		$this->db->select('idUsuario, usuario, nombres, primerApellido, segundoApellido, rol');

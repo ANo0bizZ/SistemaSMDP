@@ -74,7 +74,7 @@
             <div class="mascota-info">
               <h6><?php echo $mascota->raza; ?></h6>
               <h2><?php echo $mascota->nombre; ?></h2>
-              <a href="<?php echo site_url('usuario/login'); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
+              <a href="<?php echo site_url('usuario/solicitudAdopcion'); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
             </div>
           </div>
         </div>
@@ -112,17 +112,17 @@
         <div class="block-27">
           <ul>
             <?php if ($pagina_actual > 1): ?>
-              <li><a href="<?php echo base_url('mascota/galeria/' . ($pagina_actual - 1)); ?>">&lt;</a></li>
+              <li><a href="<?php echo base_url('mascota/galeriaVisitantes/' . ($pagina_actual - 1)); ?>">&lt;</a></li>
             <?php endif; ?>
 
             <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
               <li <?php echo $i == $pagina_actual ? 'class="active"' : ''; ?>>
-                <a href="<?php echo base_url('mascota/galeria/' . $i); ?>"><?php echo $i; ?></a>
+                <a href="<?php echo base_url('mascota/galeriaVisitantes/' . $i); ?>"><?php echo $i; ?></a>
               </li>
             <?php endfor; ?>
 
             <?php if ($pagina_actual < $total_paginas): ?>
-              <li><a href="<?php echo base_url('mascota/galeria/' . ($pagina_actual + 1)); ?>">&gt;</a></li>
+              <li><a href="<?php echo base_url('mascota/galeriaVisitantes/' . ($pagina_actual + 1)); ?>">&gt;</a></li>
             <?php endif; ?>
           </ul>
         </div>
