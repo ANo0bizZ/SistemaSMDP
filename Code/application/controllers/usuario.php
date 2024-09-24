@@ -3,6 +3,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usuario extends CI_Controller
 {
+	public function principal()
+	{
+		$this->load->view('paginaPrincipal/headerPrincipal');
+		$this->load->view('paginaPrincipal/index');
+		$this->load->view('paginaPrincipal/footerPrincipal');
+	}
+	public function blog()
+	{
+		$this->load->view('paginaPrincipal/eventos.php');
+	}
+
+	public function galeria()
+	{
+		$this->load->view('paginaPrincipal/headerVisitantes');
+		$this->load->view('paginaPrincipal/galeria.php');
+	}
+	public function visitantes()
+	{
+		$this->load->view('paginaPrincipal/headerVisitantes');
+		$this->load->view('paginaPrincipal/index.php');
+		$this->load->view('paginaPrincipal/footerPrincipal');
+	}
 	public function listaUsuarios()
 	{
 		$lista = $this->usuario_model->listausuarios();
@@ -25,6 +47,7 @@ class Usuario extends CI_Controller
 		$idUsuario = $this->input->post('idUsuario');
 		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
 		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
 		$this->load->view('inc/formModificar', $data);
 		$this->load->view('inc/footerAdmin');
 	}
@@ -53,28 +76,13 @@ class Usuario extends CI_Controller
 		$this->usuario_model->actualizarEstado($idUsuario, $data);
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
-
+	
 	public function crearUsuario()
 	{
 		$this->load->view('inc/headerAdmin');
 		$this->load->view('inc/sidebar');
 		$this->load->view('inc/formCrearUsuario');
 		$this->load->view('inc/footerAdmin');
-	}
-	public function principal()
-	{
-		$this->load->view('paginaPrincipal/headerPrincipal');
-		$this->load->view('paginaPrincipal/index');
-		$this->load->view('paginaPrincipal/footerPrincipal');
-	}
-	public function blog()
-	{
-		$this->load->view('paginaPrincipal/eventos.php');
-	}
-
-	public function galeria()
-	{
-		$this->load->view('paginaPrincipal/galeria.php');
 	}
 
 	public function administrador()
@@ -83,12 +91,6 @@ class Usuario extends CI_Controller
 		$this->load->view('inc/sidebar');
 		$this->load->view('inc/mainAdmin.php');
 		$this->load->view('inc/footerAdmin.php');
-	}
-	public function visitantes()
-	{
-		$this->load->view('paginaPrincipal/headerVisitantes');
-		$this->load->view('paginaPrincipal/index.php');
-		$this->load->view('paginaPrincipal/footerPrincipal');
 	}
 	public function login()
 	{
@@ -186,6 +188,10 @@ class Usuario extends CI_Controller
 		} else {
 			redirect('usuario/login', 'refresh');
 		}
+	}
+	public function solicitud(){
+		$this->load->view('paginaPrincipal/headerVisitante');
+		$this->load->view('paginaPrincipal/solicitudAdopcion');
 	}
 	public function logout()
 	{

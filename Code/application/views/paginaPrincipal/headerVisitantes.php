@@ -17,12 +17,12 @@
     .outlined-text {
       font-size: 24px;
       font-family: Arial, sans-serif;
-      color: white; /* Color del texto */
+      color: white;
       text-shadow: 
         -2px -2px 0 #009745,  
          2px -2px 0 #009745,
         -2px  2px 0 #009745,
-         2px  2px 0 #009745; /* Contorno negro */
+         2px  2px 0 #009745; 
     }
   </style>
 </head>
@@ -59,7 +59,6 @@
                     <li class="nav-item"><a href="<?php echo site_url('usuario/eventos'); ?>" class="nav-link">Eventos</a></li>
                     <li class="nav-item"><a href="contactos.php" class="nav-link">Contactos</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/logout'); ?>" class="btn btn-primary mr-md-3 py-3 px-2" style="margin-top: 25px;">Cerrar Sesión<span class="ion-ios-arrow-forward"></span></a></li>
-                    
                 </ul>
             </div>
         </div>
