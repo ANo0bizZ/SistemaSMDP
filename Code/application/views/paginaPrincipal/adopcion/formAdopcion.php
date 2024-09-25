@@ -157,8 +157,8 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label class="control-label">Example</label>
-                                                    <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>
+                                                    <label class="control-label">Ejemplo</label>
+                                                    <p class="description">"Quiero adoptar una mascota porque puedo ofrecerle un hogar lleno de amor y cuidado. Me comprometo a brindarle atención, tiempo y un ambiente seguro donde pueda ser feliz."</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,10 +187,10 @@
                                 </div>
                             </form>
                         </div>
-                    </div> <!-- wizard container -->
+                    </div> 
                 </div>
-            </div> <!-- row -->
-        </div> <!--  big container -->
+            </div> 
+        </div> 
 
         <div class="footer">
             <div class="container text-center">

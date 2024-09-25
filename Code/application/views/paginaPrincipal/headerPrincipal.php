@@ -1,30 +1,31 @@
+<title>Sistema de Refugio San Martin de Porres</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/animate.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/owl.carousel.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/magnific-popup.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/jquery.timepicker.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/flaticon.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/style.css">
 
-    <title>Sistema de Refugio San Martin de Porres</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/animate.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/magnific-popup.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/jquery.timepicker.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/flaticon.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/style.css">
-
-    <style>
+<style>
     .outlined-text {
-      font-size: 24px;
-      font-family: Arial, sans-serif;
-      color: white; /* Color del texto */
-      text-shadow: 
-        -2px -2px 0 #009745,  
-         2px -2px 0 #009745,
-        -2px  2px 0 #009745,
-         2px  2px 0 #009745; /* Contorno negro */
+        font-size: 24px;
+        font-family: Arial, sans-serif;
+        color: white;
+        /* Color del texto */
+        text-shadow:
+            -2px -2px 0 #009745,
+            2px -2px 0 #009745,
+            -2px 2px 0 #009745,
+            2px 2px 0 #009745;
+        /* Contorno negro */
     }
-  </style>
+</style>
 </head>
 
 <body>
@@ -54,14 +55,18 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="<?php echo site_url('usuario/principal'); ?>" class="nav-link">Inicio</a></li>
-                    <li class="nav-item"><a href="servicios.php" class="nav-link">Quienes somos?</a></li>
+                    <li class="nav-item"><a href="<?php echo site_url('usuario/mision'); ?>" class="nav-link">Quienes somos?</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/galeria'); ?>" class="nav-link">Galeria</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/eventos'); ?>" class="nav-link">Eventos</a></li>
-                    <li class="nav-item"><a href="contactos.php" class="nav-link">Contactos</a></li>
-                    <li class="nav-item"><a href="<?php echo site_url('usuario/panel'); ?>" class="btn btn-primary mr-md-3 py-3 px-2" style="margin-top: 25px;">Acceder<span class="ion-ios-arrow-forward"></span></a></li>
+                    <li class="nav-item"><a href="<?php echo site_url('usuario/contactos'); ?>" class="nav-link">Contactos</a></li>
+                    <li class="nav-item">
+                        <?php if ($this->session->userdata('idUsuario')): ?>
+                            <a href="<?php echo site_url('usuario/logout'); ?>" class="btn btn-primary mr-md-3 py-3 px-2" style="margin-top: 25px;">Cerrar Sesión<span class="ion-ios-arrow-forward"></span></a>
+                        <?php else: ?>
+                            <a href="<?php echo site_url('usuario/panel'); ?>" class="btn btn-primary mr-md-3 py-3 px-2" style="margin-top: 25px;">Acceder<span class="ion-ios-arrow-forward"></span></a>
+                        <?php endif; ?>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
-    

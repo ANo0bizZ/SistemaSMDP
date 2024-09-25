@@ -26,7 +26,7 @@
   <div class="container">
     <div class="row no-gutters slider-text align-items-end">
       <div class="col-md-9 ftco-animate pb-5">
-        <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Inicio <i class="ion-ios-arrow-forward"></i></a></span> <span>Galeria<i class="ion-ios-arrow-forward"></i></span></p>
+        <p class="breadcrumbs mb-2"><span class="mr-2"><a href="<?php echo site_url('usuario/principal'); ?>">Inicio <i class="ion-ios-arrow-forward"></i></a></span> <span>Galeria<i class="ion-ios-arrow-forward"></i></span></p>
         <h1 class="mb-0 bread">Galeria</h1>
       </div>
     </div>
@@ -74,7 +74,11 @@
             <div class="mascota-info">
               <h6><?php echo $mascota->raza; ?></h6>
               <h2><?php echo $mascota->nombre; ?></h2>
-              <a href="<?php echo site_url('usuario/login'); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
+              <?php if ($this->session->userdata('idUsuario')): ?>
+                <a href="<?php echo site_url('usuario/solicitudAdopcion/' . $mascota->idMascotas); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
+              <?php else: ?>
+                <a href="<?php echo site_url('usuario/login'); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
+              <?php endif; ?>
             </div>
           </div>
         </div>
