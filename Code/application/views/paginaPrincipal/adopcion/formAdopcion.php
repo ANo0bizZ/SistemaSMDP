@@ -1,14 +1,16 @@
 <body>
     <div class="image-container set-full-height" style="background-image: url('<?php echo base_url() ?>formSolicitudAdopcion/assets/img/bg2.jpg')">
-        <a href="<?php echo site_url('usuario/principal'); ?>"><div class="logo-container" >
-            <div class="logo">
-                <img src="<?php echo base_url() ?>formSolicitudAdopcion/assets/img/SMDP1.png">
+        <a href="<?php echo site_url('usuario/principal'); ?>">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="<?php echo base_url() ?>formSolicitudAdopcion/assets/img/SMDP1.png">
+                </div>
+                <div class="brand">
+                    Centro de Adopciones "San Martin de Porres"
+                </div>
             </div>
-            <div class="brand">
-                Centro de Adopciones "San Martin de Porres"
-            </div>
-        </div></a>
-    
+        </a>
+       
 
         <a href="https://wa.link/bc9i3x" class="made-with-mk">
             <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width:24px; height:24px;">
@@ -34,7 +36,8 @@
                                         <li><a href="#description" data-toggle="tab">¿Porque Desea Adoptar?</a></li>
                                     </ul>
                                 </div>
-
+<!-- -------------------------------------------------------------------------------------- -->
+ 
                                 <div class="tab-content">
                                     <div class="tab-pane" id="details">
                                         <div class="row">
@@ -49,7 +52,7 @@
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Nombres</label>
-                                                        <input name="nombres" type="text" class="form-control">
+                                                        <input name="nombres" type="text" class="form-control"  value="<?php echo $this->session->userdata('nombres'); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
@@ -58,7 +61,7 @@
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Apellido Materno</label>
-                                                        <input name="name" type="text" class="form-control">
+                                                        <input name="name" type="text" class="form-control" value="<?php echo $this->session->userdata('segundoApellido'); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
@@ -67,7 +70,7 @@
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Email</label>
-                                                        <input name="email" type="email" class="form-control">
+                                                        <input name="email" type="email" class="form-control" value="<?php echo $this->session->userdata('usuario'); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
@@ -76,7 +79,7 @@
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Fecha de Nacimiento</label><br>
-                                                        <input name="fechaNacimiento" type="date" class="form-control">
+                                                        <input name="fechaNacimiento" type="date" class="form-control" value="<?php echo $this->session->userdata('fechaNacimiento'); ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,7 +90,7 @@
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Apellido Paterno</label>
-                                                        <input name="primerApeliido" type="text" class="form-control">
+                                                        <input name="primerApeliido" type="text" class="form-control" value="<?php echo $this->session->userdata('primerApellido'); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
@@ -96,7 +99,7 @@
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Cedula de Identidad</label>
-                                                        <input name="ci" type="number" class="form-control">
+                                                        <input name="ci" type="number" class="form-control" value="">
                                                     </div>
                                                 </div>
                                                 <div class="input-group">
@@ -105,13 +108,13 @@
                                                     </span>
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Numero de Celular</label>
-                                                        <input name="ci" type="number" class="form-control">
+                                                        <input name="ci" type="number" class="form-control" value="">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- --------------------------------------------------------- -->
+                    <!-- --------------------------------------------------------- -->
                                     <div class="tab-pane" id="captain">
                                         <h4 class="info-text">Información Importante</h4>
                                         <div class="row">
@@ -157,8 +160,8 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label class="control-label">Example</label>
-                                                    <p class="description">"The room really nice name is recognized as being a really awesome room. We use it every sunday when we go fishing and we catch a lot. It has some kind of magic shield around it."</p>
+                                                    <label class="control-label">Ejemplo</label>
+                                                    <p class="description">"Quiero adoptar una mascota porque puedo ofrecerle un hogar lleno de amor y cuidado. Me comprometo a brindarle atención, tiempo y un ambiente seguro donde pueda ser feliz."</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,10 +190,10 @@
                                 </div>
                             </form>
                         </div>
-                    </div> <!-- wizard container -->
+                    </div>
                 </div>
-            </div> <!-- row -->
-        </div> <!--  big container -->
+            </div>
+        </div>
 
         <div class="footer">
             <div class="container text-center">

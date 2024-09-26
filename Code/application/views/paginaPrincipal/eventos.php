@@ -1,13 +1,9 @@
-<?php 
-include 'headerPrincipal.php';
-?>
-    <!-- END nav -->
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text align-items-end">
           <div class="col-md-9 ftco-animate pb-5">
-          	<p class="breadcrumbs mb-2"><span class="mr-2"><a href="<?php echo site_url('usuario/principal'); ?>">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Blog <i class="ion-ios-arrow-forward"></i></span></p>
+          	<p class="breadcrumbs mb-2"><span class="mr-2"><a href="<?php echo site_url('usuario/principal'); ?>">Inicio <i class="ion-ios-arrow-forward"></i></a></span> <span>Eventos <i class="ion-ios-arrow-forward"></i></span></p>
             <h1 class="mb-0 bread">Eventos</h1>
           </div>
         </div>
@@ -19,7 +15,7 @@ include 'headerPrincipal.php';
         <div class="row d-flex">
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_1.jpg');">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/image_1.jpg');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">
@@ -33,7 +29,7 @@ include 'headerPrincipal.php';
           </div>
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_2.jpg');">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/image_2.jpg');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">
@@ -47,7 +43,7 @@ include 'headerPrincipal.php';
           </div>
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_3.jpg');">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/image_3.jpg');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">
@@ -62,7 +58,7 @@ include 'headerPrincipal.php';
 
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_4.jpg');">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/image_4.jpg');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">
@@ -76,7 +72,7 @@ include 'headerPrincipal.php';
           </div>
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_5.jpg');">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/image_5.jpg');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">
@@ -90,7 +86,7 @@ include 'headerPrincipal.php';
           </div>
           <div class="col-md-4 d-flex ftco-animate">
             <div class="blog-entry align-self-stretch">
-              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('images/image_6.jpg');">
+              <a href="blog-single.html" class="block-20 rounded" style="background-image: url('<?php echo base_url() ?>extrasPrincipal/images/image_6.jpg');">
               </a>
               <div class="text p-4">
               	<div class="meta mb-2">
@@ -121,8 +117,4 @@ include 'headerPrincipal.php';
       </div>
     </section>
   </body>
-
-  <?php
-  include 'footerPrincipal.php';
-  ?>
 </html>

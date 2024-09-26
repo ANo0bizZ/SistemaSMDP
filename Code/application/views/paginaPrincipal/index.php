@@ -368,7 +368,7 @@
                             <div class="media-body">
                                 <h3 class="heading">Seguir viendo</h3>
                                 <br>
-                                <a href="galeria.php" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                                <a href="<?php echo site_url('usuario/galeria'); ?>" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
                             </div>
                         </div>
                     </div>
