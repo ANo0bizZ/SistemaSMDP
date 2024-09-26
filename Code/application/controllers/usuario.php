@@ -114,7 +114,7 @@ class Usuario extends CI_Controller
 		} else {
 			$this->session->set_flashdata('error', 'Error al enviar correo.');
 		}
-		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $ci, $usuario, $contra, $rol, null);
+		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $usuario, $contra, $rol, null);
 	}
 	public function validarLogin()
 	{
