@@ -164,16 +164,14 @@
                                     </div>
                                     <div class="wizard-footer">
                                         <div class="pull-right">
-                                            <input type='button' class='btn btn-next btn-fill btn-success btn-wd'
-                                                name='next' value='Siguiente' />
-                                            <!-- <input type='button' class='btn btn-finish btn-fill btn-success btn-wd'
-                                                name='finish' value='Finalizar' /> -->
+                                            <button type='button' class='btn btn-next btn-fill btn-success btn-wd'
+                                                name='next'>Siguiente</button>
                                             <button type="submit" class='btn btn-finish btn-fill btn-success btn-wd'
                                             name='finish'>Finalizar</button>
                                         </div>
                                         <div class="pull-left">
-                                            <input type='button' class='btn btn-previous btn-fill btn-default btn-wd'
-                                                name='previous' value='Anterior' />
+                                            <button type='button' class='btn btn-previous btn-fill btn-default btn-wd'
+                                                name='previous'>Anterior</button>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>

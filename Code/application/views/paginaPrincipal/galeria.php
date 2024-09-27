@@ -75,7 +75,8 @@
               <h6><?php echo $mascota->raza; ?></h6>
               <h2><?php echo $mascota->nombre; ?></h2>
               <?php if ($this->session->userdata('idUsuario')): ?>
-                <a href="<?php echo site_url('usuario/solicitudAdopcion/' . $mascota->idMascotas); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
+                <a href="<?php echo site_url('usuario/solicitudAdopcion'); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
+                
               <?php else: ?>
                 <a href="<?php echo site_url('usuario/login'); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
               <?php endif; ?>

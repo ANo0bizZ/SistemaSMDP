@@ -255,4 +255,5 @@
     document.getElementById('btnAceptar').addEventListener('click', function() {
         $('#successModal').modal('hide');
     });
+    
 </script>

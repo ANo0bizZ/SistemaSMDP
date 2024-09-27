@@ -43,8 +43,10 @@ class Usuario extends CI_Controller
 		$this->load->view('paginaPrincipal/footerPrincipal');
 	} 
 	public function solicitudAdopcion(){
+		$idUsuario = $this->input->get('idUsuario');
+		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
 		$this->load->view('paginaPrincipal/adopcion/headerAdopcion');
-		$this->load->view('paginaPrincipal/adopcion/formAdopcion');
+		$this->load->view('paginaPrincipal/adopcion/formAdopcion',$data);
 		$this->load->view('paginaPrincipal/adopcion/footerAdopcion');
 	}
 	public function eventos()
@@ -75,6 +77,7 @@ class Usuario extends CI_Controller
 		$this->load->view('inc/listaUsuarios', $data);
 		$this->load->view('inc/footerAdmin');
 	}
+	
 	public function login()
 	{
 		$this->load->view('login');

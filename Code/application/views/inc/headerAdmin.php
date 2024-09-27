@@ -11,9 +11,7 @@
   Administrador SMDP
 </title>
 
-<!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-<!-- Nucleo Icons -->
 <link href="<?php  echo base_url(); ?>tempAdmin/assets/css/nucleo-icons.css" rel="stylesheet" />
 <link href="<?php  echo base_url(); ?>tempAdmin/assets/css/nucleo-svg.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
