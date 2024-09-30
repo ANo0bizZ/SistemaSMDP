@@ -14,4 +14,12 @@ class Visitante extends CI_Controller
 		$this->visitante_model->registrar_solicitud($idUsuario, $ci, $celular, $direccion, null, $descripcion);
         redirect('usuario/galeria', 'refresh');
     }
+	public function perfil()
+	{
+		$lista = $this->usuario_model->listausuarios();
+		$data['usuarios'] = $lista->result();
+		$this->load->view('paginaPrincipal/headerPrincipal');
+		$this->load->view('paginaPrincipal/perfil', $data);
+		$this->load->view('paginaPrincipal/footerPrincipal');
+	}
 }

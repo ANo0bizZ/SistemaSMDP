@@ -95,8 +95,7 @@
               <tbody>
                 <?php $contador = 1; ?>
                 <?php foreach ($usuarios as $usuario) : ?>
-                  <?php if ($usuario->estado == 1) :
-                  ?>
+                  <?php if ($usuario->estado == 1) :?>
                     <tr>
                       <td align="center"><?php echo $contador; ?></td>
                       <td align="center"><?php echo $usuario->nombres; ?></td>

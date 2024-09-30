@@ -25,7 +25,6 @@
         </div>
         <input type="date" name="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
         <input type="email" name="usuario" placeholder="Email" required>
-        <input type="password" name="contra" placeholder="Password" required>
         <label for="rol">¿Como deseas ayudarnos?</label>
         <select class="form-control" name="rol" id="rol" style="width: 100%; border-radius: 10px; padding: 5px;" required>
             <option value="1">Adoptante</option>

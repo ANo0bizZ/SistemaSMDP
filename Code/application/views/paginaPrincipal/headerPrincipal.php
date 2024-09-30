@@ -17,20 +17,35 @@
         font-size: 24px;
         font-family: Arial, sans-serif;
         color: white;
-        /* Color del texto */
         text-shadow:
             -2px -2px 0 #009745,
             2px -2px 0 #009745,
             -2px 2px 0 #009745,
             2px 2px 0 #009745;
-        /* Contorno negro */
+    }
+
+    @media (max-width: 992px) {
+        .navbar-toggler {
+            border-color: transparent;
+        }
+
+        .navbar-toggler-icon {
+            background-image: none;
+        }
+
+        .navbar-toggler::before {
+            content: '\f0c9';
+            font-family: "FontAwesome";
+            font-size: 24px;
+            color: white;
+        }
     }
 </style>
 </head>
 
 <body>
     <div class="wrap">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
                     <p class="mb-0 phone pl-md-2">
@@ -49,9 +64,16 @@
             </div>
         </div>
     </div>
-    <nav class=" navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="<?php echo site_url('usuario/principal'); ?>"><img src="<?php echo base_url(); ?>extrasPrincipal/images/SMDP1.ico" alt="">Refugio "San Martin de Porres"</a>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="<?php echo site_url('usuario/principal'); ?>">
+                <img src="<?php echo base_url(); ?>extrasPrincipal/images/SMDP1.ico" alt="">
+                <span class="d-none d-sm-inline" style="color: black;">Refugio "San Martin de Porres"</span>
+                <span class="d-inline d-sm-none" style="color: black;">Refugio SMDP</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" style="background-color: #00904D;">
+                <span class=""></span>
+            </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="<?php echo site_url('usuario/principal'); ?>" class="nav-link">Inicio</a></li>
@@ -59,6 +81,9 @@
                     <li class="nav-item"><a href="<?php echo site_url('usuario/galeria'); ?>" class="nav-link">Galeria</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/eventos'); ?>" class="nav-link">Eventos</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/contactos'); ?>" class="nav-link">Contactos</a></li>
+                    <?php if ($this->session->userdata('idUsuario')): ?>
+                        <li class="nav-item"><a href="<?php echo site_url('visitante/perfil'); ?>" class="nav-link">Perfil</a></li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <?php if ($this->session->userdata('idUsuario')): ?>
                             <a href="<?php echo site_url('usuario/logout'); ?>" class="btn btn-primary mr-md-3 py-3 px-2" style="margin-top: 25px;">Cerrar Sesión<span class="ion-ios-arrow-forward"></span></a>

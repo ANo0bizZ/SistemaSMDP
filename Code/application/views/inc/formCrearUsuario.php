@@ -45,7 +45,7 @@
 </nav>
 <div class="container" id="container" style="max-width: 600px; margin: auto;">
     <div class="form-container sign-up" style="padding: 30px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border-radius: 15px; background: #fff;">
-        <form action="<?php echo site_url('usuario/registrarUsuarioA'); ?>" method="post" id="formRegistro">
+        <form action="<?php echo site_url('usuario/registrarUsuario'); ?>" method="post" id="formRegistro">
             <h3 style="text-align: center; margin-bottom: 20px;">Crear Cuenta</h3>
             <input type="text" name="nombres" placeholder="Nombre(s)" required style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
             <div style="display: flex; gap: 10px; margin-bottom: 15px;">
@@ -55,7 +55,6 @@
             <label for="rol" style="margin-bottom: 5px;">Fecha de Nacimiento</label>
             <input type="date" name="fechaNacimiento" placeholder="Fecha de Nacimiento" required style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
             <input type="email" name="usuario" placeholder="Email" required style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
-            <input type="password" name="contra" placeholder="Password" required style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
             <label for="rol" style="margin-bottom: 5px;">¿Qué rol tendrá?</label>
             <select class="form-control" name="rol" id="rol" style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;" required>
                 <option value="1">Adoptante</option>
@@ -73,7 +72,7 @@
                 <h5 class="modal-title" id="successModalLabel">¡Registro Exitoso!</h5>
             </div>
             <div class="modal-body">
-                El usuario se ha registrado correctamente.
+                Se envio los datos del nuevo usuario a su correo.
             </div>
             <div class="modal-footer" style="border-top: none;">
                 <button type="button" class="btn btn-success" id="btnAceptar">Aceptar</button>

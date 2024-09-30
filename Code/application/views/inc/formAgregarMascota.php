@@ -80,7 +80,7 @@
             </div>
             <input type="text" name="nombre" placeholder="Nombre de la Mascota" required
                 style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
-            <label for="" style="margin-bottom: 5px;">Año Nacimiento de la Mascota</label>
+            <label for="" style="margin-bottom: 5px;">Año Nacimiento Aproximado de la Mascota</label>
             <input type="number" name="fechaNacMascota" id="fechaIngreso" min="2000" max="<?php echo date('Y'); ?>"
                 style="width: 100%; margin-bottom: 15px; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
             <label for="" style="margin-bottom: 5px;">Fecha de Ingreso al Refugio</label>
