@@ -69,8 +69,4 @@ class Usuario_model extends CI_Model
 		$this->db->where('idUsuario', $idUsuario);
 		$this->db->update('usuarios', $data);
 	}
-	/* public function solicitudAdopcion($idUsuario, $data){
-		$this->db->where('idUsuario', $idUsuario);
-		$this->db->update('usuarios', $data);
-	} */
 }
