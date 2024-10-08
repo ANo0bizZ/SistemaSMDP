@@ -1,3 +1,14 @@
+<style>
+    .mascota-card .form-check-input:checked {
+        background-color: #4caf50;
+        border-color: #4caf50;
+    }
+
+    .mascota-card .form-check-label {
+        font-weight: bold;
+    }
+</style>
+
 <body>
     <div class="image-container set-full-height"
         style="background-image: url('<?php echo base_url() ?>formSolicitudAdopcion/assets/img/bg2.jpg')">
@@ -34,6 +45,7 @@
                                     <ul>
                                         <li><a href="#details" data-toggle="tab">Datos Personales</a></li>
                                         <li><a href="#captain" data-toggle="tab">Información Adicional</a></li>
+                                        <li><a href="#seleccion" data-toggle="tab">Selección de Mascotas</a></li>
                                         <li><a href="#description" data-toggle="tab">¿Porque Desea Adoptar?</a></li>
                                     </ul>
                                 </div>
@@ -125,23 +137,63 @@
                                         <h4 class="info-text">Información Importante</h4>
                                         <div class="row">
                                             <div class="col-sm-10 col-sm-offset-1">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-12">
                                                     <h6>Dirección</h6>
                                                     <textarea name="direccion" class="form-control" placeholder="" rows="6"></textarea>
-                                                    <!-- <div id="map" style="height: 300px; width: 100%;"></div> -->
                                                 </div>
-                                                <!--  <div class="col-sm-6">
-                                                    <h6>Dirección</h6>
-                                                    <input type="text" id="address" name="address" class="form-control" readonly>
+                                                <!-- <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="fotoFactura">Subir Fotografía de la Factura de Luz:</label>
+                                                        <input type="file" name="fotoFactura" id="fotoFactura" accept="image/*">
+                                                    </div>
                                                 </div> -->
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- ------------------------------------------------------------------------------------------------------ -->
+                                    <div class="tab-pane" id="seleccion">
+                                        <div class="row">
+                                            <h4 class="info-text">Seleccione la o las mascotas que desea adoptar</h4>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <?php foreach ($mascotas as $mascota): ?>
+                                                        <div class="col-md-4 col-sm-6 mb-4">
+                                                            <div class="mascota-card" style="height: 300px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                                                <?php
+                                                                $fotos = !empty($mascota->fotos) ? explode(',', $mascota->fotos) : [];
+                                                                $primeraFoto = !empty($fotos) ? $fotos[0] : '';
+                                                                ?>
+                                                                <div class="mascota-imagen" style="height: 200px; overflow: hidden;">
+                                                                    <?php if (!empty($primeraFoto)): ?>
+                                                                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                                                            <img src="<?php echo base_url($primeraFoto); ?>" alt="<?php echo $mascota->nombre; ?>" style="min-width: 100%; min-height: 100%; width: auto; height: auto; object-fit: cover;">
+                                                                        </div>
+                                                                    <?php else: ?>
+                                                                        <div style="height: 100%; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                                                                            <p>No hay imagen disponible</p>
+                                                                        </div>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                                <div class="mascota-info" style="padding: 10px; text-align: center;">
+                                                                    <h5 style="margin-bottom: 10px;"><?php echo $mascota->nombre; ?></h5>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" name="mascotasSeleccionadas[]" value="<?php echo $mascota->idMascotas; ?>" id="mascota-<?php echo $mascota->idMascotas; ?>" style="transform: scale(1.5);">
+                                                                        <label class="form-check-label" for="mascota-<?php echo $mascota->idMascotas; ?>" style="margin-left: 10px; cursor: pointer;">
+                                                                            Deseo Adoptar a esta mascota
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="tab-pane" id="description">
                                         <div class="row">
-                                            <h4 class="info-text"> ¿Podría decirnos porque desea adoptar una mascota?
+                                            <h6 align="center">Usted se encuentra a solo un paso de poder cambiar la vida de uno
+                                                o más peluditos que le brindaran amor incondicional. </h6>
+                                            <h4 class="info-text">¿Podría decirnos porque desea adoptar una mascota?
                                             </h4>
                                             <div class="col-sm-6 col-sm-offset-1">
                                                 <div class="form-group">

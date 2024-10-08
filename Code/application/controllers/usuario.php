@@ -30,13 +30,6 @@ class Usuario extends CI_Controller
 		$this->load->view('paginaPrincipal/galeria', $data);
 		$this->load->view('paginaPrincipal/footerPrincipal');
 	} 
-	public function solicitudAdopcion(){
-		$idUsuario = $this->input->get('idUsuario');
-		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
-		$this->load->view('paginaPrincipal/adopcion/headerAdopcion');
-		$this->load->view('paginaPrincipal/adopcion/formAdopcion',$data);
-		$this->load->view('paginaPrincipal/adopcion/footerAdopcion');
-	}
 	public function eventos()
 	{
 		$this->load->view('paginaPrincipal/headerPrincipal');
@@ -61,10 +54,10 @@ class Usuario extends CI_Controller
 		$this->load->view('inc/footerAdmin');
 	}
 	public function registrarUsuario() {
-		$nombres = $this->input->post('nombres');
-		$primerApellido = $this->input->post('primerApellido');
-		$segundoApellido = $this->input->post('segundoApellido');
-		$fechaNacimiento = $this->input->post('fechaNacimiento');
+		$nombres = strtoupper($this->input->post('nombres'));
+		$primerApellido = strtoupper($this->input->post('primerApellido'));
+		$segundoApellido = strtoupper($this->input->post('segundoApellido'));
+		$fechaNacimiento = strtoupper($this->input->post('fechaNacimiento'));
 		$usuario = $this->input->post('usuario');
 		$rol = $this->input->post('rol');
 		$contra = $this->contraAleatoria();
@@ -121,7 +114,7 @@ class Usuario extends CI_Controller
 		$temp_user = $this->session->userdata('temp_user');
 	
 		if ($temp_user && $temp_user['token'] === $token) {
-			$idUsuario = $this->usuario_model->registrar_usuario(
+			$this->usuario_model->registrar_usuario(
 				$temp_user['nombres'],
 				$temp_user['primerApellido'],
 				$temp_user['segundoApellido'],

@@ -15,4 +15,6 @@
 	<link href="<?php echo base_url() ?>formSolicitudAdopcion/assets/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="<?php echo base_url() ?>formSolicitudAdopcion/assets/css/material-bootstrap-wizard.css" rel="stylesheet" />
 	<link href="<?php echo base_url() ?>formSolicitudAdopcion/assets/css/demo.css" rel="stylesheet" />
+	
+	<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
 </head>

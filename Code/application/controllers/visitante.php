@@ -3,6 +3,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Visitante extends CI_Controller
 {
+	public function solicitudAdopcion()
+	{
+		$idUsuario = $this->input->get('idUsuario');
+		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
+		$por_pagina = 9;
+		$pagina = 1;
+		$inicio = ($pagina - 1) * $por_pagina;
+		$data['mascotas'] = $this->mascota_model->obtenerMascotasDisponibles($inicio, $por_pagina);
+
+		$this->load->view('paginaPrincipal/adopcion/headerAdopcion');
+		$this->load->view('paginaPrincipal/adopcion/formAdopcion', $data);
+		$this->load->view('paginaPrincipal/adopcion/footerAdopcion');
+	}
 	public function registrarSolicitud()
 	{
 		$idUsuario = $this->session->userdata('idUsuario');
@@ -14,6 +27,7 @@ class Visitante extends CI_Controller
 		$this->visitante_model->registrar_solicitud($idUsuario, $ci, $celular, $direccion, null, $descripcion);
 		redirect('usuario/galeria', 'refresh');
 	}
+
 	public function perfil()
 	{
 		$lista = $this->usuario_model->listausuarios();
@@ -39,17 +53,48 @@ class Visitante extends CI_Controller
 		$data['usuario'] = $_POST['usuario'];
 		$data['rol'] = $_POST['rol'];
 		$data['fechaNacimiento'] = strtoupper($_POST['fechaNacimiento']);
-		$this->usuario_model->modificarUsuario($idUsuario, $data);
+		$data['ultimaActualizacion'] = date('Y-m-d H:i:s');
+
+		$result = $this->usuario_model->modificarUsuario($idUsuario, $data);
+
+		if ($result) {
+			$this->session->set_flashdata('user_update_success', true);
+		}
+
 		redirect('visitante/perfil', 'refresh');
 	}
-	public function validarContra(){
-		$usuario = $_POST['usuario'];
-		$contra = $_POST['contra'];
-		$this->usuario_model->validar_usuario($usuario, $contra);
-	}
-	public function modContra(){
+
+	public function modContra()
+	{
 		$idUsuario = $this->input->post('idUsuario');
-		$data['contra'] = $_POST['nuevaContra'];
-		$this->usuario_model->modificarContra($idUsuario, $data);
+		$contraActual = $this->input->post('contraActual');
+		$nuevaContra = $this->input->post('nuevaContra');
+		$confirmarContra = $this->input->post('confirmarContra');
+
+		$usuario = $this->visitante_model->obtenerUsuario($idUsuario);
+
+		if (!$usuario || md5($contraActual) !== $usuario->contra) {
+			$this->session->set_flashdata('current_password_error', true);
+			redirect('visitante/perfil');
+			return;
+		}
+
+		if ($nuevaContra !== $confirmarContra) {
+			$this->session->set_flashdata('password_mismatch_error', true);
+			redirect('visitante/perfil');
+			return;
+		}
+
+		$data['contra'] = md5($nuevaContra);
+		$data['ultimaActualizacion'] = date('Y-m-d H:i:s');
+		$result = $this->visitante_model->modificarUsuario($idUsuario, $data);
+
+		if ($result) {
+			$this->session->set_flashdata('password_update_success', true);
+		} else {
+			$this->session->set_flashdata('password_update_error', true);
+		}
+
+		redirect('visitante/perfil');
 	}
 }

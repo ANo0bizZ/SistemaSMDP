@@ -82,7 +82,6 @@
         <div class="col-md-12">
           <h3 class="mb-4">Actividades Pasadas</h3>
           <div class="row">
-            <!-- Esta sección se generará dinámicamente con datos de la base de datos -->
             <div class="col-md-4">
               <div class="card mb-4">
                 <div class="card-body">

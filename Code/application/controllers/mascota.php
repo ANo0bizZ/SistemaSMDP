@@ -35,11 +35,11 @@ class Mascota extends CI_Controller
 	{
 		$idEspecies = $this->input->post('especies');
 		$idRazas = $this->input->post('razas');
-		$nombre = $this->input->post('nombre');
+		$nombre = strtoupper($this->input->post('nombre'));
 		$fechaNacMascota = $this->input->post('fechaNacMascota');
 		$fechaIngreso = $this->input->post('fechaIngreso');
-		$sexo = $this->input->post('sexo');
-		$color = $this->input->post('color');
+		$sexo = strtoupper($this->input->post('sexo'));
+		$color = strtoupper($this->input->post('color'));
 		$descripcion = $this->input->post('descripcion');
 
 		$this->load->model('mascota_model');
@@ -108,8 +108,8 @@ class Mascota extends CI_Controller
 	{
 		$idMascotas = $this->input->post('idMascotas');
 		$data['nombre'] = strtoupper($_POST['nombre']);
-		$data['color'] = $_POST['color'];
-		$data['sexo'] = $_POST['sexo'];
+		$data['color'] = strtoupper($_POST['color']);
+		$data['sexo'] = strtoupper($_POST['sexo']);
 		$data['estado'] = $_POST['estado'];
 		$data['fechaNacMascota'] = strtoupper($_POST['fechaNacMascota']);
 		$this->mascota_model->modificarMascota($idMascotas, $data);
