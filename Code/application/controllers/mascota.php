@@ -115,4 +115,25 @@ class Mascota extends CI_Controller
 		$this->mascota_model->modificarMascota($idMascotas, $data);
 		redirect('mascota/listaMascotas', 'refresh');
 	}
+	public function modFotoMascota($idMascotas)
+	{
+		$data['fotos'] = $this->mascota_model->obtenerFotosMascota($idMascotas);
+		$data['mascota'] = $this->mascota_model->recuperarMascota($idMascotas);
+		$data['idMascotas']= $idMascotas;
+
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
+		$this->load->view('inc/modFoto', $data);
+		$this->load->view('inc/footerAdmin');
+	}
+	public function cambiarEstadoMascota()
+	{
+		$idUsuario = $this->input->post('idMascotas');
+		$estado = $this->input->post('estado');
+		$data = array(
+			'estado' => $estado
+		);
+		$this->mascota_model->actualizarEstadoMascota($idMascotas, $data);
+		redirect('mascota/listarMascotas', 'refresh');
+	}
 }

@@ -94,11 +94,28 @@ class Mascota_model extends CI_Model
         $this->db->limit($por_pagina, $inicio);
         return $this->db->get()->result();
     }
-
     public function contarMascotasDisponibles()
     {
         $this->db->from('mascotas');
         $this->db->where('estado', 0);
         return $this->db->count_all_results();
-    } 
+    }
+    public function obtenerFotosMascota($idMascotas)
+    {
+        $this->db->where('idMascotas', $idMascotas);
+        $this->db->where('estado', 0);
+        $query = $this->db->get('fotos');
+        return $query->result();
+    }
+
+    public function actualizarEstadoMascota($idMascotas, $data)
+	{
+		$this->db->where('idMascotas', $idMascotas);
+		$this->db->update('mascotas', $data);
+	}
+
+    public function agregarFotoMascota($data)
+    {
+        return $this->db->insert('fotos', $data);
+    }
 }

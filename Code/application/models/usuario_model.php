@@ -19,6 +19,7 @@ class Usuario_model extends CI_Model
 			'usuario' => $usuario,
 			'contra' => md5($contra),
 			'rol' => $rol,
+			'estado' => 1
 		);
 		
 		$this->db->insert('usuarios', $data);
@@ -64,8 +65,11 @@ class Usuario_model extends CI_Model
 		return $this->db->get();
 	}
 
-	public function actualizarEstado($idUsuario, $data)
+	public function actualizarEstado($idUsuario)
 	{
+		$data=array(
+			'estado' => 0
+		);
 		$this->db->where('idUsuario', $idUsuario);
 		$this->db->update('usuarios', $data);
 	}

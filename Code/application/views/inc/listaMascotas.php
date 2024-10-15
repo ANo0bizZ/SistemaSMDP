@@ -71,7 +71,7 @@
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Estado</th>
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Edad</th>
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Color</th>
-                                        <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Descripción</th>
+                                        <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Editar Fotos</th>
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Editar Datos</th>
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Eliminar</th>
                                     </tr>
@@ -108,15 +108,20 @@
                                                     ?>
                                                 </td>
                                                 <td align="center"><?php echo $mascota->color; ?></td>
-                                                <td align="center"><?php echo $mascota->descripcion; ?></td>
                                                 <td align="center">
-                                                    <?php echo form_open("mascota/modMascota"); ?>
+                                                    <?php echo form_open("mascota/modFotoMascota"); ?>
                                                     <input type="hidden" name="idMascotas" value="<?php echo $mascota->idMascotas; ?>">
-                                                    <button type="submit" class="btn btn-warning fas fa-edit">Editar</button>
+                                                    <a href="<?php echo site_url('mascota/modFotoMascota/' . $mascota->idMascotas); ?>" class="btn btn-primary fas fa-image"> Editar Foto</a>
                                                     <?php echo form_close(); ?>
                                                 </td>
                                                 <td align="center">
-                                                    <button type="button" class="btn btn-danger fas fa-trash" data-toggle="modal" data-target="#confirmDeleteModal" data-id="<?php echo $mascota->idMascotas; ?>">Eliminar</button>
+                                                    <?php echo form_open("mascota/modMascota"); ?>
+                                                    <input type="hidden" name="idMascotas" value="<?php echo $mascota->idMascotas; ?>">
+                                                    <button type="submit" class="btn btn-warning fas fa-edit"> Editar</button>
+                                                    <?php echo form_close(); ?>
+                                                </td>
+                                                <td align="center">
+                                                    <button type="button" class="btn btn-danger fas fa-trash" data-toggle="modal" data-target="#confirmDeleteModal" data-id="<?php echo $mascota->idMascotas; ?>"> Eliminar</button>
                                                 </td>
                                             </tr>
                                             <?php $contador++; ?>
@@ -134,7 +139,7 @@
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Estado</th>
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Edad</th>
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Color</th>
-                                        <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Descripción</th>
+                                        <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Editar Fotos</th>
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Editar Datos</th>
                                         <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Eliminar</th>
                                     </tr>
@@ -160,9 +165,9 @@
                         ¿Estás seguro de que quiere eliminar a esta mascota?
                     </div>
                     <div class="modal-footer">
-                        <?php echo form_open("mascota/cambiarEstado"); ?>
-                        <input type="hidden" name="idUsuario" id="deleteUserId" value="">
-                        <input type="hidden" name="estado" value="0">
+                        <?php echo form_open("mascota/cambiarEstadoMascota"); ?>
+                        <input type="hidden" name="idMascota" id="deleteUserId" value="">
+                        <input type="hidden" name="estado" value="1">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-danger">Confirmar</button>
                         <?php echo form_close(); ?>

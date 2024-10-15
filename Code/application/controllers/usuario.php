@@ -211,34 +211,13 @@ class Usuario extends CI_Controller
 		$this->usuario_model->modificarUsuario($idUsuario, $data);
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
-	public function cambiarEstado()
-	{
+	public function cambiarEstado() {
 		$idUsuario = $this->input->post('idUsuario');
-		$estado = $this->input->post('estado');
-		$data = array(
-			'estado' => $estado
-		);
-		$this->usuario_model->actualizarEstado($idUsuario, $data);
+		echo 'ID de Usuario recibido: ' . $idUsuario;  // Verifica el valor recibido
+		$this->usuario_model->actualizarEstado($idUsuario);
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
 	
-	/* public function registrarUsuarioA()
-	{
-		$nombres = $this->input->post('nombres');
-		$primerApellido = $this->input->post('primerApellido');
-		$segundoApellido = $this->input->post('segundoApellido');
-		$fechaNacimiento = $this->input->post('fechaNacimiento');
-		$ci = $this->input->post('ci');
-		$usuario = $this->input->post('usuario');
-		$contra = md5($this->input->post('contra'));
-		$rol = $this->input->post('rol');
-
-		$this->load->model('usuario_model');
-		$idCreador = $this->session->userdata('idUsuario');
-		$this->usuario_model->registrar_usuario($nombres, $primerApellido, $segundoApellido, $fechaNacimiento, $ci, $usuario, $contra, $rol, $idCreador);
-
-		redirect('usuario/administrador');
-	} */
 	public function modUsuario()
 	{
 		$idUsuario = $this->input->post('idUsuario');

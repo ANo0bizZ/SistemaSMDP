@@ -95,7 +95,7 @@
               <tbody>
                 <?php $contador = 1; ?>
                 <?php foreach ($usuarios as $usuario) : ?>
-                  <?php if ($usuario->estado == 1) :?>
+                  <?php if ($usuario->estado == 1) : ?>
                     <tr>
                       <td align="center"><?php echo $contador; ?></td>
                       <td align="center"><?php echo $usuario->nombres; ?></td>
@@ -126,7 +126,7 @@
                         <?php echo form_close(); ?>
                       </td>
                       <td align="center">
-                        <button type="button" class="btn btn-danger fas fa-trash" data-toggle="modal" data-target="#confirmDeleteModal" data-id="<?php echo $usuario->idUsuario; ?>"> Eliminar</button>
+                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal" data-id="<?php echo $usuario->idUsuario; ?>">Eliminar</button>
                       </td>
                     </tr>
                     <?php $contador++; ?>
@@ -169,7 +169,6 @@
         <div class="modal-footer">
           <?php echo form_open("usuario/cambiarEstado"); ?>
           <input type="hidden" name="idUsuario" id="deleteUserId" value="">
-          <input type="hidden" name="estado" value="0">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-danger">Confirmar</button>
           <?php echo form_close(); ?>
@@ -183,6 +182,10 @@
 
   <script>
     $(document).ready(function() {
+      <?php if ($this->session->flashdata('error')): ?>
+        $('#errorModal').modal('show');
+      <?php endif; ?>
+
       $('#confirmDeleteModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         var userId = button.data('id');
