@@ -61,7 +61,7 @@
                       ?></td>
                 </div>
 
-                <?php echo form_open("visitante/modUsuario"); ?>
+                <?php echo form_open("usuario/modUsuarioP"); ?>
                 <input type="hidden" name="idUsuario" value="<?php echo $usuario->idUsuario; ?>">
                 <button type="submit" class="btn btn-success"> Editar Datos</button>
                 <?php echo form_close(); ?>

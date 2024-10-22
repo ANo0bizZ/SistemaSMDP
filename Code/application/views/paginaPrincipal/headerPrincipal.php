@@ -82,7 +82,7 @@
                     <li class="nav-item"><a href="<?php echo site_url('usuario/eventos'); ?>" class="nav-link">Eventos</a></li>
                     <li class="nav-item"><a href="<?php echo site_url('usuario/contactos'); ?>" class="nav-link">Contactos</a></li>
                     <?php if ($this->session->userdata('idUsuario')): ?>
-                        <li class="nav-item"><a href="<?php echo site_url('visitante/perfil'); ?>" class="nav-link">Perfil</a></li>
+                        <li class="nav-item"><a href="<?php echo site_url('usuario/perfil'); ?>" class="nav-link">Perfil</a></li>
                     <?php endif; ?>
                     <li class="nav-item">
                         <?php if ($this->session->userdata('idUsuario')): ?>

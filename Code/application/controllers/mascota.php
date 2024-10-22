@@ -119,7 +119,7 @@ class Mascota extends CI_Controller
 	{
 		$data['fotos'] = $this->mascota_model->obtenerFotosMascota($idMascotas);
 		$data['mascota'] = $this->mascota_model->recuperarMascota($idMascotas);
-		$data['idMascotas']= $idMascotas;
+		$data['idMascotas'] = $idMascotas;
 
 		$this->load->view('inc/headerAdmin');
 		$this->load->view('inc/sidebar');

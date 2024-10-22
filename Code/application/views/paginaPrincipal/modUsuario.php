@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
-                <?php echo form_open_multipart("visitante/modificarbdUsuario", array('id' => 'modificarUsuarioForm')); ?>
+                <?php echo form_open_multipart(action: "usuario/modificarbdUsuarioP", array('id' => 'modificarUsuarioForm')); ?>
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="idUsuario" value="<?php echo $row->idUsuario; ?>" readonly>
                 </div>
@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
-                <?php echo form_open_multipart("visitante/modContra", array('id' => 'cambiarContraForm')); ?>
+                <?php echo form_open_multipart("usuario/modContra", array('id' => 'cambiarContraForm')); ?>
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="idUsuario" value="<?php echo $row->idUsuario; ?>" readonly>
                 </div>

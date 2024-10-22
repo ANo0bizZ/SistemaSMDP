@@ -33,7 +33,7 @@
                 <div class="col-sm-8 col-sm-offset-2">
                     <div class="wizard-container">
                         <div class="card wizard-card" data-color="green" id="wizard">
-                            <form action="<?php echo site_url('visitante/registrarSolicitud'); ?>" method="post">
+                            <form action="<?php echo site_url('adopciones/registrarSolicitud'); ?>" method="post">
                                 <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
                                 <div class="wizard-header">
                                     <h3 class="wizard-title">
@@ -88,16 +88,6 @@
                                                             value="<?php echo $this->session->userdata('usuario'); ?>">
                                                     </div>
                                                 </div>
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">calendar_today</i>
-                                                    </span>
-                                                    <div class="form-group label-floating">
-                                                        <label class="control-label">Fecha de Nacimiento</label><br>
-                                                        <input name="fechaNacimiento" type="date" class="form-control"
-                                                            value="<?php echo $this->session->userdata('fechaNacimiento'); ?>">
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="input-group">
@@ -141,12 +131,6 @@
                                                     <h6>Dirección</h6>
                                                     <textarea name="direccion" class="form-control" placeholder="" rows="6"></textarea>
                                                 </div>
-                                                <!-- <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="fotoFactura">Subir Fotografía de la Factura de Luz:</label>
-                                                        <input type="file" name="fotoFactura" id="fotoFactura" accept="image/*">
-                                                    </div>
-                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -217,8 +201,7 @@
                                     <div class="pull-right">
                                         <button type='button' class='btn btn-next btn-fill btn-success btn-wd'
                                             name='next'>Siguiente</button>
-                                        <button type="submit" class='btn btn-finish btn-fill btn-success btn-wd'
-                                            name='finish'>Finalizar</button>
+                                        <button type="submit" class='btn btn-finish btn-fill btn-success btn-wd' name='finish' onclick="return enviarSolicitud()">Finalizar</button>
                                     </div>
                                     <div class="pull-left">
                                         <button type='button' class='btn btn-previous btn-fill btn-default btn-wd'
@@ -232,8 +215,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="footer">
             <div class="container text-center">
                 Copyright &copy;<script>
@@ -243,52 +224,36 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="successModalLabel">Éxito</h4>
+                </div>
+                <div class="modal-body">
+                    <p>¡Su solicitud fue enviada al administrador, recibira una respuesta pronto!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- <script>
-        function initMap() {
-            const map = new google.maps.Map(document.getElementById('map'), {
-                center: {
-                    lat: -16.5,
-                    lng: -68.15
-                },
-                zoom: 13
-            });
-
-            let marker;
-
-            map.addListener('click', function(e) {
-                placeMarker(e.latLng, map);
-            });
-
-            function placeMarker(latLng, map) {
-                if (marker) {
-                    marker.setPosition(latLng);
-                } else {
-                    marker = new google.maps.Marker({
-                        position: latLng,
-                        map: map
-                    });
-                }
-
-                updateAddress(latLng);
-            }
-
-            function updateAddress(latLng) {
-                const geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    location: latLng
-                }, function(results, status) {
-                    if (status === 'OK') {
-                        if (results[0]) {
-                            document.getElementById('address').value = results[0].formatted_address;
-                        } else {
-                            console.log('No se encontraron resultados');
-                        }
-                    } else {
-                        console.log('Geocodificación falló debido a: ' + status);
-                    }
-                });
-            }
+    <script>
+        function enviarSolicitud() {
+            $('#successModal').modal('show');
+            setTimeout(function() {
+                document.querySelector('form').submit();
+            }, 2000); 
+            return false;
         }
+
+        $('#successModal').on('shown.bs.modal', function() {
+            setTimeout(function() {
+                $('#successModal').modal('hide');
+            }, 15000);
+        });
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> -->
+</body>
