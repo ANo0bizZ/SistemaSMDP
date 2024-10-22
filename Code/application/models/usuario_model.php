@@ -85,4 +85,9 @@ class Usuario_model extends CI_Model
 		$query = $this->db->get('usuarios');
 		return $query->row();
 	}
+	public function solicitudesVoluntarios() {
+		$this->db->where('rol', '2');
+		$query = $this->db->get('usuarios');
+		return $query->result();
+	}
 }

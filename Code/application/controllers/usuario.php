@@ -29,7 +29,7 @@ class Usuario extends CI_Controller
 		$this->load->view('paginaPrincipal/headerPrincipal');
 		$this->load->view('paginaPrincipal/galeria', $data);
 		$this->load->view('paginaPrincipal/footerPrincipal');
-	} 
+	}
 	public function eventos()
 	{
 		$this->load->view('paginaPrincipal/headerPrincipal');
@@ -53,7 +53,7 @@ class Usuario extends CI_Controller
 		$this->load->view('inc/formCrearUsuario');
 		$this->load->view('inc/footerAdmin');
 	}
-	public function registrarUsuario() {
+	/* public function registrarUsuario() {
 		$nombres = strtoupper($this->input->post('nombres'));
 		$primerApellido = strtoupper($this->input->post('primerApellido'));
 		$segundoApellido = strtoupper($this->input->post('segundoApellido'));
@@ -103,16 +103,83 @@ class Usuario extends CI_Controller
 			$this->session->set_flashdata('error', 'Error al enviar correo.');
 			redirect('usuario/registro');
 		}
+	} */
+	public function registrarUsuario() {
+		$nombres = strtoupper($this->input->post('nombres'));
+		$primerApellido = strtoupper($this->input->post('primerApellido'));
+		$segundoApellido = strtoupper($this->input->post('segundoApellido'));
+		$fechaNacimiento = strtoupper($this->input->post('fechaNacimiento'));
+		$usuario = $this->input->post('usuario');
+		$rol = $this->input->post('rol');
+		$contra = $this->contraAleatoria();
+		$token = bin2hex(random_bytes(16));
+	
+		if ($rol == 2) {  // Si el rol es 2 (voluntario)
+			// Guardar la información en la sesión temporalmente
+			$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
+			$solicitudesVoluntarios[] = [
+				'nombres' => $nombres,
+				'primerApellido' => $primerApellido,
+				'segundoApellido' => $segundoApellido,
+				'fechaNacimiento' => $fechaNacimiento,
+				'usuario' => $usuario,
+				'rol' => $rol,
+				'contra' => $contra,
+				'token' => $token
+			];
+			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);
+	
+			// Mostrar un mensaje al usuario solicitante
+			$this->session->set_flashdata('success', 'La solicitud de voluntariado fue enviada. Recibirás una respuesta en tu correo.');
+			redirect('usuario/principal');  // Redirigir a la página principal
+		} else {
+			// Si no es voluntario, proceder con el registro normal y enviar correo
+			$this->enviarCorreoBienvenida($nombres, $primerApellido, $segundoApellido, $usuario, $contra, $token);
+			redirect('usuario/registroConfirmado');
+		}
 	}
-	public function registroConfirmado() {
+
+	private function enviarCorreoBienvenida($nombres, $primerApellido, $segundoApellido, $usuario, $contra, $token)
+	{
+		$this->load->library('email');
+		$this->email->from('arkxcpa14@gmail.com', 'Centro de Adopciones "San Martin de Porres"');
+		$this->email->to($usuario);
+		$this->email->subject('Bienvenido a Centro de Adopciones "San Martin');
+		$linkVerificacion = "http://localhost/SistemaSMDP/Code/index.php/usuario/verificar/" . $token;
+
+		$this->email->message("
+		<div style='text-align: center;'>
+			<p>Estimado/a {$nombres} {$primerApellido} {$segundoApellido},</p>
+			<p>Su cuenta ha sido creada con éxito. A continuación, le proporcionaremos sus detalles de acceso:</p>
+			<p>Usuario: {$usuario}</p>
+			<p>Por su seguridad se ha generado una contraseña aleatoria, que asegura que nadie más tenga acceso a ella y que podrá cambiar al acceder a su cuenta</p>
+			<p>Su contraseña es la siguiente:</p>
+			<p>Contraseña: {$contra}</p>
+			<p>Haz clic en el siguiente botón para verificar y activar tu cuenta:</p>
+			<br>
+			<a href='" . $linkVerificacion . "' style='display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #28a745; text-decoration: none; border-radius: 5px;'>Verificar y Activar Cuenta</a>
+			<br><br>
+			<p>Gracias por ser parte del Cambio. Adopta Hoy, Ama Para Siempre.</p>
+		</div>");
+
+		if ($this->email->send()) {
+			$this->session->set_flashdata('success', 'Correo enviado exitosamente.');
+		} else {
+			$this->session->set_flashdata('error', 'Error al enviar correo.');
+		}
+	}
+
+	public function registroConfirmado()
+	{
 		$data['modalMensaje'] = 'Se ha enviado la información de registro a su correo electrónico.';
 		$data['mostrarModal'] = true;
 		$this->load->view('paginaPrincipal/registroConfirmado', $data);
 	}
-	
-	public function verificar($token) {
+
+	public function verificar($token)
+	{
 		$temp_user = $this->session->userdata('temp_user');
-	
+
 		if ($temp_user && $temp_user['token'] === $token) {
 			$this->usuario_model->registrar_usuario(
 				$temp_user['nombres'],
@@ -133,8 +200,9 @@ class Usuario extends CI_Controller
 			redirect('usuario/login');
 		}
 	}
-	
-	private function contraAleatoria($longitud = 8) {
+
+	private function contraAleatoria($longitud = 8)
+	{
 		$caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$contra = '';
 		for ($i = 0; $i < $longitud; $i++) {
@@ -146,7 +214,7 @@ class Usuario extends CI_Controller
 	{
 		$usuario = $_POST['usuario'];
 		$contra = $_POST['contra'];
-		
+
 		$consulta = $this->usuario_model->validar_usuario($usuario, $contra);
 		if ($consulta->num_rows() > 0) {
 			foreach ($consulta->result() as $row) {
@@ -216,16 +284,18 @@ class Usuario extends CI_Controller
 		$data['usuario'] = $_POST['usuario'];
 		$data['rol'] = $_POST['rol'];
 		$data['fechaNacimiento'] = strtoupper($_POST['fechaNacimiento']);
+		$data['ultimaActualizacion'] = date('Y-m-d H:i:s');
 		$this->usuario_model->modificarUsuario($idUsuario, $data);
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
-	public function cambiarEstado() {
+	public function cambiarEstado()
+	{
 		$idUsuario = $this->input->post('idUsuario');
-		echo 'ID de Usuario recibido: ' . $idUsuario;  // Verifica el valor recibido
+		echo 'ID de Usuario recibido: ' . $idUsuario;
 		$this->usuario_model->actualizarEstado($idUsuario);
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
-	
+
 	public function modUsuario()
 	{
 		$idUsuario = $this->input->post('idUsuario');
@@ -239,6 +309,14 @@ class Usuario extends CI_Controller
 	{
 		$this->session->sess_destroy();
 		redirect('usuario/principal', 'refresh');
+	}
+	public function modUsuarioP()
+	{
+		$idUsuario = $this->input->post('idUsuario');
+		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
+		$this->load->view('paginaPrincipal/headerPrincipal');
+		$this->load->view('paginaPrincipal/modUsuario', $data);
+		$this->load->view('paginaPrincipal/footerPrincipal');
 	}
 	public function modificarbdUsuarioP()
 	{
@@ -292,12 +370,49 @@ class Usuario extends CI_Controller
 
 		redirect('usuario/perfil');
 	}
-	public function modUsuarioP()
+	public function solicitudesVoluntarios()
 	{
-		$idUsuario = $this->input->post('idUsuario');
-		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
-		$this->load->view('paginaPrincipal/headerPrincipal');
-		$this->load->view('paginaPrincipal/modUsuario', $data);
-		$this->load->view('paginaPrincipal/footerPrincipal');
+		$data['solicitudes'] = $this->session->userdata('solicitudesVoluntarios') ?? [];
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
+		$this->load->view('inc/solicitudVoluntarios', $data);
+		$this->load->view('inc/footerAdmin');
+	}
+	public function aceptarSolicitud($indice) {
+		$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
+		if (isset($solicitudesVoluntarios[$indice])) {
+			$usuario = $solicitudesVoluntarios[$indice];
+			$this->usuario_model->registrar_usuario(
+				$usuario['nombres'], 
+				$usuario['primerApellido'], 
+				$usuario['segundoApellido'], 
+				$usuario['fechaNacimiento'], 
+				$usuario['usuario'], 
+				$usuario['contra'], 
+				$usuario['rol'],
+				$usuario[''],
+
+			);
+			$this->enviarCorreoBienvenida($usuario['nombres'], $usuario['primerApellido'], $usuario['segundoApellido'], $usuario['usuario'], $usuario['contra'], $usuario['token']);
+	
+			unset($solicitudesVoluntarios[$indice]);
+			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);
+	
+			$this->session->set_flashdata('success', 'Solicitud aceptada y correo enviado.');
+		}
+		redirect('usuario/solicitudesVoluntarios');
+	}
+	public function rechazarSolicitud($indice) {
+		// Obtener todas las solicitudes de voluntarios desde la sesión
+		$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
+		
+		// Eliminar la solicitud de la lista temporal
+		if (isset($solicitudesVoluntarios[$indice])) {
+			unset($solicitudesVoluntarios[$indice]);
+			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);
+			$this->session->set_flashdata('success', 'Solicitud rechazada.');
+		}
+	
+		redirect('usuario/solicitudesVoluntarios');
 	}
 }
