@@ -114,8 +114,7 @@ class Usuario extends CI_Controller
 		$contra = $this->contraAleatoria();
 		$token = bin2hex(random_bytes(16));
 	
-		if ($rol == 2) {  // Si el rol es 2 (voluntario)
-			// Guardar la información en la sesión temporalmente
+		if ($rol == 2) {
 			$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
 			$solicitudesVoluntarios[] = [
 				'nombres' => $nombres,
@@ -128,12 +127,9 @@ class Usuario extends CI_Controller
 				'token' => $token
 			];
 			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);
-	
-			// Mostrar un mensaje al usuario solicitante
 			$this->session->set_flashdata('success', 'La solicitud de voluntariado fue enviada. Recibirás una respuesta en tu correo.');
-			redirect('usuario/principal');  // Redirigir a la página principal
+			redirect('usuario/principal'); 
 		} else {
-			// Si no es voluntario, proceder con el registro normal y enviar correo
 			$this->enviarCorreoBienvenida($nombres, $primerApellido, $segundoApellido, $usuario, $contra, $token);
 			redirect('usuario/registroConfirmado');
 		}

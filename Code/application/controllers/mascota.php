@@ -113,7 +113,7 @@ class Mascota extends CI_Controller
 		$data['estado'] = $_POST['estado'];
 		$data['fechaNacMascota'] = strtoupper($_POST['fechaNacMascota']);
 		$this->mascota_model->modificarMascota($idMascotas, $data);
-		redirect('mascota/listaMascotas', 'refresh');
+		redirect('mascota/listarMascotas', 'refresh');
 	}
 	public function modFotoMascota($idMascotas)
 	{
