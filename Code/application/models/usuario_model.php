@@ -64,7 +64,6 @@ class Usuario_model extends CI_Model
 		$this->db->where('idUsuario', $idUsuario);
 		return $this->db->get();
 	}
-
 	public function actualizarEstado($idUsuario)
 	{
 		$data=array(

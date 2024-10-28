@@ -104,7 +104,8 @@ class Usuario extends CI_Controller
 			redirect('usuario/registro');
 		}
 	} */
-	public function registrarUsuario() {
+	public function registrarUsuario()
+	{
 		$nombres = strtoupper($this->input->post('nombres'));
 		$primerApellido = strtoupper($this->input->post('primerApellido'));
 		$segundoApellido = strtoupper($this->input->post('segundoApellido'));
@@ -113,7 +114,7 @@ class Usuario extends CI_Controller
 		$rol = $this->input->post('rol');
 		$contra = $this->contraAleatoria();
 		$token = bin2hex(random_bytes(16));
-	
+
 		if ($rol == 2) {
 			$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
 			$solicitudesVoluntarios[] = [
@@ -128,7 +129,7 @@ class Usuario extends CI_Controller
 			];
 			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);
 			$this->session->set_flashdata('success', 'La solicitud de voluntariado fue enviada. Recibirás una respuesta en tu correo.');
-			redirect('usuario/principal'); 
+			redirect('usuario/principal');
 		} else {
 			$this->enviarCorreoBienvenida($nombres, $primerApellido, $segundoApellido, $usuario, $contra, $token);
 			redirect('usuario/registroConfirmado');
@@ -266,11 +267,13 @@ class Usuario extends CI_Controller
 	{
 		$lista = $this->usuario_model->listausuarios();
 		$data['usuarios'] = $lista->result();
+
 		$this->load->view('inc/headerAdmin');
 		$this->load->view('inc/sidebar');
 		$this->load->view('inc/listaUsuarios', $data);
 		$this->load->view('inc/footerAdmin');
 	}
+
 	public function modificarbdUsuario()
 	{
 		$idUsuario = $this->input->post('idUsuario');
@@ -296,10 +299,10 @@ class Usuario extends CI_Controller
 	{
 		$idUsuario = $this->input->post('idUsuario');
 		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
-		$this->load->view('inc/headerAdmin1');
-		$this->load->view('inc/sidebar1');
-		$this->load->view('inc/formModificar', $data);
-		$this->load->view('inc/footerAdmin1');
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
+		$this->load->view('inc/editarUsuario', $data);
+		$this->load->view('inc/footerAdmin');
 	}
 	public function logout()
 	{
@@ -374,49 +377,43 @@ class Usuario extends CI_Controller
 		$this->load->view('inc/solicitudVoluntarios', $data);
 		$this->load->view('inc/footerAdmin1');
 	}
-	public function aceptarSolicitud($indice) {
+	public function aceptarSolicitud($indice)
+	{
 		$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
 		if (isset($solicitudesVoluntarios[$indice])) {
 			$usuario = $solicitudesVoluntarios[$indice];
 			$this->usuario_model->registrar_usuario(
-				$usuario['nombres'], 
-				$usuario['primerApellido'], 
-				$usuario['segundoApellido'], 
-				$usuario['fechaNacimiento'], 
-				$usuario['usuario'], 
-				$usuario['contra'], 
+				$usuario['nombres'],
+				$usuario['primerApellido'],
+				$usuario['segundoApellido'],
+				$usuario['fechaNacimiento'],
+				$usuario['usuario'],
+				$usuario['contra'],
 				$usuario['rol'],
 				$usuario[''],
 
 			);
 			$this->enviarCorreoBienvenida($usuario['nombres'], $usuario['primerApellido'], $usuario['segundoApellido'], $usuario['usuario'], $usuario['contra'], $usuario['token']);
-	
+
 			unset($solicitudesVoluntarios[$indice]);
 			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);
-	
+
 			$this->session->set_flashdata('success', 'Solicitud aceptada y correo enviado.');
 		}
 		redirect('usuario/solicitudesVoluntarios');
 	}
-	public function rechazarSolicitud($indice) {
+	public function rechazarSolicitud($indice)
+	{
 		// Obtener todas las solicitudes de voluntarios desde la sesión
 		$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
-		
+
 		// Eliminar la solicitud de la lista temporal
 		if (isset($solicitudesVoluntarios[$indice])) {
 			unset($solicitudesVoluntarios[$indice]);
 			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);
 			$this->session->set_flashdata('success', 'Solicitud rechazada.');
 		}
-	
+
 		redirect('usuario/solicitudesVoluntarios');
 	}
-	/* public function administrador()
-	{
-		$this->load->view('inc/headerAdmin1.php');
-		$this->load->view('inc/sidebar1');
-		$this->load->view('inc/mainAdmin1.php');
-		$this->load->view('inc/footerAdmin1.php');
-	}*/
-	
 }
