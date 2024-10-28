@@ -1,536 +1,686 @@
-<main class="main-content border-radius-lg">
-  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-    <div class="container-fluid py-1 px-3">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-          <li class="breadcrumb-item text-sm">
-            <a class="opacity-5 text-dark" href="javascript:;">Pages</a>
-          </li>
-          <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-            Principal
-          </li>
-        </ol>
-        <h6 class="font-weight-bolder mb-0">Principal</h6>
-      </nav>
-      <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-        <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-          <div class="input-group input-group-outline">
-            <label class="form-label">Type here...</label>
-            <input type="text" class="form-control" />
-          </div>
+<div class="right_col" role="main">
+    <!-- top tiles -->
+    <div class="row" style="display: inline-block;">
+        <div class="tile_count">
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
+                <div class="count">2500</div>
+                <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
+                <div class="count">123.50</div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
+                <div class="count green">2,500</div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
+                <div class="count">4,567</div>
+                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
+                <div class="count">2,315</div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
+                <div class="count">7,325</div>
+                <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            </div>
         </div>
-        <ul class="navbar-nav justify-content-end">
-          <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-              <div class="sidenav-toggler-inner">
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-              </div>
-            </a>
-          </li>
-          <li class="nav-item px-3 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-body p-0">
-              <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-            </a>
-          </li>
-          <li class="nav-item dropdown pe-2 d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa fa-bell cursor-pointer"></i>
-            </a>
-
-            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-              <li class="mb-2">
-                <a class="dropdown-item border-radius-md" href="javascript:;">
-                  <div class="d-flex py-1">
-                    <div class="my-auto">
-                      <img src="<?php echo base_url(); ?>tempAdmin/assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="text-sm font-weight-normal mb-1">
-                        <span class="font-weight-bold">New message</span>
-                        from Laur
-                      </h6>
-                      <p class="text-xs text-secondary mb-0">
-                        <i class="fa fa-clock me-1"></i>
-                        13 minutes ago
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="mb-2">
-                <a class="dropdown-item border-radius-md" href="javascript:;">
-                  <div class="d-flex py-1">
-                    <div class="my-auto">
-                      <img src="<?php echo base_url(); ?>tempAdmin/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="text-sm font-weight-normal mb-1">
-                        <span class="font-weight-bold">New album</span> by
-                        Travis Scott
-                      </h6>
-                      <p class="text-xs text-secondary mb-0">
-                        <i class="fa fa-clock me-1"></i>
-                        1 day
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item border-radius-md" href="javascript:;">
-                  <div class="d-flex py-1">
-                    <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
-                      <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>credit-card</title>
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                            <g transform="translate(1716.000000, 291.000000)">
-                              <g transform="translate(453.000000, 454.000000)">
-                                <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                              </g>
-                            </g>
-                          </g>
-                        </g>
-                      </svg>
-                    </div>
-                    <div class="d-flex flex-column justify-content-center">
-                      <h6 class="text-sm font-weight-normal mb-1">
-                        Payment successfully completed
-                      </h6>
-                      <p class="text-xs text-secondary mb-0">
-                        <i class="fa fa-clock me-1"></i>
-                        2 days
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item d-flex align-items-center">
-            <a href="<?php echo site_url('usuario/logout'); ?>" class="btn btn-success text-body font-weight-bold px-3">
-            <i class="material-icons opacity-10">exit_to_app</i>
-              <span class="d-sm-inline d-none">Cerrar Sesión</span>
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
-  </nav>
+    <!-- /top tiles -->
 
-  <!-- End Navbar -->
-
-  <div class="container-fluid py-4">
     <div class="row">
-      <div class="col-lg-7 position-relative z-index-2">
-        <div class="card card-plain mb-4">
-          <div class="card-body p-3">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="dashboard_graph">
+
+                <div class="row x_title">
+                    <div class="col-md-6">
+                        <h3>Network Activities <small>Graph title sub-title</small></h3>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-9 ">
+                    <div id="chart_plot_01" class="demo-placeholder"></div>
+                </div>
+                <div class="col-md-3 col-sm-3  bg-white">
+                    <div class="x_title">
+                        <h2>Top Campaign Performance</h2>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 ">
+                        <div>
+                            <p>Facebook Campaign</p>
+                            <div class="">
+                                <div class="progress progress_sm" style="width: 76%;">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Twitter Campaign</p>
+                            <div class="">
+                                <div class="progress progress_sm" style="width: 76%;">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 ">
+                        <div>
+                            <p>Conventional Media</p>
+                            <div class="">
+                                <div class="progress progress_sm" style="width: 76%;">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p>Bill boards</p>
+                            <div class="">
+                                <div class="progress progress_sm" style="width: 76%;">
+                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-4 col-sm-4 ">
+            <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                    <h2>App Versions</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <h4>App Usage across versions</h4>
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.2</span>
+                        </div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w_right w_20">
+                            <span>123k</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.3</span>
+                        </div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w_right w_20">
+                            <span>53k</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.4</span>
+                        </div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w_right w_20">
+                            <span>23k</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.5</span>
+                        </div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w_right w_20">
+                            <span>3k</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="widget_summary">
+                        <div class="w_left w_25">
+                            <span>0.1.5.6</span>
+                        </div>
+                        <div class="w_center w_55">
+                            <div class="progress">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w_right w_20">
+                            <span>1k</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-4 ">
+            <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                    <h2>Device Usage</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="" style="width:100%">
+                        <tr>
+                            <th style="width:37%;">
+                                <p>Top 5</p>
+                            </th>
+                            <th>
+                                <div class="col-lg-7 col-md-7 col-sm-7 ">
+                                    <p class="">Device</p>
+                                </div>
+                                <div class="col-lg-5 col-md-5 col-sm-5 ">
+                                    <p class="">Progress</p>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                            </td>
+                            <td>
+                                <table class="tile_info">
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square blue"></i>IOS </p>
+                                        </td>
+                                        <td>30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square green"></i>Android </p>
+                                        </td>
+                                        <td>10%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square purple"></i>Blackberry </p>
+                                        </td>
+                                        <td>20%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square aero"></i>Symbian </p>
+                                        </td>
+                                        <td>15%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p><i class="fa fa-square red"></i>Others </p>
+                                        </td>
+                                        <td>30%</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 col-sm-4 ">
+            <div class="x_panel tile fixed_height_320">
+                <div class="x_title">
+                    <h2>Quick Settings</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+                        <ul class="quick-list">
+                            <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>
+                            </li>
+                            <li><i class="fa fa-bars"></i><a href="#">Subscription</a>
+                            </li>
+                            <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
+                            <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
+                            </li>
+                            <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
+                            <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
+                            </li>
+                            <li><i class="fa fa-area-chart"></i><a href="#">Logout</a>
+                            </li>
+                        </ul>
+
+                        <div class="sidebar-widget">
+                            <h4>Profile Completion</h4>
+                            <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height: 100px;"></canvas>
+                            <div class="goal-wrapper">
+                                <span id="gauge-text" class="gauge-value pull-left">0</span>
+                                <span class="gauge-value pull-left">%</span>
+                                <span id="goal-text" class="goal-value pull-right">100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4 col-sm-4 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Recent Activities <small>Sessions</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                            </div>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="dashboard-widget-content">
+
+                        <ul class="list-unstyled timeline widget">
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                                        </div>
+                                        <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                                        </div>
+                                        <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                                        </div>
+                                        <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="block">
+                                    <div class="block_content">
+                                        <h2 class="title">
+                                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                        </h2>
+                                        <div class="byline">
+                                            <span>13 hours ago</span> by <a>Jane Smith</a>
+                                        </div>
+                                        <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-8 col-sm-8 ">
+
+
+
             <div class="row">
-              <div class="col-lg-6">
-                <div class="d-flex flex-column h-100">
-                  <h2 class="font-weight-bolder mb-0">
-                    General Statistics
-                  </h2>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-lg-5 col-sm-5">
-            <div class="card mb-2">
-              <div class="card-header p-3 pt-2">
-                <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-xl mt-n4 position-absolute">
-                  <i class="material-icons opacity-10">weekend</i>
-                </div>
-                <div class="text-end pt-1">
-                  <p class="text-sm mb-0 text-capitalize">Bookings</p>
-                  <h4 class="mb-0">281</h4>
-                </div>
-              </div>
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Visitors location <small>geo-presentation</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Settings 1</a>
+                                        <a class="dropdown-item" href="#">Settings 2</a>
+                                    </div>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="dashboard-widget-content">
+                                <div class="col-md-4 hidden-small">
+                                    <h2 class="line_30">125.7k Views from 60 countries</h2>
 
-              <hr class="dark horizontal my-0" />
-              <div class="card-footer p-3">
-                <p class="mb-0">
-                  <span class="text-success text-sm font-weight-bolder">+55% </span>than last week
-                </p>
-              </div>
-            </div>
-
-            <div class="card mb-2">
-              <div class="card-header p-3 pt-2">
-                <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary shadow text-center border-radius-xl mt-n4 position-absolute">
-                  <i class="material-icons opacity-10">leaderboard</i>
-                </div>
-                <div class="text-end pt-1">
-                  <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                  <h4 class="mb-0">2,300</h4>
-                </div>
-              </div>
-
-              <hr class="dark horizontal my-0" />
-              <div class="card-footer p-3">
-                <p class="mb-0">
-                  <span class="text-success text-sm font-weight-bolder">+3% </span>than last month
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-5 col-sm-5 mt-sm-0 mt-4">
-            <div class="card mb-2">
-              <div class="card-header p-3 pt-2 bg-transparent">
-                <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
-                  <i class="material-icons opacity-10">store</i>
-                </div>
-                <div class="text-end pt-1">
-                  <p class="text-sm mb-0 text-capitalize">Revenue</p>
-                  <h4 class="mb-0">34k</h4>
-                </div>
-              </div>
-
-              <hr class="horizontal my-0 dark" />
-              <div class="card-footer p-3">
-                <p class="mb-0">
-                  <span class="text-success text-sm font-weight-bolder">+1% </span>than yesterday
-                </p>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-header p-3 pt-2 bg-transparent">
-                <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
-                  <i class="material-icons opacity-10">person_add</i>
-                </div>
-                <div class="text-end pt-1">
-                  <p class="text-sm mb-0 text-capitalize">Followers</p>
-                  <h4 class="mb-0">+91</h4>
-                </div>
-              </div>
-
-
-              <hr class="horizontal my-0 dark" />
-              <div class="card-footer p-3">
-                <p class="mb-0">Agregar Usuarios</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-4">
-          <div class="col-10">
-            <div class="card mb-4">
-              <div class="d-flex">
-                <div class="icon icon-shape icon-lg bg-gradient-success shadow text-center border-radius-xl mt-n3 ms-4">
-                  <i class="material-icons opacity-10" aria-hidden="true">language</i>
-                </div>
-                <h6 class="mt-3 mb-2 ms-3">Sales by Country</h6>
-              </div>
-              <div class="card-body p-3">
-                <div class="row">
-                  <div class="col-lg-6 col-md-7">
-                    <div class="table-responsive">
-                      <table class="table align-items-center">
-                        <tbody>
-                          <tr>
-                            <td class="w-30">
-                              <div class="d-flex px-2 py-1 align-items-center">
-                                <div>
-                                  <img src="<?php echo base_url(); ?>tempAdmin/assets/img/icons/flags/US.png" alt="Country flag" />
+                                    <table class="countries_list">
+                                        <tbody>
+                                            <tr>
+                                                <td>United States</td>
+                                                <td class="fs15 fw700 text-right">33%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>France</td>
+                                                <td class="fs15 fw700 text-right">27%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Germany</td>
+                                                <td class="fs15 fw700 text-right">16%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Spain</td>
+                                                <td class="fs15 fw700 text-right">11%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Britain</td>
+                                                <td class="fs15 fw700 text-right">10%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="ms-4">
-                                  <p class="text-xs font-weight-bold mb-0">
-                                    Country:
-                                  </p>
-                                  <h6 class="text-sm font-weight-normal mb-0">
-                                    United States
-                                  </h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Sales:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  2500
-                                </h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Value:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  $230,900
-                                </h6>
-                              </div>
-                            </td>
-                            <td class="align-middle text-sm">
-                              <div class="col text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Bounce:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  29.9%
-                                </h6>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td class="w-30">
-                              <div class="d-flex px-2 py-1 align-items-center">
-                                <div>
-                                  <img src="<?php echo base_url(); ?>tempAdmin/assets/img/icons/flags/DE.png" alt="Country flag" />
-                                </div>
-                                <div class="ms-4">
-                                  <p class="text-xs font-weight-bold mb-0">
-                                    Country:
-                                  </p>
-                                  <h6 class="text-sm font-weight-normal mb-0">
-                                    Germany
-                                  </h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Sales:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  3.900
-                                </h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Value:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  $440,000
-                                </h6>
-                              </div>
-                            </td>
-                            <td class="align-middle text-sm">
-                              <div class="col text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Bounce:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  40.22%
-                                </h6>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td class="w-30">
-                              <div class="d-flex px-2 py-1 align-items-center">
-                                <div>
-                                  <img src="<?php echo base_url(); ?>tempAdmin/assets/img/icons/flags/GB.png" alt="Country flag" />
-                                </div>
-                                <div class="ms-4">
-                                  <p class="text-xs font-weight-bold mb-0">
-                                    Country:
-                                  </p>
-                                  <h6 class="text-sm font-weight-normal mb-0">
-                                    Great Britain
-                                  </h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Sales:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  1.400
-                                </h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Value:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  $190,700
-                                </h6>
-                              </div>
-                            </td>
-                            <td class="align-middle text-sm">
-                              <div class="col text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Bounce:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  23.44%
-                                </h6>
-                              </div>
-                            </td>
-                          </tr>
-
-                          <tr>
-                            <td class="w-30">
-                              <div class="d-flex px-2 py-1 align-items-center">
-                                <div>
-                                  <img src="<?php echo base_url(); ?>tempAdmin/assets/img/icons/flags/BR.png" alt="Country flag" />
-                                </div>
-                                <div class="ms-4">
-                                  <p class="text-xs font-weight-bold mb-0">
-                                    Country:
-                                  </p>
-                                  <h6 class="text-sm font-weight-normal mb-0">
-                                    Brasil
-                                  </h6>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Sales:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  562
-                                </h6>
-                              </div>
-                            </td>
-                            <td>
-                              <div class="text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Value:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  $143,960
-                                </h6>
-                              </div>
-                            </td>
-                            <td class="align-middle text-sm">
-                              <div class="col text-center">
-                                <p class="text-xs font-weight-bold mb-0">
-                                  Bounce:
-                                </p>
-                                <h6 class="text-sm font-weight-normal mb-0">
-                                  32.14%
-                                </h6>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                                <div id="world-map-gdp" class="col-md-8 col-sm-12 " style="height:230px;"></div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-lg-6 col-md-5">
-                    <div id="map" class="mt-0 mt-lg-n4"></div>
-                  </div>
                 </div>
-              </div>
+
             </div>
-          </div>
+            <div class="row">
+
+
+                <!-- Start to do list -->
+                <div class="col-md-6 col-sm-6 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>To Do List <small>Sample tasks</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Settings 1</a>
+                                        <a class="dropdown-item" href="#">Settings 2</a>
+                                    </div>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <div class="">
+                                <ul class="to_do">
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Schedule meeting with new client
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Create email address for new intern
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Have IT fix the network printer
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Copy backups to offsite location
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Create email address for new intern
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Have IT fix the network printer
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <input type="checkbox" class="flat"> Copy backups to offsite location
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End to do list -->
+
+                <!-- start of weather widget -->
+                <div class="col-md-6 col-sm-6 ">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Daily active users <small>Sessions</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Settings 1</a>
+                                        <a class="dropdown-item" href="#">Settings 2</a>
+                                    </div>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="temperature"><b>Monday</b>, 07:30 AM
+                                        <span>F</span>
+                                        <span><b>C</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="weather-icon">
+                                        <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="weather-text">
+                                        <h2>Texas <br><i>Partly Cloudy Day</i></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="weather-text pull-right">
+                                    <h3 class="degrees">23</h3>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="row weather-days">
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Mon</h2>
+                                        <h3 class="degrees">25</h3>
+                                        <canvas id="clear-day" width="32" height="32"></canvas>
+                                        <h5>15 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Tue</h2>
+                                        <h3 class="degrees">25</h3>
+                                        <canvas height="32" width="32" id="rain"></canvas>
+                                        <h5>12 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Wed</h2>
+                                        <h3 class="degrees">27</h3>
+                                        <canvas height="32" width="32" id="snow"></canvas>
+                                        <h5>14 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Thu</h2>
+                                        <h3 class="degrees">28</h3>
+                                        <canvas height="32" width="32" id="sleet"></canvas>
+                                        <h5>15 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Fri</h2>
+                                        <h3 class="degrees">28</h3>
+                                        <canvas height="32" width="32" id="wind"></canvas>
+                                        <h5>11 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="daily-weather">
+                                        <h2 class="day">Sat</h2>
+                                        <h3 class="degrees">26</h3>
+                                        <canvas height="32" width="32" id="cloudy"></canvas>
+                                        <h5>10 <i>km/h</i></h5>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end of weather widget -->
+            </div>
         </div>
-      </div>
     </div>
-
-    <div class="row mt-4">
-      <div class="col-lg-5 mb-lg-0 mb-4">
-        <div class="card z-index-2 mt-4">
-          <div class="card-body mt-n5 px-3">
-            <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1 mb-3">
-              <div class="chart">
-                <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-              </div>
-            </div>
-            <h6 class="ms-2 mt-4 mb-0">Active Users</h6>
-            <p class="text-sm ms-2">
-              (<span class="font-weight-bolder">+11%</span>) than last week
-            </p>
-            <div class="container border-radius-lg">
-              <div class="row">
-                <div class="col-3 py-3 ps-0">
-                  <div class="d-flex mb-2">
-                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
-                      <i class="material-icons opacity-10">groups</i>
-                    </div>
-                    <p class="text-xs my-auto font-weight-bold">Users</p>
-                  </div>
-                  <h4 class="font-weight-bolder">42K</h4>
-                  <div class="progress w-75">
-                    <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div class="col-3 py-3 ps-0">
-                  <div class="d-flex mb-2">
-                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
-                      <i class="material-icons opacity-10">ads_click</i>
-                    </div>
-                    <p class="text-xs mt-1 mb-0 font-weight-bold">Clicks</p>
-                  </div>
-                  <h4 class="font-weight-bolder">1.7m</h4>
-                  <div class="progress w-75">
-                    <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div class="col-3 py-3 ps-0">
-                  <div class="d-flex mb-2">
-                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-warning text-center me-2 d-flex align-items-center justify-content-center">
-                      <i class="material-icons opacity-10">receipt</i>
-                    </div>
-                    <p class="text-xs mt-1 mb-0 font-weight-bold">Sales</p>
-                  </div>
-                  <h4 class="font-weight-bolder">399$</h4>
-                  <div class="progress w-75">
-                    <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-                <div class="col-3 py-3 ps-0">
-                  <div class="d-flex mb-2">
-                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
-                      <i class="material-icons opacity-10">category</i>
-                    </div>
-                    <p class="text-xs mt-1 mb-0 font-weight-bold">Items</p>
-                  </div>
-                  <h4 class="font-weight-bolder">74</h4>
-                  <div class="progress w-75">
-                    <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-7">
-        <div class="card z-index-2">
-          <div class="card-header pb-0">
-            <h6>Sales overview</h6>
-            <p class="text-sm">
-              <i class="fa fa-arrow-up text-success"></i>
-              <span class="font-weight-bold">4% more</span> in 2021
-            </p>
-          </div>
-          <div class="card-body p-3">
-            <div class="chart">
-              <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <div id="globe" class="position-absolute end-0 top-10 mt-sm-3 mt-7 me-lg-7">
-          <canvas width="700" height="600" class="w-lg-100 h-lg-100 w-75 h-75 me-lg-0 me-n10 mt-lg-5"></canvas>
-        </div>
-      </div>
-    </div>
+</div>

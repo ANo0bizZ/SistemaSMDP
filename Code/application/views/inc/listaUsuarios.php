@@ -1,196 +1,136 @@
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-  <div class="container-fluid py-1 px-3">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Paginas</a></li>
-        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Lista de Usuarios</li>
-      </ol>
-      <h6 class="font-weight-bolder mb-0">Lista de Usuarios</h6>
-    </nav>
-    <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-      <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-        <div class="input-group input-group-outline">
-          <label class="form-label">Type here...</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <ul class="navbar-nav  justify-content-end">
-        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-            <div class="sidenav-toggler-inner">
-              <i class="sidenav-toggler-line"></i>
-              <i class="sidenav-toggler-line"></i>
-              <i class="sidenav-toggler-line"></i>
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Lista de Usuarios </h3>
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </a>
-        </li>
-        <li class="nav-item px-3 d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-body p-0">
-            <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-          </a>
-        </li>
-        <li class="nav-item dropdown pe-2 d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-bell cursor-pointer"></i>
-          </a>
-        </li>
-        <li class="nav-item d-flex align-items-center">
-          <a href="<?php echo site_url('usuario/logout'); ?>" class="btn btn-success text-body font-weight-bold px-3">
-            <i class="material-icons opacity-10">exit_to_app</i>
-            <span class="d-sm-inline d-none">Cerrar Sesión</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- End Navbar -->
-<div class="container-fluid py-4">
-  <div id="confimacionInsert"></div>
-  <!-- Mensaje de error -->
-  <?php if ($this->session->flashdata('error')) : ?>
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="errorModalLabel">Error</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <?php echo $this->session->flashdata('error'); ?>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  <?php endif; ?>
-  <div class="row">
-    <div class="col-12">
-      <div class="card my-4">
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Lista de Usuarios</h6>
-          </div>
-        </div>
-        <div class="card-body px-0 pb-2">
-          <div class="table-responsive p-0">
-            <table class="table align-items-center mb-0">
-              <thead>
-                <tr>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">No.</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Nombres</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Primer Apellido</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Segundo Apellido</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Correo</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Rol</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Edad</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Editar Datos</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Eliminar</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php $contador = 1; ?>
-                <?php foreach ($usuarios as $usuario) : ?>
-                  <?php if ($usuario->estado == 1) : ?>
-                    <tr>
-                      <td align="center"><?php echo $contador; ?></td>
-                      <td align="center"><?php echo $usuario->nombres; ?></td>
-                      <td align="center"><?php echo $usuario->primerApellido; ?></td>
-                      <td align="center"><?php echo $usuario->segundoApellido; ?></td>
-                      <td align="center"><?php echo $usuario->usuario; ?></td>
-                      <td align="center"><?php
-                                          if ($usuario->rol == 0) {
-                                            echo "ADMINISTRADOR";
-                                          } elseif ($usuario->rol == 1) {
-                                            echo "ADOPTANTE";
-                                          } elseif ($usuario->rol == 2) {
-                                            echo "VOLUNTARIO";
-                                          } else {
-                                            echo "ROL NO CONOCIDO";
-                                          }
-                                          ?></td>
-                      <td align="center"><?php
-                                          $fechaNacimiento = new DateTime($usuario->fechaNacimiento);
-                                          $hoy = new DateTime(date("Y-m-d"));
-                                          $edad = $hoy->diff($fechaNacimiento)->y;
-                                          echo $edad;
-                                          ?></td>
-                      <td align="center">
-                        <?php echo form_open("usuario/modUsuario"); ?>
-                        <input type="hidden" name="idUsuario" value="<?php echo $usuario->idUsuario; ?>">
-                        <button type="submit" class="btn btn-warning fas fa-edit"> Editar</button>
-                        <?php echo form_close(); ?>
-                      </td>
-                      <td align="center">
-                      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal" data-id="<?php echo $usuario->idUsuario; ?>">Eliminar</button>
-                      </td>
-                    </tr>
-                    <?php $contador++; ?>
-                  <?php endif; ?>
-                <?php endforeach; ?>
-              </tbody>
+            <div class="col-md-12 col-sm-12 ">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Lista de Usuarios</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="card-box table-responsive">
+                        <p class="text-muted font-13 m-b-30">
+                          Lista de todos los usuarios registrados en el sistema
+                        </p>
+                        <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th>No.</th>
+                              <th>Nombre</th>
+                              <th>Correo</th>
+                              <th>Rol</th>
+                              <th>Edad</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php foreach ($usuarios as $key => $usuario): ?>
+                              <tr>
+                                <td><?php echo $key + 1; ?></td>
+                                <td><?php echo $usuario->nombres . ' ' . $usuario->primerApellido . ' ' . $usuario->segundoApellido; ?></td>
+                                <td><?php echo $usuario->usuario; ?></td>
+                                <td><?php
+                                    if ($usuario->rol == 0) {
+                                      echo "ADMINISTRADOR";
+                                    } elseif ($usuario->rol == 1) {
+                                      echo "ADOPTANTE";
+                                    } elseif ($usuario->rol == 2) {
+                                      echo "VOLUNTARIO";
+                                    } else {
+                                      echo "ROL NO CONOCIDO";
+                                    }
+                                    ?></td>
+                                <td><?php
+                                    $fechaNacimiento = new DateTime($usuario->fechaNacimiento);
+                                    $hoy = new DateTime(date("Y-m-d"));
+                                    $edad = $hoy->diff($fechaNacimiento)->y;
+                                    echo $edad;
+                                    ?></td>
+                                <td align="center">
+                                  <a href="#" data-toggle="modal" data-target="#modalUsuario<?php echo $usuario->idUsuario; ?>">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                            <?php endforeach; ?>
+                          </tbody>
 
-              <tfoot>
-                <tr>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">No.</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Nombres</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Primer Apellido</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Segundo Apellido</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Correo</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Rol</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Edad</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Editar Datos</th>
-                  <th class="text-center text-uppercase text-primary text-xxl font-weight-bolder opacity-7">Eliminar</th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="confirmDeleteModalLabel">Eliminación de Usuario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ¿Estás seguro de que quiere eliminar este usuario?
-        </div>
-        <div class="modal-footer">
-          <?php echo form_open("usuario/cambiarEstado"); ?>
-          <input type="hidden" name="idUsuario" id="deleteUserId" value="">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-danger">Confirmar</button>
-          <?php echo form_close(); ?>
-        </div>
-      </div>
-    </div>
-  </div>
+            <?php foreach ($usuarios as $usuario): ?>
+              <div class="modal fade" id="modalUsuario<?php echo $usuario->idUsuario; ?>" tabindex="-1" role="dialog" aria-labelledby="modalUsuarioLabel<?php echo $usuario->idUsuario; ?>" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modalUsuarioLabel<?php echo $usuario->idUsuario; ?>">Detalles del Usuario</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
 
-  <script>
-    $(document).ready(function() {
-      <?php if ($this->session->flashdata('error')): ?>
-        $('#errorModal').modal('show');
-      <?php endif; ?>
-
-      $('#confirmDeleteModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var userId = button.data('id');
-        var modal = $(this);
-        modal.find('#deleteUserId').val(userId);
-      });
-    });
-  </script>
+                    <div class="modal-body">
+                      <p><strong>Nombre:</strong> <?php echo $usuario->nombres . ' ' . $usuario->primerApellido . ' ' . $usuario->segundoApellido; ?></p>
+                      <p><strong>Correo:</strong> <?php echo $usuario->usuario; ?></p>
+                      <p><strong>Rol:</strong> <?php
+                                                if ($usuario->rol == 0) {
+                                                  echo "ADMINISTRADOR";
+                                                } elseif ($usuario->rol == 1) {
+                                                  echo "ADOPTANTE";
+                                                } elseif ($usuario->rol == 2) {
+                                                  echo "VOLUNTARIO";
+                                                } else {
+                                                  echo "ROL NO CONOCIDO";
+                                                }
+                                                ?></p>
+                      <p><strong>Edad:</strong> <?php
+                                                $fechaNacimiento = new DateTime($usuario->fechaNacimiento);
+                                                $hoy = new DateTime(date("Y-m-d"));
+                                                $edad = $hoy->diff($fechaNacimiento)->y;
+                                                echo $edad;
+                                                ?></p>
+                      <p><strong>Acciones:</strong><a href="<?php echo site_url('controlador/editar/' . $usuario->idUsuario); ?>" title="Editar">
+                          <i class="fa fa-edit text-primary" style="font-size: 1.5em;"></i>
+                        </a>
+                        <a href="<?php echo site_url('controlador/eliminar/' . $usuario->idUsuario); ?>" title="Eliminar" onclick="return confirm('¿Estás seguro de eliminar este usuario?');">
+                          <i class="fa fa-trash text-danger" style="font-size: 1.5em; margin-left: 15px;"></i>
+                        </a>
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+            

@@ -44,13 +44,7 @@ class Adopciones extends CI_Controller
         $this->load->view('inc/footerAdmin');
     }
     public function solicitudesAprobadas()
-{
-    // Obtener fechas del formulario
-    $fechaInicio = $this->input->post('fechaInicio');
-    $fechaFin = $this->input->post('fechaFin');
-
-    // Pasar las fechas al modelo
-    $data['solicitudes'] = $this->adopciones_model->solicitudes_aprobadas($fechaInicio, $fechaFin);
+    $data['solicitudes'] = $this->adopciones_model->solicitudes_aprobadas();
 
     $this->load->view('inc/headerAdmin');
     $this->load->view('inc/sidebar');

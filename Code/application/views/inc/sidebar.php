@@ -1,116 +1,168 @@
-<body class="g-sidenav-show  bg-gray-200">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="<?php echo site_url('usuario/administrador'); ?>">
-        <img src="<?php echo base_url(); ?>tempAdmin/assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Administrador</span>
-      </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('usuario/administrador'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">home</i>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="<?php echo base_url(); ?>admin/production/images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>John Doe</h2>
+                        </div>
+                    </div>
+                    <br />
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="index.html"><i class="fa fa-home"></i> Home</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('usuario/crearUsuario'); ?>"><i class="fa fa-user-plus"></i> Crear Usuario</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('usuario/listaUsuarios'); ?>"><i class="fa fa-users"></i> Lista de Usuarios</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('mascota/agregarMascota'); ?>"><i class="fa fa-paw"></i> Agregar Mascota</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('mascota/listarMascotas'); ?>"><i class="fa fa-list-ul"></i> Lista de Mascotas</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('adopciones/solicitudes'); ?>"><i class="fa fa-heart"></i> Lista de Adopciones</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('usuario/solicitudesVoluntarios'); ?>"><i class="fa fa-list"></i> Solicitudes de Voluntarios</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="menu_section">
+                            <h3>Live On</h3>
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="e_commerce.html">E-commerce</a></li>
+                                        <li><a href="projects.html">Projects</a></li>
+                                        <li><a href="project_detail.html">Project Detail</a></li>
+                                        <li><a href="contacts.html">Contacts</a></li>
+                                        <li><a href="profile.html">Profile</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Pagina Principal</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('usuario/dashboard'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">dashboard</i>
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="images/img.jpg" alt="">John Doe
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>Settings</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">Help</a>
+                                    <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                </div>
+                            </li>
+
+                            <li role="presentation" class="nav-item dropdown open">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item">
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
-
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('usuario/crearUsuario'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person_add</i>
-            </div>
-
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Crear Usuario</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('usuario/listaUsuarios'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">table_view</i>
-            </div>
-
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Lista de Usuarios</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('mascota/agregarMascota'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fas fa-dog"></i>
-              <i class="fas fa-plus-circle"></i>
-            </div>
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Agregar mascotas</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('mascota/listarMascotas'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">pets</i>
-            </div>
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Lista de Mascotas</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('adopciones/solicitudes'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">list</i>
-            </div>
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Lista de Adopciones</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('usuario/solicitudesVoluntarios'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">volunteer_activism</i>
-            </div>
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Solicitudes de Voluntariado</span>
-          </a>
-        </li>
-
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">
-            Account pages
-          </h6>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo base_url(); ?>tempAdmin/pages/profile.php">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Profile</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link text-white" href="<?php echo site_url('usuario/logout'); ?>">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">exit_to_app</i>
-            </div>
-
-            <span class="nav-link-text ms-1" style="font-size: 20px;">Cerrar Sesión</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </aside>
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->

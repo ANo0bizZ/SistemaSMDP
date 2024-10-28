@@ -1,21 +1,25 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="apple-touch-icon" sizes="76x76" href="<?php  echo site_url(); ?>tempAdmin/assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="<?php  echo site_url(); ?>tempAdmin/assets/img/favicon.png">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>
-  Administrador SMDP
-</title>
+    <title>Administrador SMDP</title>
 
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
-<link href="<?php  echo base_url(); ?>tempAdmin/assets/css/nucleo-icons.css" rel="stylesheet" />
-<link href="<?php  echo base_url(); ?>tempAdmin/assets/css/nucleo-svg.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-<link id="pagestyle" href="<?php  echo base_url(); ?>tempAdmin/assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
-<script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link href="<?php echo base_url(); ?>admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <link href="<?php echo base_url(); ?>admin/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>admin/build/css/custom.min.css" rel="stylesheet">
   </head>

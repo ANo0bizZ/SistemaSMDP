@@ -48,10 +48,10 @@ class Usuario extends CI_Controller
 	}
 	public function crearUsuario()
 	{
-		$this->load->view('inc/headerAdmin');
-		$this->load->view('inc/sidebar');
+		$this->load->view('inc/headerAdmin1');
+		$this->load->view('inc/sidebar1');
 		$this->load->view('inc/formCrearUsuario');
-		$this->load->view('inc/footerAdmin');
+		$this->load->view('inc/footerAdmin1');
 	}
 	/* public function registrarUsuario() {
 		$nombres = strtoupper($this->input->post('nombres'));
@@ -197,7 +197,7 @@ class Usuario extends CI_Controller
 		}
 	}
 
-	private function contraAleatoria($longitud = 8)
+	private function contraAleatoria($longitud = 5)
 	{
 		$caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$contra = '';
@@ -257,10 +257,10 @@ class Usuario extends CI_Controller
 	}
 	public function dashboard()
 	{
-		$this->load->view('inc/headerAdmin');
-		$this->load->view('inc/sidebar');
+		$this->load->view('inc/headerAdmin1');
+		$this->load->view('inc/sidebar1');
 		$this->load->view('inc/dashboard');
-		$this->load->view('inc/footerAdmin');
+		$this->load->view('inc/footerAdmin1');
 	}
 	public function listaUsuarios()
 	{
@@ -296,10 +296,10 @@ class Usuario extends CI_Controller
 	{
 		$idUsuario = $this->input->post('idUsuario');
 		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
-		$this->load->view('inc/headerAdmin');
-		$this->load->view('inc/sidebar');
+		$this->load->view('inc/headerAdmin1');
+		$this->load->view('inc/sidebar1');
 		$this->load->view('inc/formModificar', $data);
-		$this->load->view('inc/footerAdmin');
+		$this->load->view('inc/footerAdmin1');
 	}
 	public function logout()
 	{
@@ -369,10 +369,10 @@ class Usuario extends CI_Controller
 	public function solicitudesVoluntarios()
 	{
 		$data['solicitudes'] = $this->session->userdata('solicitudesVoluntarios') ?? [];
-		$this->load->view('inc/headerAdmin');
-		$this->load->view('inc/sidebar');
+		$this->load->view('inc/headerAdmin1');
+		$this->load->view('inc/sidebar1');
 		$this->load->view('inc/solicitudVoluntarios', $data);
-		$this->load->view('inc/footerAdmin');
+		$this->load->view('inc/footerAdmin1');
 	}
 	public function aceptarSolicitud($indice) {
 		$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
@@ -411,4 +411,12 @@ class Usuario extends CI_Controller
 	
 		redirect('usuario/solicitudesVoluntarios');
 	}
+	/* public function administrador()
+	{
+		$this->load->view('inc/headerAdmin1.php');
+		$this->load->view('inc/sidebar1');
+		$this->load->view('inc/mainAdmin1.php');
+		$this->load->view('inc/footerAdmin1.php');
+	}*/
+	
 }
