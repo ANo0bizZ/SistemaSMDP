@@ -372,10 +372,10 @@ class Usuario extends CI_Controller
 	public function solicitudesVoluntarios()
 	{
 		$data['solicitudes'] = $this->session->userdata('solicitudesVoluntarios') ?? [];
-		$this->load->view('inc/headerAdmin1');
-		$this->load->view('inc/sidebar1');
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
 		$this->load->view('inc/solicitudVoluntarios', $data);
-		$this->load->view('inc/footerAdmin1');
+		$this->load->view('inc/footerAdmin');
 	}
 	public function aceptarSolicitud($indice)
 	{

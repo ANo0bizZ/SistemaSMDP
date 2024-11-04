@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Adopciones_model extends CI_Model
 {
-	public function registrar_solicitud($idUsuario, $ci, $celular, $direccion, $descripcion, $mascotasSeleccionadas)
+    public function registrar_solicitud($idUsuario, $ci, $celular, $direccion, $descripcion, $mascotasSeleccionadas)
     {
         $data = array(
             'idUsuario' => $idUsuario,
@@ -13,11 +13,11 @@ class Adopciones_model extends CI_Model
             'descripcion' => $descripcion,
             'estado' => 0
         );
-        
+
         $this->db->trans_start();
         $this->db->insert('solicitudadopcion', $data);
         $idSolicitud = $this->db->insert_id();
-        
+
         foreach ($mascotasSeleccionadas as $idMascota) {
             $this->db->insert('detalleadopcion', array(
                 'idMascotas' => $idMascota,
@@ -25,7 +25,7 @@ class Adopciones_model extends CI_Model
                 'descripcion' => 'Pendiente de aprobación'
             ));
         }
-        
+
         $this->db->trans_complete();
         return $this->db->trans_status();
     }
@@ -44,31 +44,29 @@ class Adopciones_model extends CI_Model
         return $query->result();
     }
     public function solicitudes_aprobadas($fechaInicio = null, $fechaFin = null)
-{
-    $this->db->select('s.*, u.nombres, u.primerApellido, u.fechaNacimiento, GROUP_CONCAT(DISTINCT m.idMascotas) as idMascotas, GROUP_CONCAT(DISTINCT m.nombre) as nombresMascotas');
-    $this->db->from('solicitudadopcion s');
-    $this->db->join('usuarios u', 's.idUsuario = u.idUsuario');
-    $this->db->join('detalleadopcion d', 's.idSolicitud = d.idSolicitud', 'left');
-    $this->db->join('mascotas m', 'd.idMascotas = m.idMascotas', 'left');
-    $this->db->where('s.estado', 1);
+    {
+        $this->db->select('s.*, u.nombres, u.primerApellido, u.fechaNacimiento, m.idMascotas, m.nombre as nombreMascota');
+        $this->db->from('solicitudadopcion s');
+        $this->db->join('usuarios u', 's.idUsuario = u.idUsuario');
+        $this->db->join('detalleadopcion d', 's.idSolicitud = d.idSolicitud', 'left');
+        $this->db->join('mascotas m', 'd.idMascotas = m.idMascotas', 'left');
+        $this->db->where('s.estado', 1); // Filtrar solo solicitudes aprobadas
 
-    // Aplicar filtro de fechas si se proporcionan
-    if ($fechaInicio && $fechaFin) {
-        $this->db->where('d.fechaAdopcion >=', $fechaInicio);
-        $this->db->where('d.fechaAdopcion <=', $fechaFin);
+        // Aplicar el filtro de fechas si ambos valores están definidos
+        if (!empty($fechaInicio) && !empty($fechaFin)) {
+            $this->db->where('d.fechaAdopcion >=', $fechaInicio);
+            $this->db->where('d.fechaAdopcion <=', $fechaFin);
+        }
+
+        $query = $this->db->get();
+
+        return $query->result(); // Retornar todos los resultados
     }
-
-    $this->db->group_by('s.idSolicitud');
-    $query = $this->db->get();
-
-    return $query->result();
-}
-
 
     public function aprobar_solicitud($idSolicitud)
     {
         $this->db->trans_start();
-        
+
         // Actualizar el estado de la solicitud
         $this->db->where('idSolicitud', $idSolicitud);
         $this->db->update('solicitudadopcion', ['estado' => 1]);
