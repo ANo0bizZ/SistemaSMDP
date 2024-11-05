@@ -19,9 +19,17 @@ class Usuario extends CI_Controller
 	{
 		$por_pagina = 9;
 		$inicio = ($pagina - 1) * $por_pagina;
+		$filtros = [
+			'especie' => $this->input->get('especie'), 
+			'tamanio' => $this->input->get('tamanio'), 
+			'raza'    => $this->input->get('raza')    
+		];
 
-		$data['mascotas'] = $this->mascota_model->obtenerMascotasDisponibles($inicio, $por_pagina);
-		$total_mascotas = $this->mascota_model->contarMascotasDisponibles();
+		$data['especies'] = $this->mascota_model->obtenerEspecies();
+		$data['razas'] = $this->mascota_model->obtenerRazas();
+
+		$data['mascotas'] = $this->mascota_model->obtenerMascotasDisponibles($inicio, $por_pagina, $filtros);
+		$total_mascotas = $this->mascota_model->contarMascotasDisponibles($filtros);
 
 		$data['total_paginas'] = ceil($total_mascotas / $por_pagina);
 		$data['pagina_actual'] = $pagina;
@@ -30,6 +38,7 @@ class Usuario extends CI_Controller
 		$this->load->view('paginaPrincipal/galeria', $data);
 		$this->load->view('paginaPrincipal/footerPrincipal');
 	}
+
 	public function eventos()
 	{
 		$this->load->view('paginaPrincipal/headerPrincipal');
@@ -48,10 +57,10 @@ class Usuario extends CI_Controller
 	}
 	public function crearUsuario()
 	{
-		$this->load->view('inc/headerAdmin1');
-		$this->load->view('inc/sidebar1');
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
 		$this->load->view('inc/formCrearUsuario');
-		$this->load->view('inc/footerAdmin1');
+		$this->load->view('inc/footerAdmin');
 	}
 	/* public function registrarUsuario() {
 		$nombres = strtoupper($this->input->post('nombres'));
@@ -106,16 +115,32 @@ class Usuario extends CI_Controller
 	} */
 	public function registrarUsuario()
 	{
-		$nombres = strtoupper($this->input->post('nombres'));
-		$primerApellido = strtoupper($this->input->post('primerApellido'));
-		$segundoApellido = strtoupper($this->input->post('segundoApellido'));
-		$fechaNacimiento = strtoupper($this->input->post('fechaNacimiento'));
+		$nombres = $this->input->post('nombres');
+		$primerApellido = $this->input->post('primerApellido');
+		$segundoApellido = $this->input->post('segundoApellido');
+		$fechaNacimiento = $this->input->post('fechaNacimiento');
 		$usuario = $this->input->post('usuario');
-		$rol = $this->input->post('rol');
+		$celular = $this->input->post('celular');
 		$contra = $this->contraAleatoria();
-		$token = bin2hex(random_bytes(16));
+		$rol = $this->input->post('rol');
 
-		if ($rol == 2) {
+		if ($rol == 1) {
+			$token = bin2hex(random_bytes(32));
+			$this->session->set_userdata('temp_user', [
+				'nombres' => $nombres,
+				'primerApellido' => $primerApellido,
+				'segundoApellido' => $segundoApellido,
+				'fechaNacimiento' => $fechaNacimiento,
+				'usuario' => $usuario,
+				'contra' => $contra,
+				'rol' => $rol,
+				'token' => $token,
+			]);
+
+			$this->enviarCorreoBienvenida($nombres, $primerApellido, $segundoApellido, $usuario, $contra, $token);
+			$this->session->set_flashdata('success', 'Por favor verifica tu correo para activar tu cuenta.');
+			redirect('usuario/registroConfirmado');
+		} elseif ($rol == 2) {
 			$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
 			$solicitudesVoluntarios[] = [
 				'nombres' => $nombres,
@@ -123,23 +148,22 @@ class Usuario extends CI_Controller
 				'segundoApellido' => $segundoApellido,
 				'fechaNacimiento' => $fechaNacimiento,
 				'usuario' => $usuario,
-				'rol' => $rol,
+				'celular' => $celular,
 				'contra' => $contra,
-				'token' => $token
+				'rol' => $rol,
+				'token' => bin2hex(random_bytes(32)),
 			];
 			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);
-			$this->session->set_flashdata('success', 'La solicitud de voluntariado fue enviada. Recibirás una respuesta en tu correo.');
+
+			$this->session->set_flashdata('info', 'Tu solicitud ha sido recibida y está pendiente de aprobación.');
 			redirect('usuario/principal');
-		} else {
-			$this->enviarCorreoBienvenida($nombres, $primerApellido, $segundoApellido, $usuario, $contra, $token);
-			redirect('usuario/registroConfirmado');
 		}
 	}
 
 	private function enviarCorreoBienvenida($nombres, $primerApellido, $segundoApellido, $usuario, $contra, $token)
 	{
 		$this->load->library('email');
-		$this->email->from('arkxcpa14@gmail.com', 'Centro de Adopciones "San Martin de Porres"');
+		$this->email->from('centrodeadopcionessmdp@gmail.com', 'Centro de Adopciones "San Martin de Porres"');
 		$this->email->to($usuario);
 		$this->email->subject('Bienvenido a Centro de Adopciones "San Martin');
 		$linkVerificacion = "http://localhost/SistemaSMDP/Code/index.php/usuario/verificar/" . $token;
@@ -166,12 +190,6 @@ class Usuario extends CI_Controller
 		}
 	}
 
-	public function registroConfirmado()
-	{
-		$data['modalMensaje'] = 'Se ha enviado la información de registro a su correo electrónico.';
-		$data['mostrarModal'] = true;
-		$this->load->view('paginaPrincipal/registroConfirmado', $data);
-	}
 
 	public function verificar($token)
 	{
@@ -196,6 +214,12 @@ class Usuario extends CI_Controller
 			$this->session->set_flashdata('error', 'Token de verificación inválido o expirado.');
 			redirect('usuario/login');
 		}
+	}
+	public function registroConfirmado()
+	{
+		$data['modalMensaje'] = 'Se ha enviado la información de registro a su correo electrónico.';
+		$data['mostrarModal'] = true;
+		$this->load->view('paginaPrincipal/registroConfirmado', $data);
 	}
 
 	private function contraAleatoria($longitud = 5)
@@ -277,32 +301,54 @@ class Usuario extends CI_Controller
 	public function modificarbdUsuario()
 	{
 		$idUsuario = $this->input->post('idUsuario');
-		$data['nombres'] = strtoupper($_POST['nombres']);
-		$data['primerApellido'] = strtoupper($_POST['primerApellido']);
-		$data['segundoApellido'] = strtoupper($_POST['segundoApellido']);
-		$data['usuario'] = $_POST['usuario'];
-		$data['rol'] = $_POST['rol'];
-		$data['fechaNacimiento'] = strtoupper($_POST['fechaNacimiento']);
-		$data['ultimaActualizacion'] = date('Y-m-d H:i:s');
+
+		if (!$idUsuario) {
+			show_error('ID de usuario no proporcionado');
+			return;
+		}
+
+		$data = array(
+			'nombres' => strtoupper($this->input->post('nombres')),
+			'primerApellido' => strtoupper($this->input->post('primerApellido')),
+			'segundoApellido' => strtoupper($this->input->post('segundoApellido')),
+			'usuario' => $this->input->post('usuario'),
+			'rol' => $this->input->post('rol'),
+			'fechaNacimiento' => strtoupper($this->input->post('fechaNacimiento')),
+			'ultimaActualizacion' => date('Y-m-d H:i:s')
+		);
+
 		$this->usuario_model->modificarUsuario($idUsuario, $data);
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
-	public function cambiarEstado()
+	public function cambiarEstado($idUsuario)
 	{
-		$idUsuario = $this->input->post('idUsuario');
-		echo 'ID de Usuario recibido: ' . $idUsuario;
-		$this->usuario_model->actualizarEstado($idUsuario);
+		if ($idUsuario) {
+			$result = $this->usuario_model->actualizarEstado($idUsuario);
+			if ($result) {
+				$this->session->set_flashdata('success', 'Estado del usuario actualizado correctamente');
+			} else {
+				$this->session->set_flashdata('error', 'No se pudo actualizar el estado del usuario');
+			}
+		}
 		redirect('usuario/listaUsuarios', 'refresh');
 	}
-
-	public function modUsuario()
+	public function modUsuario($idUsuario)
 	{
-		$idUsuario = $this->input->post('idUsuario');
-		$data['usuario'] = $this->usuario_model->recuperarUsuario($idUsuario);
-		$this->load->view('inc/headerAdmin');
-		$this->load->view('inc/sidebar');
-		$this->load->view('inc/editarUsuario', $data);
-		$this->load->view('inc/footerAdmin');
+		if ($idUsuario) {
+			$usuario = $this->usuario_model->recuperarUsuario($idUsuario);
+
+			if ($usuario) {
+				$data['usuario'] = $usuario;
+				$this->load->view('inc/headerAdmin');
+				$this->load->view('inc/sidebar');
+				$this->load->view('inc/editarUsuario', $data);
+				$this->load->view('inc/footerAdmin');
+			} else {
+				redirect('usuario/listaUsuarios');
+			}
+		} else {
+			redirect('usuario/listaUsuarios');
+		}
 	}
 	public function logout()
 	{
@@ -402,12 +448,10 @@ class Usuario extends CI_Controller
 		}
 		redirect('usuario/solicitudesVoluntarios');
 	}
+
 	public function rechazarSolicitud($indice)
 	{
-		// Obtener todas las solicitudes de voluntarios desde la sesión
 		$solicitudesVoluntarios = $this->session->userdata('solicitudesVoluntarios') ?? [];
-
-		// Eliminar la solicitud de la lista temporal
 		if (isset($solicitudesVoluntarios[$indice])) {
 			unset($solicitudesVoluntarios[$indice]);
 			$this->session->set_userdata('solicitudesVoluntarios', $solicitudesVoluntarios);

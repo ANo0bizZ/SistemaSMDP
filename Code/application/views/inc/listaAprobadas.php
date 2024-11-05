@@ -16,19 +16,23 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <!-- Form for date filter -->
+                    <form action="<?php echo site_url('adopciones/solicitudes'); ?>" method="post">
+                        <button type="submit" class="btn btn-warning" style="margin-bottom: 15px;">
+                            Volver a la Lista de Solicitudes
+                        </button>
+                    </form>
                     <form method="post" action="<?php echo site_url('adopciones/solicitudesAprobadas'); ?>" class="form-inline mb-3">
                         <div class="form-group mb-2">
                             <label for="fechaInicio">Desde:</label>
-                            <input type="date" class="form-control ml-2" name="fechaInicio" id="fechaInicio" value="<?php echo $fechaInicio; ?>">
+                            <input type="date" class="form-control ml-2" name="fechaInicio" id="fechaInicio" value="<?php echo $fechaInicio ? $fechaInicio : ''; ?>">
                         </div>
                         <div class="form-group mb-2 ml-3">
                             <label for="fechaFin">Hasta:</label>
-                            <input type="date" class="form-control ml-2" name="fechaFin" id="fechaFin" value="<?php echo $fechaFin; ?>">
+                            <input type="date" class="form-control ml-2" name="fechaFin" id="fechaFin" value="<?php echo $fechaFin ? $fechaFin : ''; ?>">
                         </div>
                         <button type="submit" class="btn btn-primary mb-2 ml-3">Filtrar</button>
                     </form>
-                    <!-- Table content -->
+
                     <div class="table-responsive">
                         <table id="datatable-buttons" class="table table-striped table-bordered">
                             <thead>
@@ -41,6 +45,8 @@
                                     <th class="text-center">Dirección</th>
                                     <th class="text-center">Descripción</th>
                                     <th class="text-center">Mascotas</th>
+                                    <th class="text-center">Fecha de Adopción</th>
+                                    <th class="text-center">Descargar PDF</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,6 +68,12 @@
                                         <td align="center"><?php echo $solicitud->direccion; ?></td>
                                         <td align="center"><?php echo $solicitud->descripcion; ?></td>
                                         <td align="center"><?php echo $solicitud->nombreMascota; ?></td>
+                                        <td align="center"><?php echo isset($solicitud->fechaAdopcion) ? date('d-m-Y', strtotime($solicitud->fechaAdopcion)) : 'No disponible'; ?></td>
+                                        <td align="center">
+                                            <a href="<?php echo site_url('adopciones/generarHojaCompromiso/' . $solicitud->idSolicitud); ?>" class="btn btn-success" title="Descargar Hoja de Compromiso">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                     <?php $contador++; ?>
                                 <?php endforeach; ?>

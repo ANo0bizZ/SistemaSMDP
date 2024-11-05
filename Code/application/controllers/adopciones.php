@@ -44,95 +44,115 @@ class Adopciones extends CI_Controller
         $this->load->view('inc/footerAdmin');
     }
     public function solicitudesAprobadas()
-{
-    $fechaInicio = $this->input->post('fechaInicio') ?: null;
-    $fechaFin = $this->input->post('fechaFin') ?: null;
-    
-    // Si no se proporcionan fechas, establecer fechas por defecto (último mes)
-    if (!$fechaInicio && !$fechaFin) {
-        $fechaFin = date('Y-m-d');
-        $fechaInicio = date('Y-m-d', strtotime('-1 month'));
-    }
-    
-    $data['solicitudes'] = $this->adopciones_model->solicitudes_aprobadas($fechaInicio, $fechaFin);
-    $data['fechaInicio'] = $fechaInicio;
-    $data['fechaFin'] = $fechaFin;
+    {
+        $fechaInicio = $this->input->post('fechaInicio') ?: null;
+        $fechaFin = $this->input->post('fechaFin') ?: null;
 
-    $this->load->view('inc/headerAdmin');
-    $this->load->view('inc/sidebar');
-    $this->load->view('inc/listaAprobadas', $data);
-    $this->load->view('inc/footerAdmin');
-}
+        if (!$fechaInicio && !$fechaFin) {
+            $fechaFin = date('Y-m-d');
+            $fechaInicio = date('Y-m-d', strtotime('-1 month'));
+        }
+
+        $data['solicitudes'] = $this->adopciones_model->solicitudes_aprobadas($fechaInicio, $fechaFin);
+        $data['fechaInicio'] = $fechaInicio;
+        $data['fechaFin'] = $fechaFin;
+
+        $this->load->view('inc/headerAdmin');
+        $this->load->view('inc/sidebar');
+        $this->load->view('inc/listaAprobadas', $data);
+        $this->load->view('inc/footerAdmin');
+    }
+
     public function aprobarSolicitud()
     {
         $idSolicitud = $this->input->post('idSolicitud');
-
         $resultado = $this->adopciones_model->aprobar_solicitud($idSolicitud);
 
         if ($resultado) {
-            $this->session->set_flashdata('mensaje', 'Solicitud aprobada con éxito');
+            echo json_encode(['success' => true, 'message' => 'Solicitud aprobada con éxito']);
         } else {
-            $this->session->set_flashdata('error', 'Error al aprobar la solicitud');
+            echo json_encode(['success' => false, 'error' => 'Error al aprobar la solicitud']);
         }
-
-        redirect('adopciones/solicitudes');
     }
 
     public function rechazarSolicitud()
     {
         $idSolicitud = $this->input->post('idSolicitud');
-
         $resultado = $this->adopciones_model->rechazar_solicitud($idSolicitud);
 
         if ($resultado) {
-            $this->session->set_flashdata('mensaje', 'Solicitud rechazada');
+            echo json_encode(['success' => true, 'message' => 'Solicitud rechazada']);
         } else {
-            $this->session->set_flashdata('error', 'Error al rechazar la solicitud');
+            echo json_encode(['success' => false, 'error' => 'Error al rechazar la solicitud']);
         }
-
-        redirect('adopciones/solicitudes');
     }
-    public function exportar_excel()
+    public function generarHojaCompromiso($idSolicitud)
     {
-        $this->load->library('excel'); // Cargar la biblioteca PHPExcel
+        $solicitud = $this->adopciones_model->obtenerSolicitudPorId($idSolicitud);
 
-        $solicitudes = $this->adopciones_model->solicitudes_aprobadas();
-
-        // Crea un nuevo archivo de Excel
-        $this->excel->setActiveSheetIndex(0);
-        $this->excel->getActiveSheet()->setTitle('Solicitudes Aprobadas');
-
-        // Define las cabeceras
-        $this->excel->getActiveSheet()->setCellValue('A1', 'No.');
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Nombre del Adoptante');
-        $this->excel->getActiveSheet()->setCellValue('C1', 'CI');
-        $this->excel->getActiveSheet()->setCellValue('D1', 'Celular');
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Edad');
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Dirección');
-        $this->excel->getActiveSheet()->setCellValue('G1', 'Descripción');
-        $this->excel->getActiveSheet()->setCellValue('H1', 'Mascotas');
-
-        // Rellena los datos
-        $contador = 2;
-        foreach ($solicitudes as $solicitud) {
-            $this->excel->getActiveSheet()->setCellValue('A' . $contador, $contador - 1);
-            $this->excel->getActiveSheet()->setCellValue('B' . $contador, $solicitud->nombres . ' ' . $solicitud->primerApellido);
-            $this->excel->getActiveSheet()->setCellValue('C' . $contador, $solicitud->ci);
-            $this->excel->getActiveSheet()->setCellValue('D' . $contador, $solicitud->celular);
-            $this->excel->getActiveSheet()->setCellValue('E' . $contador, calcular_edad($solicitud->fechaNacimiento));
-            $this->excel->getActiveSheet()->setCellValue('F' . $contador, $solicitud->direccion);
-            $this->excel->getActiveSheet()->setCellValue('G' . $contador, $solicitud->descripcion);
-            $this->excel->getActiveSheet()->setCellValue('H' . $contador, $solicitud->nombresMascotas);
-            $contador++;
+        if (!$solicitud) {
+            show_404();
+            return;
         }
 
-        // Enviar el archivo Excel al navegador
-        $filename = 'solicitudes_aprobadas_' . date('YmdHis') . '.xlsx';
-        header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
+        require('fpdf/fpdf.php');
 
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-        $objWriter->save('php://output');
+        $pdf = new FPDF();
+        $pdf->AddPage();
+
+        $logo = $_SERVER['DOCUMENT_ROOT'] . '/SistemaSMDP/Code/extrasPrincipal/images/SMDP1.png';
+        if (file_exists($logo)) {
+            $pdf->Image($logo, 10, 10, 30);
+        } else {
+            echo "El archivo no existe: $logo";
+            exit();
+        }
+
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->Cell(0, 10, 'Centro de Adopciones "San Martin de Porres"', 0, 1, 'C');
+        $pdf->Ln(5);
+        $pdf->Cell(0, 10, 'Hoja de Compromiso', 0, 1, 'C');
+        $pdf->Ln(10);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(0, 10, 'Datos del ADOPTADO:', 0, 1);
+        $pdf->SetFont('Arial', '', 12);
+        $adoptadoData = 'RAZA: ' . $solicitud->raza . ' | ';
+        $adoptadoData .= 'SEXO: ' . $solicitud->sexo . ' | ';
+        $adoptadoData .= 'EDAD: ' . $this->calcularEdad($solicitud->fechaNacMascota);
+        $pdf->MultiCell(0, 10, $adoptadoData);
+        $pdf->Ln(5);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(0, 10, 'Detalle del ADOPTANTE:', 0, 1);
+        $pdf->SetFont('Arial', '', 12);
+        $adoptanteData = 'Yo: ' . $solicitud->nombres . ' ' . $solicitud->primerApellido;
+        $adoptanteData .= ' con CI: ' . $solicitud->ci;
+        $adoptanteData .= ' y vivienda en: ' . $solicitud->direccion;
+        $adoptanteData .= ' de: ' . $this->calcularEdad($solicitud->fechaNacimiento) . ' años de edad ';
+        $adoptadoData .= ' y con numero de celular: ' . $solicitud->celular;
+        $pdf->MultiCell(0, 10, utf8_decode($adoptanteData)); 
+        $pdf->Ln(5);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->MultiCell(0, 10, utf8_decode("ME COMPROMETO A:\n"
+            . " - REALIZAR LA ESTERILIZACIÓN DE MANERA OBLIGATORIA.\n"
+            . " - INICIAR y/o CONTINUAR con el ciclo de vacunación.\n"
+            . " - PROTEGER al adoptado, al uso permanente de la placa de identificación, no criarlo en zonas aisladas (patios, azoteas, terrenos vacíos).\n"
+            . " - CUIDAR adecuadamente al adoptado, lo que incluye buena alimentación y la moderación de su conducta.\n"
+            . " - ENVIAR periódicamente fotos y/o videos del adoptado.\n"
+            . " - NO ABANDONAR, NI MALTRATAR al adoptado."), 0, 'L');
+        $pdf->Ln(10);
+        $pdf->Cell(0, 10, 'Cochabamba, ' . date('d') . ' de ' . date('F') . ' de ' . date('Y'), 0, 1);
+        $pdf->Ln(20);
+        $pdf->Cell(0, 10, 'Firma del adoptante', 0, 0);
+        $pdf->Cell(0, 10, 'Firma del encargado', 0, 1, 'R');
+        $pdf->Ln(10);
+        $pdf->MultiCell(0, 10, utf8_decode('La adopción es TU DECISIÓN VOLUNTARIA Y RESPONSABLE. JAMÁS ABANDONES NI MALTRATES la vida que hoy salvas.'), 0, 'C');
+
+        $pdf->Output('D', 'hoja_compromiso.pdf');
+        exit();
+    }
+    private function calcularEdad($fechaNacimiento)
+    {
+        $edad = date_diff(date_create($fechaNacimiento), date_create('today'))->y; // Calcula la edad
+        return $edad;
     }
 }

@@ -35,6 +35,7 @@
                                             <th class="text-center">Segundo Apellido</th>
                                             <th class="text-center">Correo</th>
                                             <th class="text-center">Edad</th>
+                                            <th class="text-center">Celular</th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
@@ -47,7 +48,15 @@
                                                 <td><?= $solicitud['primerApellido']; ?></td>
                                                 <td><?= $solicitud['segundoApellido']; ?></td>
                                                 <td><?= $solicitud['usuario']; ?></td>
-                                                <td><?= $solicitud['fechaNacimiento']; ?></td>
+                                                <td>
+                                                    <?php
+                                                    $fechaNacimiento = new DateTime($solicitud['fechaNacimiento']);
+                                                    $hoy = new DateTime();
+                                                    $edad = $hoy->diff($fechaNacimiento)->y;
+                                                    echo $edad;
+                                                    ?>
+                                                </td>
+                                                <td><?= isset($solicitud['celular']) ? $solicitud['celular'] : 'N/A'; ?></td>
                                                 <td class="text-center">
                                                     <a href="<?= site_url('usuario/aceptarSolicitud/' . $indice); ?>" class="btn btn-success" title="Aceptar">
                                                         <i class="fa fa-check"></i>

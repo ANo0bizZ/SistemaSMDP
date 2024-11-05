@@ -82,24 +82,52 @@ class Mascota_model extends CI_Model
         $this->db->where('idMascotas', $idMascotas);
         $this->db->update('mascotas', $data);
     }
-    public function obtenerMascotasDisponibles($inicio, $por_pagina)
-    {
-        $this->db->select('mascotas.idMascotas, mascotas.nombre, razas.nombre as raza, IFNULL(GROUP_CONCAT(fotos.urlFoto), "") as fotos');
-        $this->db->from('mascotas');
-        $this->db->join('razas', 'mascotas.idRazas = razas.idRazas', 'left');
-        $this->db->join('fotos', 'mascotas.idMascotas = fotos.idMascotas', 'left');
-        $this->db->where('mascotas.estado', 0);
-        $this->db->where('fotos.estado', 0);
-        $this->db->group_by('mascotas.idMascotas');
-        $this->db->limit($por_pagina, $inicio);
-        return $this->db->get()->result();
+    public function obtenerMascotasDisponibles($inicio, $por_pagina, $filtros = [])
+{
+    $this->db->select('mascotas.idMascotas, mascotas.nombre, razas.nombre as raza, IFNULL(GROUP_CONCAT(fotos.urlFoto), "") as fotos');
+    $this->db->from('mascotas');
+    $this->db->join('razas', 'mascotas.idRazas = razas.idRazas', 'left');
+    $this->db->join('fotos', 'mascotas.idMascotas = fotos.idMascotas', 'left');
+    $this->db->where('mascotas.estado', 0);
+    $this->db->where('fotos.estado', 0);
+
+    // Aplicar filtros de especie, tamaño y raza si existen
+    if (!empty($filtros['especie'])) {
+        $this->db->where('mascotas.idEspecies', $filtros['especie']);
     }
-    public function contarMascotasDisponibles()
-    {
-        $this->db->from('mascotas');
-        $this->db->where('estado', 0);
-        return $this->db->count_all_results();
+    if (!empty($filtros['tamanio'])) {
+        $this->db->where('razas.tamanio', $filtros['tamanio']);
     }
+    if (!empty($filtros['raza'])) {
+        $this->db->where('mascotas.idRazas', $filtros['raza']);
+    }
+
+    $this->db->group_by('mascotas.idMascotas');
+    $this->db->limit($por_pagina, $inicio);
+
+    return $this->db->get()->result();
+}
+
+public function contarMascotasDisponibles($filtros = [])
+{
+    $this->db->from('mascotas');
+    $this->db->join('razas', 'mascotas.idRazas = razas.idRazas', 'left');
+    $this->db->where('mascotas.estado', 0);
+
+    // Aplicar filtros de especie, tamaño y raza si existen
+    if (!empty($filtros['especie'])) {
+        $this->db->where('mascotas.idEspecies', $filtros['especie']);
+    }
+    if (!empty($filtros['tamanio'])) {
+        $this->db->where('razas.tamanio', $filtros['tamanio']);
+    }
+    if (!empty($filtros['raza'])) {
+        $this->db->where('mascotas.idRazas', $filtros['raza']);
+    }
+
+    return $this->db->count_all_results();
+}
+
     public function obtenerFotosMascota($idMascotas)
     {
         $this->db->where('idMascotas', $idMascotas);

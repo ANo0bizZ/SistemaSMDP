@@ -3,10 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usuario_model extends CI_Model
 {
-	public function listausuarios()
-	{
+	public function listaUsuarios() {
 		$this->db->select('*');
 		$this->db->from('usuarios');
+		$this->db->where('estado', 1);
+		$this->db->order_by('idUsuario', 'asc');
 		return $this->db->get();
 	}
 
@@ -57,20 +58,25 @@ class Usuario_model extends CI_Model
 		$this->db->where('idUsuario', $idUsuario);
 		$this->db->update('usuarios', $data);
 	}
-	public function recuperarUsuario($idUsuario)
-	{
+	public function recuperarUsuario($idUsuario) {
 		$this->db->select('*');
 		$this->db->from('usuarios');
 		$this->db->where('idUsuario', $idUsuario);
-		return $this->db->get();
+		$query = $this->db->get();
+		
+		if ($query->num_rows() > 0) {
+			return $query;
+		} else {
+			return null;
+		}
 	}
-	public function actualizarEstado($idUsuario)
-	{
-		$data=array(
-			'estado' => 0
+	public function actualizarEstado($idUsuario) {
+		$data = array(
+			'estado' => 0,
+			'ultimaActualizacion' => date('Y-m-d H:i:s')
 		);
 		$this->db->where('idUsuario', $idUsuario);
-		$this->db->update('usuarios', $data);
+		return $this->db->update('usuarios', $data);
 	}
 	public function modificarUsuarioP($idUsuario, $data)
 	{

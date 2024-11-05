@@ -45,45 +45,67 @@ class Adopciones_model extends CI_Model
     }
     public function solicitudes_aprobadas($fechaInicio = null, $fechaFin = null)
     {
-        $this->db->select('s.*, u.nombres, u.primerApellido, u.fechaNacimiento, m.idMascotas, m.nombre as nombreMascota');
+        $this->db->select('s.*, u.nombres, u.primerApellido, u.fechaNacimiento, s.ci, s.celular, s.direccion, s.descripcion, GROUP_CONCAT(m.nombre) AS nombreMascota, d.fechaAdopcion');
         $this->db->from('solicitudadopcion s');
         $this->db->join('usuarios u', 's.idUsuario = u.idUsuario');
         $this->db->join('detalleadopcion d', 's.idSolicitud = d.idSolicitud', 'left');
         $this->db->join('mascotas m', 'd.idMascotas = m.idMascotas', 'left');
-        $this->db->where('s.estado', 1); // Filtrar solo solicitudes aprobadas
+        $this->db->where('s.estado', 1);
 
-        // Aplicar el filtro de fechas si ambos valores están definidos
         if (!empty($fechaInicio) && !empty($fechaFin)) {
             $this->db->where('d.fechaAdopcion >=', $fechaInicio);
             $this->db->where('d.fechaAdopcion <=', $fechaFin);
         }
 
+        $this->db->group_by('s.idSolicitud');
+
         $query = $this->db->get();
 
-        return $query->result(); // Retornar todos los resultados
+        return $query->result(); 
     }
-
     public function aprobar_solicitud($idSolicitud)
     {
         $this->db->trans_start();
 
-        // Actualizar el estado de la solicitud
         $this->db->where('idSolicitud', $idSolicitud);
         $this->db->update('solicitudadopcion', ['estado' => 1]);
 
-        // Actualizar la tabla detalleadopcion
         $this->db->where('idSolicitud', $idSolicitud);
         $this->db->update('detalleadopcion', [
             'descripcion' => 'Adopción aprobada'
         ]);
 
-        $this->db->trans_complete();
+        $this->db->select('idMascotas');
+        $this->db->from('detalleadopcion');
+        $this->db->where('idSolicitud', $idSolicitud);
+        $mascotas = $this->db->get()->result();
 
+        $fechaActual = date('Y-m-d H:i:s');
+        foreach ($mascotas as $mascota) {
+            $this->db->where('idMascotas', $mascota->idMascotas);
+            $this->db->update('mascotas', [
+                'estado' => 1,
+                'ultimaActualizacion' => $fechaActual
+            ]);
+        }
+
+        $this->db->trans_complete();
         return $this->db->trans_status();
     }
+
     public function rechazar_solicitud($idSolicitud)
     {
         $this->db->where('idSolicitud', $idSolicitud);
         return $this->db->update('solicitudadopcion', ['estado' => 2]);
+    }
+    public function obtenerSolicitudPorId($idSolicitud) {
+        $this->db->select('s.*, u.nombres, u.primerApellido, m.nombre AS nombreMascota, da.fechaAdopcion, u.fechaNacimiento, m.sexo AS sexo, m.fechaNacMascota AS fechaNacMascota, r.nombre AS raza'); // Añadido 'r.nombre AS raza'
+        $this->db->from('solicitudadopcion s');
+        $this->db->join('usuarios u', 's.idUsuario = u.idUsuario'); // Asegúrate de que esto coincida con tu esquema
+        $this->db->join('detalleadopcion da', 's.idSolicitud = da.idSolicitud');
+        $this->db->join('mascotas m', 'da.idMascotas = m.idMascotas');
+        $this->db->join('razas r', 'm.idRazas = r.idRazas'); // Añadido JOIN para obtener la raza de la mascota
+        $this->db->where('s.idSolicitud', $idSolicitud);
+        return $this->db->get()->row();
     }
 }

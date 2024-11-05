@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Administrador SMDP</title>
+  <title>Centro de Adopciones "San Martin de Porres</title>
 
   <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
   <link href="<?php echo base_url(); ?>admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,4 +28,5 @@
   <link href="<?php echo base_url(); ?>admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
   <link href="<?php echo base_url(); ?>admin/build/css/custom.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>

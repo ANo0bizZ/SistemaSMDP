@@ -11,36 +11,29 @@
 
 <body>
     <div class="container" id="container">
-    <div class="form-container sign-up">
-    <form action="<?php echo site_url('usuario/registrarUsuario'); ?>" method="post">
-        <h3>Crear Cuenta</h3>
-        <!-- <div class="social-icons">
-            <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-        </div> -->
-        <input type="text" name="nombres" placeholder="Nombre(s)" required>
-        <div style="display: flex; gap: 10px;">
-            <input type="text" name="primerApellido" placeholder="Primer Apellido" style="flex: 1;" required>
-            <input type="text" name="segundoApellido" placeholder="Segundo Apellido" style="flex: 1;">
+        <div class="form-container sign-up">
+            <form action="<?php echo site_url('usuario/registrarUsuario'); ?>" method="post">
+                <h3>Crear Cuenta</h3>
+                <input type="text" name="nombres" placeholder="Nombre(s)" required>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" name="primerApellido" placeholder="Primer Apellido" style="flex: 1;" required>
+                    <input type="text" name="segundoApellido" placeholder="Segundo Apellido" style="flex: 1;">
+                </div>
+                <input type="date" name="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
+                <input type="email" name="usuario" placeholder="Email" required>
+                <label for="rol">¿Como deseas ayudarnos?</label>
+                <select class="form-control" name="rol" id="rol" style="width: 100%; border-radius: 10px; padding: 5px;" required>
+                    <option value="1">Adoptante</option>
+                    <option value="2">Voluntario</option>
+                </select>
+                <input type="number" name="celular" id="celular" placeholder="Número de Celular" style="display: none;" required>
+                <button type="submit">Registrarse</button>
+            </form>
         </div>
-        <input type="date" name="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
-        <input type="email" name="usuario" placeholder="Email" required>
-        <label for="rol">¿Como deseas ayudarnos?</label>
-        <select class="form-control" name="rol" id="rol" style="width: 100%; border-radius: 10px; padding: 5px;" required>
-            <option value="1">Adoptante</option>
-            <option value="2">Voluntario</option>
-        </select>
-        <button type="submit">Registrarse</button>
-    </form>
-</div>
 
         <div class="form-container sign-in">
             <form action="<?php echo site_url('usuario/validarLogin'); ?>" method="post">
                 <h1 align="center">Iniciar Sesión</h1><br>
-                <!-- <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                </div> -->
                 <span>Inicie sesión si ya tiene una cuenta</span>
                 <input type="email" name="usuario" id="usuario" class="form-control" placeholder="Email">
                 <input type="password" name="contra" id="contra" class="form-control" placeholder="Contraseña">
@@ -50,8 +43,8 @@
                 <a href="#">¿Olvidó su Contraseña? </a>
                 <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión </button>
             </form>
-
         </div>
+
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
@@ -67,5 +60,23 @@
             </div>
         </div>
     </div>
+    
     <script src="<?php echo base_url(); ?>extrasLogin/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const rolSelect = document.getElementById('rol');
+            const celularInput = document.getElementById('celular');
+
+            rolSelect.addEventListener('change', function() {
+                if (rolSelect.value === '2') { // Si se selecciona "Voluntario"
+                    celularInput.style.display = 'block'; // Mostrar el campo de celular
+                } else {
+                    celularInput.style.display = 'none'; // Ocultar el campo de celular
+                    celularInput.value = ''; // Limpiar el campo si no se muestra
+                }
+            });
+        });
+    </script>
+    
 </body>
+</html>

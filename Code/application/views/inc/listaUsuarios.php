@@ -1,4 +1,29 @@
         <div class="right_col" role="main">
+        <?php if($this->session->flashdata('success')): ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Éxito!',
+                text: '<?php echo $this->session->flashdata('success'); ?>',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            });
+        });
+        </script>
+    <?php endif; ?>
+
+    <?php if($this->session->flashdata('error')): ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                title: 'Error!',
+                text: '<?php echo $this->session->flashdata('error'); ?>',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        });
+        </script>
+    <?php endif; ?>
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -12,9 +37,6 @@
                   <h2>Lista de Usuarios</h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -65,9 +87,7 @@
                                   <a href="<?php echo site_url('usuario/modUsuario/' . $usuario->idUsuario); ?>" title="Editar">
                                     <i class="fa fa-edit text-primary" style="font-size: 1.5em;"></i>
                                   </a>
-                                  <a href="<?php echo site_url('controlador/eliminar/' . $usuario->idUsuario); ?>"
-                                    title="Eliminar"
-                                    onclick="return confirm('¿Estás seguro de eliminar este usuario?');" style="margin-left: 15px;">
+                                  <a href="#" onclick="confirmarEliminacion('<?php echo $usuario->idUsuario; ?>')" title="Eliminar" style="margin-left: 15px;">
                                     <i class="fa fa-trash text-danger" style="font-size: 1.5em;"></i>
                                   </a>
                                 </td>
@@ -83,3 +103,21 @@
                 </div>
               </div>
             </div>
+<script>
+function confirmarEliminacion(idUsuario) {
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "El usuario será desactivado del sistema",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, desactivar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = '<?php echo site_url('usuario/cambiarEstado/'); ?>' + idUsuario;
+        }
+    });
+}
+</script>
