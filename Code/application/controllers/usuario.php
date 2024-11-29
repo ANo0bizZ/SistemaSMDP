@@ -20,9 +20,9 @@ class Usuario extends CI_Controller
 		$por_pagina = 9;
 		$inicio = ($pagina - 1) * $por_pagina;
 		$filtros = [
-			'especie' => $this->input->get('especie'), 
-			'tamanio' => $this->input->get('tamanio'), 
-			'raza'    => $this->input->get('raza')    
+			'especie' => $this->input->get('especie'),
+			'tamanio' => $this->input->get('tamanio'),
+			'raza'    => $this->input->get('raza')
 		];
 
 		$data['especies'] = $this->mascota_model->obtenerEspecies();
@@ -41,10 +41,24 @@ class Usuario extends CI_Controller
 
 	public function eventos()
 	{
+		$this->load->model('usuario_model');
+		$data['actividades'] = $this->usuario_model->get_actividades();
+		$usuarioId = $this->session->userdata('idUsuario');
+		if ($usuarioId) {
+			$data['participaciones'] = [];
+			foreach ($data['actividades'] as $actividad) {
+				$participacion = $this->usuario_model->get_participacion($actividad->idActividad, $usuarioId);
+				$data['participaciones'][$actividad->idActividad] = $participacion;
+			}
+		}
+		$data['usuario_logueado'] = $usuarioId;
+		$data['rol_usuario'] = $this->session->userdata('rol');
+
 		$this->load->view('paginaPrincipal/headerPrincipal');
-		$this->load->view('paginaPrincipal/eventos.php');
+		$this->load->view('paginaPrincipal/eventos', $data);
 		$this->load->view('paginaPrincipal/footerPrincipal');
 	}
+
 	public function contactos()
 	{
 		$this->load->view('paginaPrincipal/headerPrincipal');
@@ -459,5 +473,69 @@ class Usuario extends CI_Controller
 		}
 
 		redirect('usuario/solicitudesVoluntarios');
+	}
+
+	public function creacionEventos()
+	{
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
+		$this->load->view('inc/crearEventos');
+		$this->load->view('inc/footerAdmin');
+	}
+
+	public function registrarEvento()
+	{
+		$data = array(
+			'nombre' => $this->input->post('nombreEvento'),
+			'descripcion' => $this->input->post('descripcion'),
+			'fechaInicio' => date('Y-m-d H:i:s', strtotime($this->input->post('fechaInicio'))),
+			'fechaFin' => date('Y-m-d H:i:s', strtotime($this->input->post('fechaFin'))),
+			'ubicacion' => $this->input->post('ubicacion'),
+			'tipoEvento' => $this->input->post('tipoEvento'),
+			'estado' => 1,
+			'idCreador' => $this->session->userdata('idUsuario')
+		);
+
+		$resultado = $this->usuario_model->guardarEvento($data);
+
+		if ($resultado) {
+			echo json_encode(array('success' => true));
+		} else {
+			echo json_encode(array('success' => false, 'message' => 'Error al registrar el evento.'));
+		}
+	}
+	public function registrarParticipacion()
+	{
+		if (!$this->session->userdata('idUsuario')) {
+			echo json_encode(['status' => 'error', 'message' => 'Debes iniciar sesión.']);
+			return;
+		}
+
+		$idActividad = $this->input->post('idActividad');
+		$accion = $this->input->post('accion');
+		$asistira = ($accion == 'participar') ? 1 : 2;
+
+		$datos = [
+			'idActividad' => $idActividad,
+			'idUsuario' => $this->session->userdata('idUsuario'),
+			'estado' => $asistira
+		];
+		$this->usuario_model->registrar_participacion($datos);
+
+		redirect('usuario/eventos#eventos-section');
+	}
+	public function voluntarios()
+	{
+		$datos['participaciones'] = $this->usuario_model->get_actividades_con_participaciones();
+		$this->load->view('inc/headerAdmin');
+		$this->load->view('inc/sidebar');
+		$this->load->view('inc/voluntarios', $datos);
+		$this->load->view('inc/footerAdmin');
+	}
+	public function donaciones()
+	{
+		$this->load->view('paginaPrincipal/headerPrincipal');
+		$this->load->view('paginaPrincipal/donaciones');
+		$this->load->view('paginaPrincipal/footerPrincipal');
 	}
 }

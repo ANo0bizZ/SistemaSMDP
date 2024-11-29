@@ -3,6 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/animate.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/owl.carousel.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>extrasPrincipal/css/owl.theme.default.min.css">
@@ -44,26 +45,24 @@
 </head>
 
 <body>
-    <div class="wrap">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 d-flex align-items-center">
-                    <p class="mb-0 phone pl-md-2">
-                        <a href="#"><span class="fa fa-paper-plane mr-1"></span>refugiosanmartindeporres@gmail.com</a>
+<div class="wrap">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 d-flex align-items-center">
+            </div>
+            <div class="col-md-6 d-flex justify-content-md-end">
+                <div class="cta">
+                    <p class="mb-0 d-flex">
+                        <a href="<?php echo site_url('usuario/donaciones'); ?>" class="btn btn-warning d-flex align-items-center justify-content-center">
+                            <span class="fa fa-donate mr-1"></span> Realiza una Donación
+                        </a>
                     </p>
-                </div>
-                <div class="col-md-6 d-flex justify-content-md-end">
-                    <div class="social-media">
-                        <p class="mb-0 d-flex">
-                            <a href="https://www.facebook.com/CentroDeAdopcionesSanMartinDePorres" class="d-flex align-items-center justify-content-center" target="_blank"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-                            <a href="https://www.instagram.com/refugiosanmartindeporres/" class="d-flex align-items-center justify-content-center" target="_blank"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-                            <a href="https://wa.link/bc9i3x" class="d-flex align-items-center justify-content-center" target="_blank"><span class="fa fa-whatsapp"><i class="sr-only">WhatsApp</i></span></a>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?php echo site_url('usuario/principal'); ?>">

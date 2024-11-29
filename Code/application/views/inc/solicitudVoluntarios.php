@@ -9,14 +9,7 @@
         <div class="col-md-12 col-sm-12 ">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Solicitudes de Voluntarios
-                    </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
+                    <h2>Solicitudes de Voluntarios</h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -26,7 +19,7 @@
                                 <p class="text-muted font-13 m-b-30">
                                     Aquí puedes gestionar las solicitudes de voluntariado enviadas por los usuarios.
                                 </p>
-                                <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                <table id="datatable-buttons" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th class="text-center">No.</th>
@@ -100,3 +93,4 @@
             </div>
         </div>
     <?php endif; ?>
+</div>

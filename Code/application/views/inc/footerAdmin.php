@@ -11,6 +11,8 @@
 <script src="<?php echo base_url(); ?>admin/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?php echo base_url(); ?>admin/vendors/fastclick/lib/fastclick.js"></script>
 <script src="<?php echo base_url(); ?>admin/vendors/nprogress/nprogress.js"></script>
+<script src="<?php echo base_url(); ?>admin/vendors/raphael/raphael.min.js"></script>
+<script src="<?php echo base_url(); ?>admin/vendors/morris.js/morris.min.js"></script>
 <script src="<?php echo base_url(); ?>admin/vendors/iCheck/icheck.min.js"></script>
 <script src="<?php echo base_url(); ?>admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -28,6 +30,7 @@
 <script src="<?php echo base_url(); ?>admin/vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="<?php echo base_url(); ?>admin/vendors/pdfmake/build/vfs_fonts.js"></script>
 <script src="<?php echo base_url(); ?>admin/build/js/custom.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 <script>
 $(document).ready(function() {
     if ($.fn.DataTable.isDataTable('#datatable-buttons')) {

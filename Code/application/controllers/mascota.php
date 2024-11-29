@@ -31,7 +31,7 @@ class Mascota extends CI_Controller
 		}
 	}
 
-	public function registrarMascota()
+	public function agregarMascotas()
 	{
 		$idEspecies = $this->input->post('especies');
 		$idRazas = $this->input->post('razas');
@@ -85,7 +85,6 @@ class Mascota extends CI_Controller
 			'message' => 'Mascota registrada con éxito. Fotos registradas: ' . $fotos_registradas
 		]);
 	}
-
 	public function listarMascotas()
 	{
 		$data['mascotas'] = $this->mascota_model->obtenerMascotas();

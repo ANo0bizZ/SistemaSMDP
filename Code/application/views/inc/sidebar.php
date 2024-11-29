@@ -22,7 +22,7 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="index.html"><i class="fa fa-home"></i> Inicio</a>
+                                    <a href="<?php echo site_url('usuario/administrador'); ?>"><i class="fa fa-home"></i> Inicio</a>
                                 </li>
                                 <li>
                                     <a href="<?php echo site_url('usuario/crearUsuario'); ?>"><i class="fa fa-user-plus"></i> Crear Usuario</a>
@@ -42,19 +42,16 @@
                                 <li>
                                     <a href="<?php echo site_url('usuario/solicitudesVoluntarios'); ?>"><i class="fa fa-list"></i> Solicitudes de Voluntarios</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo site_url('usuario/creacionEventos'); ?>"><i class="fa fa-calendar"></i> Creación de Eventos</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('usuario/voluntarios'); ?>"><i class="fa fa-user"></i> Voluntarios</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="sidebar-footer hidden-small">
-                        <!-- <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a> -->
                         <a data-toggle="tooltip" data-placement="top" title="Cerrar Sesión" href="<?php echo site_url('usuario/logout'); ?>" class="logout-link">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>

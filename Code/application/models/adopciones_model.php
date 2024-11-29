@@ -52,16 +52,14 @@ class Adopciones_model extends CI_Model
         $this->db->join('mascotas m', 'd.idMascotas = m.idMascotas', 'left');
         $this->db->where('s.estado', 1);
 
-        if (!empty($fechaInicio) && !empty($fechaFin)) {
+        if ($fechaInicio && $fechaFin) {
             $this->db->where('d.fechaAdopcion >=', $fechaInicio);
             $this->db->where('d.fechaAdopcion <=', $fechaFin);
         }
 
         $this->db->group_by('s.idSolicitud');
 
-        $query = $this->db->get();
-
-        return $query->result(); 
+        return $this->db->get()->result();
     }
     public function aprobar_solicitud($idSolicitud)
     {
@@ -98,7 +96,8 @@ class Adopciones_model extends CI_Model
         $this->db->where('idSolicitud', $idSolicitud);
         return $this->db->update('solicitudadopcion', ['estado' => 2]);
     }
-    public function obtenerSolicitudPorId($idSolicitud) {
+    public function obtenerSolicitudPorId($idSolicitud)
+    {
         $this->db->select('s.*, u.nombres, u.primerApellido, m.nombre AS nombreMascota, da.fechaAdopcion, u.fechaNacimiento, m.sexo AS sexo, m.fechaNacMascota AS fechaNacMascota, r.nombre AS raza'); // Añadido 'r.nombre AS raza'
         $this->db->from('solicitudadopcion s');
         $this->db->join('usuarios u', 's.idUsuario = u.idUsuario'); // Asegúrate de que esto coincida con tu esquema

@@ -48,15 +48,12 @@ class Adopciones extends CI_Controller
         $fechaInicio = $this->input->post('fechaInicio') ?: null;
         $fechaFin = $this->input->post('fechaFin') ?: null;
 
-        if (!$fechaInicio && !$fechaFin) {
-            $fechaFin = date('Y-m-d');
-            $fechaInicio = date('Y-m-d', strtotime('-1 month'));
+        if ($this->input->post()) {
+            $data['solicitudes'] = $this->adopciones_model->solicitudes_aprobadas($fechaInicio, $fechaFin);
+        } else {
+            $data['solicitudes'] = $this->adopciones_model->solicitudes_aprobadas(null, null);
         }
-
-        $data['solicitudes'] = $this->adopciones_model->solicitudes_aprobadas($fechaInicio, $fechaFin);
-        $data['fechaInicio'] = $fechaInicio;
-        $data['fechaFin'] = $fechaFin;
-
+        
         $this->load->view('inc/headerAdmin');
         $this->load->view('inc/sidebar');
         $this->load->view('inc/listaAprobadas', $data);
@@ -129,7 +126,7 @@ class Adopciones extends CI_Controller
         $adoptanteData .= ' y vivienda en: ' . $solicitud->direccion;
         $adoptanteData .= ' de: ' . $this->calcularEdad($solicitud->fechaNacimiento) . ' años de edad ';
         $adoptadoData .= ' y con numero de celular: ' . $solicitud->celular;
-        $pdf->MultiCell(0, 10, utf8_decode($adoptanteData)); 
+        $pdf->MultiCell(0, 10, utf8_decode($adoptanteData));
         $pdf->Ln(5);
         $pdf->SetFont('Arial', '', 12);
         $pdf->MultiCell(0, 10, utf8_decode("ME COMPROMETO A:\n"

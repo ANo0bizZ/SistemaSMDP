@@ -35,6 +35,7 @@
 
 <section class="ftco-section">
   <div class="container">
+    <h2 class="text-center mb-4" id="adopcion-section">Filtrar Mascotas en la Galería</h2>
     <form action="<?php echo site_url('usuario/galeria'); ?>" method="get" class="mb-5">
       <div class="form-row">
         <div class="col-md-4">
@@ -75,7 +76,7 @@
         </div>
       </div>
     </form>
-
+    <h2 class="text-center mb-4">Mascotas en Adopción</h2>
     <div class="row">
       <?php foreach ($mascotas as $mascota): ?>
         <div class="col-md-4 ftco-animate">
@@ -90,8 +91,8 @@
                   <?php foreach ($fotos as $index => $foto): ?>
                     <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
                       <img src="<?php echo base_url($foto); ?>" class="d-block w-100 mascota-img" alt="<?php echo $mascota->nombre; ?>">
-                      <a href="#" class="icon image-popup d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#modal-<?php echo $mascota->idMascotas; ?>">
-                        <span class="fa fa-expand"></span>
+                      <a href="#" class="icon image-popup d-flex justify-content-center align-items-center" data-toggle="modal" data-target="#modal-<?php echo $mascota->idMascotas; ?>"><br>
+                        <span class="fas fa-expand-alt"></span>
                       </a>
                     </div>
                   <?php endforeach; ?>
@@ -116,7 +117,7 @@
               <h6><?php echo $mascota->raza; ?></h6>
               <h2><?php echo $mascota->nombre; ?></h2>
               <?php if ($this->session->userdata('idUsuario')): ?>
-                <a href="<?php echo site_url('adopciones/solicitudAdopcion');?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
+                <a href="<?php echo site_url('adopciones/solicitudAdopcion'); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
               <?php else: ?>
                 <a href="<?php echo site_url('usuario/login'); ?>" class="btn btn-primary solicitar-btn">Solicitar Adopción</a>
               <?php endif; ?>
@@ -151,7 +152,7 @@
         </div>
       <?php endforeach; ?>
     </div>
-    
+
     <div class="row mt-5">
       <div class="col text-center">
         <div class="block-27">

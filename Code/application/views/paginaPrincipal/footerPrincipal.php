@@ -6,9 +6,9 @@
 					</div>
 					<div class="col-md-6 col-lg-3 pl-lg-4 mb-4 mb-md-6">
 						<ul class="ftco-footer-social p-0">
-							<li class="ftco-animate"><a href="https://wa.link/bc9i3x" data-toggle="tooltip" data-placement="top" title="WhatsApp"  target="_blank"><span class="fa fa-whatsapp"></span></a></li>
-							<li class="ftco-animate"><a href="https://www.facebook.com/CentroDeAdopcionesSanMartinDePorres" data-toggle="tooltip" data-placement="top" title="Facebook"  target="_blank"><span class="fa fa-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="https://www.instagram.com/refugiosanmartindeporres/" data-toggle="tooltip" data-placement="top" title="Instagram"  target="_blank"><span class="fa fa-instagram"></span></a></li>
+							<li class="ftco-animate"><a href="https://wa.link/bc9i3x" data-toggle="tooltip" data-placement="top" title="WhatsApp"  target="_blank"><span class="fab fa-whatsapp"></span></a></li>
+							<li class="ftco-animate"><a href="https://www.facebook.com/CentroDeAdopcionesSanMartinDePorres" data-toggle="tooltip" data-placement="top" title="Facebook"  target="_blank"><span class="fab fa-facebook"></span></a></li>
+							<li class="ftco-animate"><a href="https://www.instagram.com/refugiosanmartindeporres/" data-toggle="tooltip" data-placement="top" title="Instagram"  target="_blank"><span class="fab fa-instagram"></span></a></li>
 						  </ul>
 					</div>
 				</div>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,14 +18,17 @@
                     <input type="text" name="primerApellido" placeholder="Primer Apellido" style="flex: 1;" required>
                     <input type="text" name="segundoApellido" placeholder="Segundo Apellido" style="flex: 1;">
                 </div>
-                <input type="date" name="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <label for="fechaNacimiento" style="font-size: 13px; min-width: 50px;">Fecha de Nacimiento:</label>
+                    <input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de Nacimiento" required>
+                </div>
                 <input type="email" name="usuario" placeholder="Email" required>
                 <label for="rol">¿Como deseas ayudarnos?</label>
                 <select class="form-control" name="rol" id="rol" style="width: 100%; border-radius: 10px; padding: 5px;" required>
                     <option value="1">Adoptante</option>
                     <option value="2">Voluntario</option>
                 </select>
-                <input type="number" name="celular" id="celular" placeholder="Número de Celular" style="display: none;" required>
+                <input type="number" name="celular" id="celular" placeholder="Número de Celular" style="display: none;">
                 <button type="submit">Registrarse</button>
             </form>
         </div>
@@ -60,7 +62,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="<?php echo base_url(); ?>extrasLogin/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -77,6 +79,7 @@
             });
         });
     </script>
-    
+
 </body>
+
 </html>
